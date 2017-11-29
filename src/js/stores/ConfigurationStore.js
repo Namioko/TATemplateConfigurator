@@ -1,6 +1,6 @@
 import {observable, action} from "mobx"
 
-export default class ConfigurationStore {
+class ConfigurationStore {
     @observable questions = [];
     @observable customerLogo = '';
     @observable showOnlySelectedCategoryTagInHitlist = true;
@@ -57,3 +57,8 @@ export default class ConfigurationStore {
         }
     };
 }
+
+const configurationStore = new ConfigurationStore();
+
+export default configurationStore;
+export { ConfigurationStore };
