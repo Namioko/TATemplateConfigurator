@@ -1,0 +1,76 @@
+@import "index.css";
+
+:root {
+    --button: {
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        border: none;
+        border-radius: 5%;
+        text-align: center;
+    }
+}
+
+.windows {
+    width: 85%;
+}
+
+.windows__question {
+    display: none;
+    width: 60%;
+    margin-top: 3%;
+    margin-left: 15%;
+}
+
+.windows__question-chosen {
+    display: inline-block;
+}
+
+.windows__question__buttons {
+    display: flex;
+    width: 100%;
+    height: 3%;
+    margin: 1% 0;
+}
+
+.windows__question__buttons_add {
+    background-color: var(--secondary-color);
+    color: white;
+    @apply --button;
+    width: 8%;
+}
+
+.windows__question__buttons_add-before {
+    margin-left: 41%;
+}
+
+.windows__question__buttons_add-after {
+    margin-left: 2%;
+}
+
+.windows__question__buttons_arrow {
+    width: 5%;
+    @apply --button;
+    background-color: #6e6f73;
+    color: white;
+    font-size: 1.1em;
+}
+
+.windows__question__buttons_arrow-prev {
+    margin-left: 30%;
+}
+
+.windows__question__buttons_arrow-next {
+    margin-left: 1%;
+}
+
+.windows__question_main-part {
+    border: var(--border);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    background: white;
+    width: 100%;
+    height: 700px;
+}
+
+.windows__question_header {
+    background-color: var(--main-color);
+    height: 5%;
+}

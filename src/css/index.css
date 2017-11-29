@@ -1,0 +1,33 @@
+@import "menu.css";
+@import "windows.css";
+
+:root {
+    --light-main-color: #a36dff;
+    --main-color: #5e35b1;
+    --dark-main-color: #280680;
+
+    --light-secondary-color: #ffbd45;
+    --secondary-color: #fb8c00;
+    --dark-secondary-color: #c25e00;
+}
+
+body {
+    font-family: Roboto, monospace;
+    margin: 0;
+    background: #9b9b9b;
+}
+
+.configurator {
+    height: 100%;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+}
+
+.navbar {
+    height: 50px;
+    width: 100%;
+    background-color: white;
+}

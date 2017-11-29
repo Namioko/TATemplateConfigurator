@@ -1,0 +1,37 @@
+@import "index.css";
+
+:root {
+    --border: solid 1px #c5c8cd;
+    --menu-line: {
+        height: 35px;
+        line-height: 35px;
+    };
+}
+
+.menu {
+    width: 15%;
+    border-right: var(--border);
+    background-color: white;
+}
+
+.menu__submenu_header {
+    background-color: #E1E4E9;
+    @apply --menu-line;
+    font-weight: 500;
+    padding-left: 2%;
+}
+
+.menu__submenu_question {
+    padding-left: 10%;
+    @apply --menu-line;
+    border-top: var(--border);
+    background-color: white;
+}
+
+.menu__submenu_question:last-child {
+    border-bottom: var(--border);
+}
+
+.menu__submenu_question-chosen {
+    background-color: var(--light-main-color);
+}
