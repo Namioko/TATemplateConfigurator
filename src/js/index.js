@@ -10,12 +10,8 @@ let configurationStore = new ConfigurationStore();
     configurationStore.addQuestion({index: value, TAQuestionName: `name${value}`});
 });
 
-let configuratorContainer = document.createElement('div');
-let body = document.body;
-body.appendChild(configuratorContainer);
-
 ReactDom.render(
     (<Provider configurationStore={configurationStore}>
         <Configurator/>
     </Provider>),
-    configuratorContainer);
+    document.getElementById('root'));
