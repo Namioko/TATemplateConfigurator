@@ -1,6 +1,7 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react';
-import QuestionWindow from "./question-window";
+import QuestionWindow from './question-window';
+import QuestionButtonsWrapper from './question-buttons-wrapper';
 
 const WindowsWrapper = ({configurationStore}) => {
     let questionWindows = [];
@@ -10,8 +11,10 @@ const WindowsWrapper = ({configurationStore}) => {
     });
 
     return (
-        <div className={'windows'}>
+        <div className={'window'}>
+            <QuestionButtonsWrapper/>
             {questionWindows}
+            <QuestionButtonsWrapper/>
         </div>
     )
 };

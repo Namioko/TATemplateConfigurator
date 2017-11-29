@@ -34,6 +34,9 @@ class ConfigurationStore {
         };
 
         this.questions.splice(index, 0, newQuestion);
+        if(index === -1) {
+            index++;
+        }
         this.chosenQuestionIndex = index;
     };
 
