@@ -9,7 +9,8 @@
 }
 
 .menu {
-    width: 15%;
+    width: 25vh;
+    height: 95vh;
     border-right: var(--border);
     background-color: white;
 }

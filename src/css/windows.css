@@ -9,13 +9,9 @@
     }
 }
 
-.windows {
-    width: 85%;
-}
-
 .windows__question {
     display: none;
-    width: 60%;
+    width: 50vw;
     margin-top: 3%;
     margin-left: 15%;
 }
