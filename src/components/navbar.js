@@ -8,4 +8,4 @@ const NavBar = () => {
     )
 };
 
-export default observer(NavBar);
+export default NavBar;

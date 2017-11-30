@@ -37,7 +37,7 @@ module.exports = {
                 })
             },
             {
-                test: /.js?$/,
+                test: /.jsx?$/,
                 loader: 'babel-loader',
                 exclude: /node_modules/,
                 query: {

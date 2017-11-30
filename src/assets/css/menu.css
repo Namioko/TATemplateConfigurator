@@ -9,24 +9,27 @@
 }
 
 .menu {
-    width: 25vh;
-    height: 95vh;
+    width: 25rem;
+    height: 100vh;
     border-right: var(--border);
     background-color: white;
 }
 
 .menu__submenu_header {
-    background-color: #E1E4E9;
-    @apply --menu-line;
-    font-weight: 500;
-    padding-left: 2%;
+    background-color: #AAB2BF;
+    height: 3.5rem;
+    font-weight: 700;
+    line-height: 3.5rem;
+    padding-left: 1rem;
+    font-size: 1.3rem;
+    color: #404040;
 }
 
 .menu__submenu_question {
-    padding-left: 10%;
-    @apply --menu-line;
+    padding-left: 1.5rem;
     border-top: var(--border);
-    background-color: white;
+    line-height: 2.5rem;
+    font-size: 1.2rem;
 }
 
 .menu__submenu_question:last-child {
@@ -34,5 +37,7 @@
 }
 
 .menu__submenu_question-chosen {
-    background-color: var(--light-main-color);
+    background-color: #57BBF6;
+    border-left: .3rem #438BC6 solid;
+    color: #fff;
 }
