@@ -4,7 +4,6 @@ class ConfigurationStore {
     @observable questions = [];
     @observable customerLogo = '';
     @observable showOnlySelectedCategoryTagInHitlist = true;
-    @observable design = null;
     @observable sentimentRange;
     @observable chosenQuestionIndex = -1;
 
@@ -49,9 +48,6 @@ class ConfigurationStore {
         this.showOnlySelectedCategoryTagInHitlist = showOnlySelectedCategoryTagInHitlist;
     };
 
-    @action setDesign = () => {
-    }; //TODO: make setting design by each field(?)
-
     @action setSentimentRange = () => {
     }; //TODO: make setting sentiment range by each field(?)
 
@@ -61,7 +57,7 @@ class ConfigurationStore {
         }
     };
 
-    //add computed name + model as ID
+    //TODO: add computed name + model as ID
 }
 
 const configurationStore = new ConfigurationStore();

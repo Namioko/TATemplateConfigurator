@@ -1,6 +1,6 @@
 {
   "name": "tatemplateconfigurator",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "build": "react-scripts build"
   },
   "author": "",
-  "license": "ISC",
+  "license": "LGPL-3.0",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
