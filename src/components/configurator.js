@@ -1,5 +1,4 @@
 import React from 'react';
-import {observer} from 'mobx-react';
 import NavBar from './navbar';
 import Menu from "./menu";
 import WindowsWrapper from "./windows/windows-wrapper";

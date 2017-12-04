@@ -1,18 +1,21 @@
 import React from 'react';
-import {observer} from 'mobx-react';
 import { Tab, Tabs, TabList, TabPanel } from './tabs';
 import QuestionPanel from './panel/QuestionPanel';
 import DesignPanel from './panel/DesignPanel';
+import AnotherPanel from './panel/AnotherPanel';
 import '../../assets/css/menu.css';
+import SmsIcon from  '../../assets/img/icons/ic_sms.svg';
+import DesignIcon from '../../assets/img/icons/ic_color.svg';
+import MoreIcon from '../../assets/img/icons/ic_more.svg';
 
 const Menu = () => {
     return (
         <div className='menu'>
              <Tabs defaultTab="tab-questions" vertical>
                 <TabList>
-                    <Tab tabFor="tab-questions">Q</Tab>
-                    <Tab tabFor="tab-design">D</Tab>
-                    <Tab tabFor="tab-another">A</Tab>
+                    <Tab tabFor="tab-questions"><img src={SmsIcon} className="tab-icon" alt="Questions"/></Tab>
+                    <Tab tabFor="tab-design"><img src={DesignIcon} className="tab-icon" alt="Design"/></Tab>
+                    <Tab tabFor="tab-another"><img src={MoreIcon} className="tab-icon" alt="Another"/></Tab>
                 </TabList>
                 <TabPanel tabId="tab-questions">
                     <QuestionPanel />
@@ -21,7 +24,7 @@ const Menu = () => {
                     <DesignPanel />
                 </TabPanel>
                 <TabPanel tabId="tab-another">
-                    Another Panel
+                    <AnotherPanel />
                 </TabPanel>
             </Tabs>
         </div>

@@ -9,9 +9,13 @@ const QuestionWindow = ({configurationStore, ...props}) => {
         'question-window_chosen': configurationStore.chosenQuestionIndex === props.index
     });
 
+    const question = configurationStore.questions[configurationStore.chosenQuestionIndex];
+
     return (
         <div className={className}>
-            <div className={'question-window_header'}/>
+            <div className={'question-window_header'}>
+                <span className="question-window_header_title">{question.TAQuestionName}</span>
+            </div>
         </div>
     )
 };

@@ -1,4 +1,4 @@
-import {observable, action} from "mobx"
+import {observable, action } from "mobx"
 
 class ConfigurationStore {
     @observable questions = [];
@@ -11,7 +11,7 @@ class ConfigurationStore {
     @action addQuestion = ({
                                index,
                                TAFolderId, DatasourceId, DatabaseSchemaId, DatabaseTableName, RelationshipColumnName = "parent",
-                               TextSeparator = "|", TAQuestionName, TAModelNo, TimeVariableId, VariablesToViewBy, HitlistColumns,
+                               TextSeparator = "|", TAQuestionName = "no title", TAModelNo, TimeVariableId, VariablesToViewBy, HitlistColumns,
                                FilterQuestions, CorrelationVariableId, CorrelationSuppressingBase,
                                CorrelationVariableShownName = 'Overall Sentiment'
                            }) => {
