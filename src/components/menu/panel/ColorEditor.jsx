@@ -1,7 +1,5 @@
 import React from 'react';
-import { PanelHeader } from './PanelHeader';
 import ColorPicker from 'rc-color-picker';
-import {observer, inject} from 'mobx-react';
 import PropTypes from 'prop-types';
 import 'rc-color-picker/assets/index.css';
 

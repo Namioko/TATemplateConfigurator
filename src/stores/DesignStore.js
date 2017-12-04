@@ -2,14 +2,15 @@ import {observable, action } from "mobx"
 
 class DesignStore { 
 
+    @observable customerLogo;
     @observable design;
 
     constructor() {
+        this.customerLogo = "";
         this.design = {
             positiveColor: "#7cc700",       //positive color
             neutralColor: "#cdd1d9",        //neutral color
             negativeColor: "#fd9900",       //negatine color
-
             backgroundColor: "#e1e4e9",     //Background, inactive navigation tabs
             headerBackgroundColor: "#000",  //background for navigation panel, pagetitle and logo
             headerTextColor: "#fff",        //text color for pagetitle
@@ -23,7 +24,6 @@ class DesignStore {
             dividerColor: "#ccc",           //color for inputs borders
             lightDividerColor: "#e1e4e9",   //separation line between table rows
             disabledTextColor: "#ccc",      //disabled text color
-
             chartPalette: ["#fd9900", "#cdd1d9", "#7cc700"],    //correlation chart points colors
             areasPalette: {                                     //colors for correlation chart areas
                 "Priority Issues": "#ee627d",
@@ -33,6 +33,10 @@ class DesignStore {
             }
         };
     }
+    
+    @action setCustomerLogo = (customerLogo) => {
+        this.customerLogo = customerLogo;
+    };
 
     @action setProperty = (propertyName, propertyValue) => {
         this.design[propertyName] = propertyValue;
