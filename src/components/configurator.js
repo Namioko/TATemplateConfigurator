@@ -10,8 +10,10 @@ const Configurator = () => {
             <DevTools/>
             <NavBar/>
             <div className={'main'}>
-                <Menu/>
-                <WindowsWrapper/>
+                <div className="content">
+                    <Menu/>
+                    <WindowsWrapper/>
+                </div>
             </div>
         </div>
     )

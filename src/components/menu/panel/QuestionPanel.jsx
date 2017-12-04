@@ -13,17 +13,18 @@ const QuestionPanel = ({configurationStore}) => {
 
     const { questions } = configurationStore;
 
-    return (
-        <div>
+    return ( /* TODO: fix height */
+        <div style={{ height: "calc(100% - 3.5rem)" }}> 
             <PanelHeader name="TAQuestions"/>
             <button className={firstAddButtonClassName}
                     onClick={() => configurationStore.addQuestion({index: configurationStore.chosenQuestionIndex})}>
                 + Add
             </button>
-            {questions.map((item, key) => (
-                <Question key={key} index={key}/>
-            ))}
-            {questions}
+            <div className="question-list">
+                {questions.map((item, key) => (
+                    <Question key={key} index={key}/>
+                ))}
+            </div>
         </div>
     );
 };

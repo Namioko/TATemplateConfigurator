@@ -10,7 +10,7 @@
 
 .menu {
     width: 30rem;
-    height: 100vh;
+    height: 100%;
     border-right: var(--border);
     background-color: white;
 }
@@ -40,4 +40,9 @@
     background-color: #57BBF6;
     border-left: .3rem #438BC6 solid;
     color: #fff;
+}
+
+.question-list {
+    height: 100%;
+    overflow-y: auto;
 }
