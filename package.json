@@ -37,6 +37,7 @@
     "mobx": "^3.3.1",
     "mobx-react": "^4.3.4",
     "prop-types": "^15.6.0",
+    "rc-color-picker": "^1.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
