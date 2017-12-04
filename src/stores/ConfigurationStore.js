@@ -11,7 +11,7 @@ class ConfigurationStore {
     @action addQuestion = ({
                                index,
                                TAFolderId, DatasourceId, DatabaseSchemaId, DatabaseTableName, RelationshipColumnName = "parent",
-                               TextSeparator = "|", TAQuestionName = "no title", TAModelNo, TimeVariableId, VariablesToViewBy, HitlistColumns,
+                               TextSeparator = "|", TAQuestionName, TAModelNo, TimeVariableId, VariablesToViewBy, HitlistColumns,
                                FilterQuestions, CorrelationVariableId, CorrelationSuppressingBase,
                                CorrelationVariableShownName = 'Overall Sentiment'
                            }) => {
@@ -22,8 +22,9 @@ class ConfigurationStore {
             DatabaseTableName, //Table containing TA model
             RelationshipColumnName, //Column which contains id of parent category in table (usually "parent")
             TextSeparator, //Separator between ParentCategory, subcategory and attribute in category name (usually "|")
-            TAQuestionName, // the question ID of the Text Analytics verbatim quesiton
-            TAModelNo,             // the Genius Model ID
+            TAQuestionName, // the question ID of the Text Analytics
+            // verbatim quesiton   (unique with model)
+            TAModelNo,             // the Genius Model ID   (unique with name)
             TimeVariableId, //date variable
             VariablesToViewBy, //variable to use for breaking detailed analysis table
             HitlistColumns,//adiitional columns in the hitlists
@@ -59,6 +60,8 @@ class ConfigurationStore {
             this.chosenQuestionIndex = chosenQuestionIndex;
         }
     };
+
+    //add computed name + model as ID
 }
 
 const configurationStore = new ConfigurationStore();

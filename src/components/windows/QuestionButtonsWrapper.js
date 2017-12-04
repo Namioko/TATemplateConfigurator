@@ -3,10 +3,9 @@ import {observer, inject} from 'mobx-react';
 import classNames from 'classnames';
 
 const QuestionButtonsWrapper = ({configurationStore}) => {
-    //debugger;
     const wrapperClassName = classNames({
         'question-window__buttons': true,
-        'question-window__buttons_hidden': configurationStore.chosenQuestionIndex < 0
+        'hidden': configurationStore.chosenQuestionIndex < 0
     });
 
     return (

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export const PanelHeader = (props) => {
     return (
-        <div className='menu__submenu_header'>
+        <div className='menu__panel_header'>
             {props.name}
         </div>
     )

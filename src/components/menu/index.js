@@ -2,7 +2,7 @@ import React from 'react';
 import { Tab, Tabs, TabList, TabPanel } from './tabs';
 import QuestionPanel from './panel/QuestionPanel';
 import DesignPanel from './panel/DesignPanel';
-import AnotherPanel from './panel/AnotherPanel';
+import OtherPanel from './panel/OtherPanel';
 import '../../assets/css/menu.css';
 import SmsIcon from  '../../assets/img/icons/ic_sms.svg';
 import DesignIcon from '../../assets/img/icons/ic_color.svg';
@@ -24,7 +24,7 @@ const Menu = () => {
                     <DesignPanel />
                 </TabPanel>
                 <TabPanel tabId="tab-another">
-                    <AnotherPanel />
+                    <OtherPanel />
                 </TabPanel>
             </Tabs>
         </div>

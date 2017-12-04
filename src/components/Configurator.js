@@ -1,7 +1,7 @@
 import React from 'react';
-import NavBar from './navbar';
+import NavBar from './Navbar';
 import Menu from "./menu";
-import WindowsWrapper from "./windows/windows-wrapper";
+import WindowsWrapper from "./windows/WindowsWrapper";
 import DevTools from 'mobx-react-devtools';
 
 const Configurator = () => {

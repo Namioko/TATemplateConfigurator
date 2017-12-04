@@ -1,15 +1,7 @@
 @import "menu.css";
+@import "question-panel.css";
+@import "buttons.css";
 @import "windows.css";
-
-:root {
-    --light-main-color: #a36dff;
-    --main-color: #5e35b1;
-    --dark-main-color: #280680;
-
-    --light-secondary-color: #ffbd45;
-    --secondary-color: #fb8c00;
-    --dark-secondary-color: #c25e00;
-}
 
 html, 
 body, 
@@ -23,6 +15,10 @@ body,
     font-size: 10px;
 }
 
+.hidden {
+    display: none!important;
+}
+
 .configurator {
     height: 100%;
     width: 100%;
@@ -30,8 +26,6 @@ body,
 
 .main {
     display: flex;
-    height: 100%;
-    width: 100%;
 }
 
 .navbar {

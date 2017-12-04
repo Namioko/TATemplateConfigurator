@@ -1,0 +1,28 @@
+.green-button:focus,
+.gray-button:focus {
+    outline: 0;
+}
+
+.gray-button {
+    color: #fff;
+    background-color: #AAB2BF;
+    border-color: #9096A2;
+}
+
+.gray-button:hover,
+.gray-button:active {
+    background-color: #9096A2;
+    border-color: rgb(125, 128, 134);
+}
+
+.green-button {
+    color: #fff;
+    background-color: #A3D465;
+    border-color: #A3D465;
+}
+
+.green-button:hover,
+.green-button:active {
+    background-color: #4CAF50;
+    border-color: #43A047;
+}

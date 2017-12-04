@@ -1,13 +1,13 @@
 import React from 'react';
 import { PanelHeader } from './PanelHeader';
 
-const AnotherPanel = () => {
+const OtherPanel = () => {
     return (
         <div>
-            <PanelHeader name="Another"/>
+            <PanelHeader name="Other"/>
             <p>Content</p>
         </div>
     )
 };
 
-export default AnotherPanel;
+export default OtherPanel;

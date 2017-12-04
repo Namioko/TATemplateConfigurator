@@ -10,12 +10,12 @@
 
 .menu {
     width: 30rem;
-    height: 100%;
+    height: 90.8rem;
     border-right: var(--border);
     background-color: white;
 }
 
-.menu__submenu_header {
+.menu__panel_header {
     background-color: #AAB2BF;
     height: 3.5rem;
     font-weight: 700;
@@ -25,24 +25,8 @@
     color: #404040;
 }
 
-.menu__submenu_question {
-    padding-left: 1.5rem;
-    border-top: var(--border);
-    line-height: 2.5rem;
-    font-size: 1.2rem;
-}
-
-.menu__submenu_question:last-child {
-    border-bottom: var(--border);
-}
-
-.menu__submenu_question-chosen {
-    background-color: #57BBF6;
-    border-left: .3rem #438BC6 solid;
-    color: #fff;
-}
-
 .question-list {
     height: 100%;
     overflow-y: auto;
+    /*width: 25.5rem;*/
 }
