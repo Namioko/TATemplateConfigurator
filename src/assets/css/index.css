@@ -20,13 +20,8 @@ body,
 }
 
 .configurator {
-    height: 100%;
+    height: 59.7rem;
     width: 100%;
-}
-
-.main {
-    height: 100%;
-    display: flex;
 }
 
 .navbar {
@@ -40,6 +35,7 @@ body,
 .content {
     display: flex;
     padding-top: 4rem;
+    min-height: 100%;
 }
 
 .form-control {

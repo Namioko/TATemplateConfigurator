@@ -16,7 +16,7 @@ class DesignPanel extends Component {
         const { design } = this.props.designStore;
 
         return (
-            <div style={{ height: "calc(100% - 3.5rem)" }}>
+            <div>
                 <PanelHeader name="Design"/>
                 <div className="panel-content">
                     <ColorEditor 

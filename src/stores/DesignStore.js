@@ -1,6 +1,6 @@
-import {observable, action } from "mobx"
+import {observable, action} from 'mobx';
 
-class DesignStore { 
+class DesignStore {
 
     @observable customerLogo;
     @observable design;
@@ -33,7 +33,7 @@ class DesignStore {
             }
         };
     }
-    
+
     @action setCustomerLogo = (customerLogo) => {
         this.customerLogo = customerLogo;
     };
@@ -46,4 +46,4 @@ class DesignStore {
 const designStore = new DesignStore();
 
 export default designStore;
-export { DesignStore };
+export {DesignStore};

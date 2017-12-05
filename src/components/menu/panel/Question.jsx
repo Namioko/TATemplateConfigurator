@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 const Question = ({configurationStore, ...props}) => {
     const className = classNames({
-        'menu__question-panel_question': true,
-        'menu__question-panel_question_chosen': configurationStore.chosenQuestionIndex === props.index //replace index with ID
+        'question-list_question': true,
+        'question-list_question_chosen': configurationStore.chosenQuestionIndex === props.index //TODO: replace index with ID
     });
 
     return (
         <div className={className}
              onClick={() => configurationStore.changeCurrentQuestion({chosenQuestionIndex: props.index})}>
-            <div className={'menu__question-panel_question-icon'}/>
+            <div className="question-list_question-icon"/>
             {
                 configurationStore.questions[props.index].TAQuestionName === undefined
                     ? `q${props.index}`

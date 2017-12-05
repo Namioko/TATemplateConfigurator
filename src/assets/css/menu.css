@@ -1,5 +1,3 @@
-@import "index.css";
-
 :root {
     --border: solid 1px #c5c8cd;
     --menu-line: {
@@ -22,10 +20,4 @@
     padding-left: 1rem;
     font-size: 1.3rem;
     color: #404040;
-}
-
-.question-list,
-.panel-content {
-    height: 100%;
-    overflow-y: auto;
 }

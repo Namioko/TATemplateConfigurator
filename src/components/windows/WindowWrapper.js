@@ -3,18 +3,15 @@ import {observer, inject} from 'mobx-react';
 import QuestionWindow from './QuestionWindow';
 import QuestionButtonsWrapper from './QuestionButtonsWrapper';
 
-const WindowsWrapper = ({configurationStore}) => {
+const WindowWrapper = () => {
         return (
-            <div className={'window'}>
+            <div className="window-wrapper">
                 <QuestionButtonsWrapper/>
-                {
-                    configurationStore.chosenQuestionIndex !== -1 &&
-                    <QuestionWindow/>
-                }
+                <QuestionWindow/>
                 <QuestionButtonsWrapper/>
             </div>
         )
     }
 ;
 
-export default inject('configurationStore')(observer(WindowsWrapper));
+export default observer(WindowWrapper);
