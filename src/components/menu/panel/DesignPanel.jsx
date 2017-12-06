@@ -9,16 +9,16 @@ class DesignPanel extends Component {
 
     onChangeColor = (name, color) => {
         this.props.designStore.setProperty(name, color.color);
-    }
+    };
 
     render() {
 
         const { design } = this.props.designStore;
 
         return (
-            <div>
+            <div className="menu__panel">
                 <PanelHeader name="Design"/>
-                <div className="panel-content">
+                <div className="menu__panel_content">
                     <ColorEditor 
                         value={design['positiveColor']} 
                         label="Positive Color"

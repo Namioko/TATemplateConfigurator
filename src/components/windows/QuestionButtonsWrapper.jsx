@@ -2,20 +2,37 @@ import React from 'react';
 import {observer, inject} from 'mobx-react';
 import classNames from 'classnames';
 
-const QuestionButtonsWrapper = ({configurationStore}) => {
+const QuestionButtonsWrapper = ({componentStore, questionStore}) => {
     const wrapperClassName = classNames({
         'window-buttons': true,
-        'hidden': configurationStore.chosenQuestionIndex < 0
+        'hidden': componentStore.currentQuestionIndex < 0
+        // TODO: conditional rendering
     });
 
     const onBeforeClickHandler =
-        () => configurationStore.addQuestion({index: configurationStore.chosenQuestionIndex});
+        () => {
+            questionStore.addQuestion({index: componentStore.currentQuestionIndex});
+            componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex});
+        };
     const onAfterClickHandler =
-        () => configurationStore.addQuestion({index: configurationStore.chosenQuestionIndex + 1});
+        () => {
+            questionStore.addQuestion({index: componentStore.currentQuestionIndex + 1});
+            componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex + 1});
+        };
     const onPrevClickHandler =
-        () => configurationStore.changeCurrentQuestion({chosenQuestionIndex: configurationStore.chosenQuestionIndex - 1});
+        () => {
+            //TODO: make it better
+            if (componentStore.currentQuestionIndex > 0) {
+                componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex - 1});
+            }
+        };
     const onNextClickHandler =
-        () => configurationStore.changeCurrentQuestion({chosenQuestionIndex: configurationStore.chosenQuestionIndex + 1});
+        () => {
+            //TODO: make it better
+            if (componentStore.currentQuestionIndex < questionStore.questions.length - 1) {
+                componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex + 1});
+            }
+        };
 
     return (
         <div className={wrapperClassName}>
@@ -45,4 +62,4 @@ const QuestionButtonsWrapper = ({configurationStore}) => {
     )
 };
 
-export default inject('configurationStore')(observer(QuestionButtonsWrapper));
+export default inject('componentStore', 'questionStore')(observer(QuestionButtonsWrapper));

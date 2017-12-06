@@ -1,29 +1,29 @@
 import React from 'react';
 import {PanelHeader} from './PanelHeader';
-import classNames from 'classnames';
 import Question from './Question';
 import {observer, inject} from 'mobx-react';
-import configurationStore from '../../../stores/ConfigurationStore';
 
-const QuestionPanel = () => {
+const QuestionPanel = ({componentStore}) => {
     return (
-        <div>
+        <div className="menu__panel">
             <PanelHeader name="TAQuestions"/>
-            <MenuQuestionAddButton/>
-            <QuestionList/>
+            {
+                componentStore.currentQuestionIndex < 0
+                    ? <MenuQuestionAddButton/>
+                    : <QuestionList/>
+            }
         </div>
     );
 };
 
-const MenuQuestionAddButton = inject('configurationStore')(observer(({configurationStore}) => {
-    const className = classNames({
-        'add-button': true,
-        'hidden': configurationStore.chosenQuestionIndex >= 0
-    });
-    const onClickHandler = () => configurationStore.addQuestion({index: configurationStore.chosenQuestionIndex});
+const MenuQuestionAddButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
+    const onClickHandler = () => {
+        questionStore.addQuestion({index: componentStore.currentQuestionIndex});
+        componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex});
+    };
 
     return (
-        <div className={className}>
+        <div className="add-button">
             <button className="green-button"
                     onClick={onClickHandler}>
                 + Add
@@ -32,11 +32,11 @@ const MenuQuestionAddButton = inject('configurationStore')(observer(({configurat
     )
 }));
 
-const QuestionList = inject('configurationStore')(observer(({configurationStore}) => {
-    const {questions} = configurationStore;
+const QuestionList = inject('questionStore')(observer(({questionStore}) => {
+    const {questions} = questionStore;
 
     return (
-        <div className='question-list'>
+        <div className='menu__panel_content'>
             {questions.map((item, key) => (
                 <Question key={key} index={key}/>
             ))}
@@ -44,4 +44,4 @@ const QuestionList = inject('configurationStore')(observer(({configurationStore}
     )
 }));
 
-export default observer(QuestionPanel);
+export default inject('componentStore')(observer(QuestionPanel));

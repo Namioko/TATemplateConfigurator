@@ -6,12 +6,14 @@ import DevTools from 'mobx-react-devtools';
 
 const Configurator = () => {
     return (
-        <div className={'configurator'}>
+        <div className="configurator">
             <DevTools/>
             <NavBar/>
-            <div className="content">
-                <Menu/>
-                <WindowsWrapper/>
+            <div className="main">
+                <div className="content">
+                    <Menu/>
+                    <WindowsWrapper/>
+                </div>
             </div>
         </div>
     )

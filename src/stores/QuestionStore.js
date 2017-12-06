@@ -1,11 +1,8 @@
 import {observable, action} from 'mobx';
 
-class ConfigurationStore {
+class QuestionStore {
 
     @observable questions = [];
-    @observable showOnlySelectedCategoryTagInHitlist = true;
-    @observable sentimentRange;
-    @observable chosenQuestionIndex = -1; //TODO: add computed name + model as ID and move to separate QuestionStore
 
     @action addQuestion = ({
                                index,
@@ -34,24 +31,10 @@ class ConfigurationStore {
         };
 
         this.questions.splice(index, 0, newQuestion);
-        if (index === -1) {
-            index++;
-        }
-        this.chosenQuestionIndex = index;
-    };
-
-    @action setShowOnlySelectedCategoryTagInHitlist = ({showOnlySelectedCategoryTagInHitlist}) => {
-        this.showOnlySelectedCategoryTagInHitlist = showOnlySelectedCategoryTagInHitlist;
-    };
-
-    @action changeCurrentQuestion = ({chosenQuestionIndex}) => { //TODO: move to separate QuestionStore
-        if (chosenQuestionIndex >= 0 && chosenQuestionIndex < this.questions.length) {
-            this.chosenQuestionIndex = chosenQuestionIndex;
-        }
     };
 }
 
-const configurationStore = new ConfigurationStore();
+const questionStore = new QuestionStore();
 
-export default configurationStore;
-export {ConfigurationStore};
+export default questionStore;
+export {QuestionStore};

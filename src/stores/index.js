@@ -1,7 +1,11 @@
-import configurationStore from './ConfigurationStore';
-import designStore from './DesignStore'
+import componentStore from './ComponentStore';
+import designStore from './DesignStore';
+import questionStore from './QuestionStore';
+import otherStore from './OtherStore';
 
 export {
-    configurationStore,
-    designStore
+    componentStore,
+    designStore,
+    questionStore,
+    otherStore
 };
