@@ -38,6 +38,7 @@
     "prop-types": "^15.6.0",
     "rc-color-picker": "^1.2.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-tag-input": "^4.7.2"
   }
 }

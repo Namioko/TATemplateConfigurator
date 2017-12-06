@@ -23,7 +23,7 @@ const Question = ({componentStore, questionStore, ...props}) => {
 };
 
 Question.propTypes = {
-    index: PropTypes.number
+    index: PropTypes.number.isRequired
 };
 
 export default inject('componentStore', 'questionStore')(observer(Question));

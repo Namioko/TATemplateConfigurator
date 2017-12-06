@@ -7,7 +7,7 @@ class QuestionStore {
     @action addQuestion = ({
                                index,
                                TAFolderId, DatasourceId, DatabaseSchemaId, DatabaseTableName, RelationshipColumnName = "parent",
-                               TextSeparator = "|", TAQuestionName, TAModelNo, TimeVariableId, VariablesToViewBy, HitlistColumns,
+                               TextSeparator = "|", TAQuestionName, TAModelNo, TimeVariableId, VariablesToViewBy = [], HitlistColumns,
                                FilterQuestions, CorrelationVariableId, CorrelationSuppressingBase,
                                CorrelationVariableShownName = 'Overall Sentiment'
                            }) => {

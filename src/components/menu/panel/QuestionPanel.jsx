@@ -3,39 +3,38 @@ import {PanelHeader} from './PanelHeader';
 import Question from './Question';
 import {observer, inject} from 'mobx-react';
 
-const QuestionPanel = ({componentStore}) => {
+const QuestionPanel = () => {
     return (
         <div className="menu__panel">
             <PanelHeader name="TAQuestions"/>
-            {
-                componentStore.currentQuestionIndex < 0
-                    ? <MenuQuestionAddButton/>
-                    : <QuestionList/>
-            }
+            <MenuQuestionAddButton/>
+            <QuestionList/>
         </div>
     );
 };
 
 const MenuQuestionAddButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
-    const onClickHandler = () => {
-        questionStore.addQuestion({index: componentStore.currentQuestionIndex});
+    const handleClick = () => {
         componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex});
+        questionStore.addQuestion({index: componentStore.currentQuestionIndex});
     };
 
     return (
+        componentStore.currentQuestionIndex < 0 &&
         <div className="add-button">
             <button className="green-button"
-                    onClick={onClickHandler}>
+                    onClick={handleClick}>
                 + Add
             </button>
         </div>
     )
 }));
 
-const QuestionList = inject('questionStore')(observer(({questionStore}) => {
+const QuestionList = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
     const {questions} = questionStore;
 
     return (
+        componentStore.currentQuestionIndex >= 0 &&
         <div className='menu__panel_content'>
             {questions.map((item, key) => (
                 <Question key={key} index={key}/>
@@ -44,4 +43,4 @@ const QuestionList = inject('questionStore')(observer(({questionStore}) => {
     )
 }));
 
-export default inject('componentStore')(observer(QuestionPanel));
+export default observer(QuestionPanel);
