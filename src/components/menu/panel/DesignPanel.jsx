@@ -11,14 +11,30 @@ class DesignPanel extends Component {
         this.props.designStore.setProperty(name, color.color);
     };
 
+    onChangeLogoUrl = (e) => {
+         this.props.designStore.setCustomerLogo(e.target.value);
+    };
+
     render() {
 
         const { design } = this.props.designStore;
-
+        const logo = this.props.designStore.customerLogo;
+    
         return (
             <div className="menu__panel">
                 <PanelHeader name="Design"/>
                 <div className="menu__panel_content">
+                    <div className="logo-container" style={{ display: 'inline-block', float: 'left', padding: '.3rem 1rem' }}>
+                        <span style={{ 'fontSize': '1.3rem' }}>Customer Logo</span>
+                        <br/> {/* If image url is invalid - show error*/}
+                        <input type="text" className="form-control" value={logo} placeholder="Logo url" style={{ float: 'left', width: '93%' }} onChange={this.onChangeLogoUrl}/>
+                        {(logo) ?
+                        (
+                            <img alt="Logo preview" src={logo} style={{width: '93%', height: 'auto'}}/>
+                        ) : (
+                            ""
+                        )}
+                    </div>
                     <ColorEditor 
                         value={design['positiveColor']} 
                         label="Positive Color"

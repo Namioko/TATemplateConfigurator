@@ -6,7 +6,7 @@ class DesignStore {
     @observable design;
 
     constructor() {
-        this.customerLogo = "";
+        this.customerLogo = "https://reportal.euro.confirmit.com/cf_clientutil/themes/flattheme/images/logo-gigantic.png";
         this.design = {
             positiveColor: "#7cc700",       //positive color
             neutralColor: "#cdd1d9",        //neutral color
@@ -40,7 +40,7 @@ class DesignStore {
 
     @action setProperty = (propertyName, propertyValue) => {
         this.design[propertyName] = propertyValue;
-    }
+    };
 }
 
 const designStore = new DesignStore();
