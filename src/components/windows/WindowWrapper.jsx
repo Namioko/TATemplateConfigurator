@@ -8,7 +8,6 @@ const WindowWrapper = () => {
             <div className="window-wrapper">
                 <QuestionButtonsWrapper/>
                 <QuestionWindow/>
-                <QuestionButtonsWrapper/>
             </div>
         )
     }

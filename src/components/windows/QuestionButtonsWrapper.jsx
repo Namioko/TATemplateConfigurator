@@ -2,8 +2,10 @@ import React from 'react';
 import {observer, inject} from 'mobx-react';
 
 const QuestionButtonsWrapper = inject('componentStore')(observer(({componentStore}) => {
+    const {currentQuestionIndex} = componentStore;
+
     return (
-        componentStore.currentQuestionIndex >= 0 &&
+        currentQuestionIndex >= 0 &&
         <div className="window-buttons">
             <div className="window-buttons__add-container">
                 <WindowAddBeforeButton/>
@@ -18,10 +20,13 @@ const QuestionButtonsWrapper = inject('componentStore')(observer(({componentStor
 }));
 
 const WindowAddBeforeButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
+    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
+    const {addQuestion} = questionStore;
+
     const handleClick =
         () => {
-            componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex});
-            questionStore.addQuestion({index: componentStore.currentQuestionIndex});
+            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex});
+            addQuestion({index: currentQuestionIndex});
         };
 
     return (
@@ -33,10 +38,13 @@ const WindowAddBeforeButton = inject('componentStore', 'questionStore')(observer
 }));
 
 const WindowAddAfterButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
+    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
+    const {addQuestion} = questionStore;
+
     const handleClick =
         () => {
-            componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex + 1});
-            questionStore.addQuestion({index: componentStore.currentQuestionIndex});
+            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
+            addQuestion({index: currentQuestionIndex});
         };
 
     return (
@@ -48,11 +56,13 @@ const WindowAddAfterButton = inject('componentStore', 'questionStore')(observer(
 }));
 
 const WindowPrevButton = inject('componentStore')(observer(({componentStore}) => {
+    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
+
     const handleClick =
         () => {
             //TODO: make it better
-            if (componentStore.currentQuestionIndex > 0) {
-                componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex - 1});
+            if (currentQuestionIndex > 0) {
+                changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex - 1});
             }
         };
 
@@ -66,11 +76,14 @@ const WindowPrevButton = inject('componentStore')(observer(({componentStore}) =>
 }));
 
 const WindowNextButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
+    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
+    const {questions} = questionStore;
+
     const handleClick =
         () => {
             //TODO: make it better
-            if (componentStore.currentQuestionIndex < questionStore.questions.length - 1) {
-                componentStore.changeCurrentQuestion({chosenQuestionIndex: componentStore.currentQuestionIndex + 1});
+            if (currentQuestionIndex < questions.length - 1) {
+                changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
             }
         };
 

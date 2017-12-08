@@ -4,14 +4,9 @@ import QuestionField from './QuestionField';
 import QuestionTagField from './QuestionTagField';
 
 const QuestionWindow = ({componentStore, questionStore}) => {
-    const question = questionStore.questions[componentStore.currentQuestionIndex];
-
-    const fieldNames = [];
-    for(let key in question) {
-        if(question.hasOwnProperty(key)) {
-            fieldNames.push(key);
-        }
-    }
+    const {currentQuestionIndex} = componentStore;
+    const {questions, properties} = questionStore;
+    const currentQuestion = questions[currentQuestionIndex];
 
     return (
         componentStore.currentQuestionIndex >= 0 &&
@@ -19,22 +14,25 @@ const QuestionWindow = ({componentStore, questionStore}) => {
             <div className="question-window_header">
                 <span className="question-window_header_title">
                     {
-                        componentStore.currentQuestionIndex !== -1 && question.TAQuestionName
+                        currentQuestion.TAQuestionName
+                            ? currentQuestion.TAQuestionName
+                            : `q${currentQuestionIndex}`
                     }
                 </span>
             </div>
             <div className="question-window__content">
                 <div className="question-window__question-field-list">
-                    <QuestionField fieldName="TAFolderId"/>
-                    <QuestionField fieldName="DatasourceId"/>
-                    <QuestionField fieldName="DatasourceSchemaId"/>
-                    <QuestionField fieldName="DatabaseTableName"/>
-                    <QuestionField fieldName="RelationshipColumnName"/>
-                    <QuestionField fieldName="TextSeparator"/>
-                    <QuestionField fieldName="TAQuestionName"/>
-                    <QuestionField fieldName="TAModelNo"/>
-                    <QuestionField fieldName="TimeVariableId"/>
-                    <QuestionTagField fieldName="VariablesToViewBy"/>
+                    {
+                        properties.map((property) => {
+                            if(!property.isArray) {
+                                return <QuestionField key={property.name} {...property}
+                                                      currentQuestionIndex={currentQuestionIndex}/>
+                            } else {
+                                return <QuestionTagField key={property.name} {...property}
+                                               currentQuestionIndex={currentQuestionIndex}/>
+                            }
+                        })
+                    }
                 </div>
             </div>
         </div>
