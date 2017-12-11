@@ -22,6 +22,9 @@ const OtherPanel = ({otherStore}) => {
                     onChange={handleChange} />
             </div>
             <p>Sentiment Range</p>
+            <div className="">
+                
+            </div>
         </div>
     )
 };

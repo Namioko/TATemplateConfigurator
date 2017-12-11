@@ -1,5 +1,6 @@
 import React from 'react';
 import {Tab, Tabs, TabList, TabPanel} from './tabs';
+import {observer, inject} from 'mobx-react';
 import QuestionPanel from './panel/QuestionPanel';
 import DesignPanel from './panel/DesignPanel';
 import OtherPanel from './panel/OtherPanel';
@@ -7,14 +8,20 @@ import '../../assets/css/menu.css';
 import SmsIcon from '../../assets/img/icons/ic_sms.svg';
 import DesignIcon from '../../assets/img/icons/ic_color.svg';
 import MoreIcon from '../../assets/img/icons/ic_more.svg';
+import {QUESTION_WINDOW, DESIGN_WINDOW} from '../../constants';
 
-const Menu = () => {
+const Menu = ({componentStore}) => {
+
+    const changeTargetWindow = (value) => {
+        componentStore.setTargetWindow(value);
+    };
+
     return (
         <div className='menu'>
             <Tabs defaultTab="tab-questions" vertical>
                 <TabList>
-                    <Tab tabFor="tab-questions"><img src={SmsIcon} className="tab-icon" alt="Questions"/></Tab>
-                    <Tab tabFor="tab-design"><img src={DesignIcon} className="tab-icon" alt="Design"/></Tab>
+                    <Tab tabFor="tab-questions" onClick={() => changeTargetWindow(QUESTION_WINDOW)}><img src={SmsIcon} className="tab-icon" alt="Questions"/></Tab>
+                    <Tab tabFor="tab-design" onClick={() => changeTargetWindow(DESIGN_WINDOW)}><img src={DesignIcon} className="tab-icon" alt="Design"/></Tab>
                     <Tab tabFor="tab-another"><img src={MoreIcon} className="tab-icon" alt="Another"/></Tab>
                 </TabList>
                 <TabPanel tabId="tab-questions">
@@ -31,4 +38,4 @@ const Menu = () => {
     )
 };
 
-export default Menu;
+export default inject('componentStore')(observer(Menu));

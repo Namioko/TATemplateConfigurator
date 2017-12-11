@@ -33,7 +33,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
         <label className="question-window__question-field">
             <span>{props.name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
-                       placeholder="" autofocus={false}/>
+                       placeholder={props.placeholder} autofocus={false}/>
             <img src={InfoIcon} alt="Info" title={props.helpLine}/>
             <span className="question-window__question-field_error">{error}</span>
         </label>
