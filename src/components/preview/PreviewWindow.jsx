@@ -3,7 +3,9 @@ import {observer, inject} from 'mobx-react';
 
 const PreviewWindow = ({designStore}) => {
     return (
-        <div>Preview Windows</div>
+        <div className="window-wrapper">
+            <div>Preview Windows</div>
+        </div>
     )
 }
 

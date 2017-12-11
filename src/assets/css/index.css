@@ -3,6 +3,7 @@
 @import "buttons.css";
 @import "windows.css";
 @import "tags.css";
+@import "navbar.css";
 
 html,
 body,
@@ -23,14 +24,6 @@ body,
 .configurator {
     height: 100%;
     width: 100%;
-}
-
-.navbar {
-    height: 4rem;
-    width: 100%;
-    background-color: white;
-    border-bottom: var(--border);
-    position: absolute;
 }
 
 .main {

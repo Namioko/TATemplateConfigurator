@@ -96,4 +96,4 @@ const WindowNextButton = inject('componentStore', 'questionStore')(observer(({co
     )
 }));
 
-export default observer(QuestionButtonsWrapper);
+export default QuestionButtonsWrapper;

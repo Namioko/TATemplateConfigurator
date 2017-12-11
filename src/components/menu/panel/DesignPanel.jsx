@@ -30,7 +30,7 @@ class DesignPanel extends Component {
                         <input type="text" className="form-control" value={logo} placeholder="Logo url" style={{ float: 'left', width: '93%' }} onChange={this.onChangeLogoUrl}/>
                         {(logo) ?
                         (
-                            <img alt="Logo preview" src={logo} style={{width: '93%', height: 'auto'}}/>
+                            <img alt="Logo preview" src={logo} className="menu__panel_design-logo"/>
                         ) : (
                             ""
                         )}

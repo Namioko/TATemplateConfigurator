@@ -39,6 +39,7 @@
     "rc-color-picker": "^1.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
     "react-tag-input": "^4.7.2"
   }
 }
