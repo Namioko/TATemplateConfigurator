@@ -1,11 +1,12 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react';
 
-const QuestionButtonsWrapper = inject('componentStore')(observer(({componentStore}) => {
+const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
     const {currentQuestionIndex} = componentStore;
+    const {questions} = questionStore;
 
     return (
-        currentQuestionIndex >= 0 &&
+        currentQuestionIndex >= 0 && questions.length > 0 &&
         <div className="window-buttons">
             <div className="window-buttons__add-container">
                 <WindowAddBeforeButton/>

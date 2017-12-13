@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from 'mobx-react';
-import QuestionWindow from './QuestionWindow';
-import QuestionButtonsWrapper from './QuestionButtonsWrapper';
+import QuestionWindow from './question-window/QuestionWindow';
+import QuestionButtonsWrapper from './question-window/QuestionButtonsWrapper';
 
 const WindowWrapper = () => {
         return (

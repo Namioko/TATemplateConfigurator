@@ -26,6 +26,16 @@
     border-radius: .1rem;
 }
 
+.question-window_icon {
+    width: 2.3rem;
+    height: 2.3rem;
+    margin-right: 1rem;
+}
+
+.question-window_icon:hover {
+    cursor: pointer;
+}
+
 .window-buttons {
     display: flex;
     width: 100%;
@@ -59,6 +69,9 @@
     height: 3rem;
     border-top-left-radius: .1rem;
     border-top-right-radius: .1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .question-window_header_title {
@@ -85,12 +98,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.question-window__question-field img {
-    width: 2.3rem;
-    height: 2.3rem;
-    margin-right: 1rem;
 }
 
 .question-window__question-field span {
