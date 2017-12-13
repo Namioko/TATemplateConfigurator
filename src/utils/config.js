@@ -5,7 +5,7 @@ export function buildConfig({questions, design, otherParams}) {
 
     static var CustomerLogo = "${otherParams.customerLogo || ''}"; // link to the company logo
     
-    static var Url = ${otherParams.url || 'true'}; //set to false if you want to see all categories captured for comment in the hitlist everytime
+    static var Url = ${!!otherParams.url}; //set to false if you want to see all categories captured for comment in the hitlist everytime
     ${buildDesign(design)}
 
     /* Negative-neutral-positive breaking on 1-11 scale)*/
