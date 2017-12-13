@@ -1,22 +1,45 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {buildConfig} from '../../utils/config';
 
-const TextEditor = ({questionStore, designStore, otherStore}) => {
+@inject('questionStore', 'designStore', 'otherStore')
+@observer
+class TextEditor extends Component {
 
-    const {questions} = questionStore;
-    const {design, customerLogo} = designStore;
+    constructor(props) {
+        super(props);
 
-    const textConfig = buildConfig({
-        questions: questions,
-        design: design,
-        otherParams: {
-            customerLogo: customerLogo
-        }});
+        const {questions} = this.props.questionStore;
+        const {design, customerLogo} = this.props.designStore;
+        const {showOnlySelectedCategoryTagInHitlist, sentimentRange} = this.props.otherStore;
 
-    return (
-        <textarea style={{width: '100%', height: '100%', marginTop: '4rem'}} value={textConfig}/>
-    )
+        const textConfig = buildConfig({
+            questions: questions,
+            design: design,
+            otherParams: {
+                customerLogo: customerLogo,
+                url: showOnlySelectedCategoryTagInHitlist,
+                sentimentRange: sentimentRange
+            }});
+
+        this.state = {
+            text: textConfig
+        };
+    }
+
+    handleTextChange = (e) => {
+        this.setState({text: e.target.value});
+    }
+
+    render() {
+        return (
+            <textarea 
+                style={{width: '100%', height: 'calc(100% - 4px)', marginTop: '4rem', border: 'none', resize: 'none'}} 
+                value={this.state.text} 
+                onChange={this.handleTextChange}
+            />
+        )
+    }
 }
 
-export default inject('questionStore', 'designStore', 'otherStore')(observer(TextEditor));
+export default TextEditor;

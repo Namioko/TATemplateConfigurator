@@ -1,8 +1,19 @@
 export function buildConfig({questions, design, otherParams}) {
+    return `public class Config {
 
-    const header = `public class Config {`;
-    const footer = `
+    ${buildQuestions(questions)}
+
+    static var CustomerLogo = "${otherParams.customerLogo || ''}"; // link to the company logo
+    
+    static var Url = ${otherParams.url || 'true'}; //set to false if you want to see all categories captured for comment in the hitlist everytime
     ${buildDesign(design)}
+
+    /* Negative-neutral-positive breaking on 1-11 scale)*/
+    static const SentimentRange = {
+        Positive: [7,8,9,10,11],
+        Neutral: [6],
+        Negative: [1,2,3,4,5]
+    }
 
     /* Please do not change anything below this point*/
         
@@ -45,10 +56,44 @@ export function buildConfig({questions, design, otherParams}) {
         return _TALibrary;
     }
 }`;
-
-    return header + footer;
 }
 
+//TODO
+function buildQuestions(questions) {
+    if(questions == null || questions.length === 0) {
+        return `static var TAQuestions = [];`
+    }
+
+    let content = '';
+
+    for(let i = 0; i < questions.length; i++) {
+        content += `
+        {
+            TAFolderId: "${questions[i]['TAFolderId'] || ''}", //How to name text Analytics folder in parameters
+            
+            DatasourceId: "${questions[i]['DatasourceId'] || ''}",  //Datasource Id of the survey
+            
+            DatabaseSchemaId: ${questions[i]['DatabaseSchemaId'] || -1}, //Schema containig TA model
+            DatabaseTableName: "${questions[i]['DatabaseTableName'] || ''}", //Table containing TA model                   
+            RelationshipColumnName: "${questions[i]['RelationshipColumnName'] || ''}", //Column which contains id of parent category in table (usually "parent")
+            TextSeparator: "${questions[i]['TextSeparator'] || ''}", //Separator between ParentCategory, subcategory and attribute in category name (usually "|")
+                       
+            TAQuestionName: "${questions[i]['TAQuestionName'] || ''}", // the question ID of the Text Analytics verbatim quesiton
+            TAModelNo: "${questions[i]['TAModelNo'] || '0'}", // the Genius Model ID
+            
+            TimeVariableId: '${questions[i]['TimeVariableId'] || ''}', //date variable
+            VariablesToViewBy: ["q_airline"], //variable to use for breaking detailed analysis table
+            HitlistColumns: ["q_airline"],//adiitional columns in the hitlists
+            FilterQuestions: ["status", "lastdevicetype", "period", "q_airline"], //array of variable Ids for the filter page
+            CorrelationVariableId: ['overall_experience_rating', 'responsible_tourism_importance'], //variableId to make Impact analysis from
+            CorrelationSuppressingBase: 4000 // if # of respondent for specific category is less than this number, the category will be hidden
+        }${(i < questions.length - 1) ? ',' : ''}`;
+    }
+
+    return `static var TAQuestions = [${content}];`
+}
+
+//TODO
 function buildDesign(design) {
     if(design == null) {
         return `static var Design = null; //for default color scheme`;
