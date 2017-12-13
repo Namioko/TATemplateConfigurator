@@ -29,6 +29,7 @@
 .menu__panel_content {
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .menu__panel_design-logo {
@@ -36,4 +37,13 @@
     margin-top: 1rem;
     float: left;
     width: 100%;
+}
+
+.menu__panel_design-subtitle {
+    width: 100%;
+    background-color: #ededed;
+    display: inline-block;
+    font-size: 1.35rem;
+    padding: .65rem 1rem;
+    font-weight: 700;
 }

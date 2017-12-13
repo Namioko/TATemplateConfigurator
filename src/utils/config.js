@@ -86,14 +86,13 @@ function buildQuestions(questions) {
             HitlistColumns: ["q_airline"],//adiitional columns in the hitlists
             FilterQuestions: ["status", "lastdevicetype", "period", "q_airline"], //array of variable Ids for the filter page
             CorrelationVariableId: ['overall_experience_rating', 'responsible_tourism_importance'], //variableId to make Impact analysis from
-            CorrelationSuppressingBase: 4000 // if # of respondent for specific category is less than this number, the category will be hidden
+            CorrelationSuppressingBase: ${questions[i]['CorrelationSuppressingBase'] || 0} // if # of respondent for specific category is less than this number, the category will be hidden
         }${(i < questions.length - 1) ? ',' : ''}`;
     }
 
     return `static var TAQuestions = [${content}];`
 }
 
-//TODO
 function buildDesign(design) {
     if(design == null) {
         return `static var Design = null; //for default color scheme`;
@@ -117,12 +116,12 @@ function buildDesign(design) {
         dividerColor: "${design['dividerColor']}",           //color for inputs borders
         lightDividerColor: "${design['lightDividerColor']}",   //separation line between table rows
         disabledTextColor: "${design['disabledTextColor']}",      //disabled text color
-        chartPalette: ["#fd9900", "#cdd1d9", "#7cc700"],    //correlation chart points colors
+        chartPalette: ${JSON.stringify(design['chartPalette'])},    //correlation chart points colors
         areasPalette: {                                     //colors for correlation chart areas
-            "Priority Issues": "#ee627d",
-            "Strength": "#7cc700",
-            "Monitor and Improve": "#ffb944",
-            "Maintain": "#82b8ec"
+            "Priority Issues": "${design['areasPalette']['Priority Issues']}",
+            "Strength": "${design['areasPalette']['Strength']}",
+            "Monitor and Improve": "${design['areasPalette']['Monitor and Improve']}",
+            "Maintain": "${design['areasPalette']['Maintain']}"
         }
     }`;
 }

@@ -11,6 +11,14 @@ class DesignPanel extends Component {
         this.props.designStore.setProperty(name, color.color);
     };
 
+    onChangeChartColor = (index, color) => {
+        this.props.designStore.setChartPalette(index, color.color);
+    };
+
+    onChangeAreaPalette = (area, color) => {
+        this.props.designStore.setAreaPalette(area, color.color);
+    };
+
     onChangeLogoUrl = (e) => {
          this.props.designStore.setCustomerLogo(e.target.value);
     };
@@ -114,6 +122,43 @@ class DesignPanel extends Component {
                         value={design['disabledTextColor']} 
                         label="Disabled Text Color"
                         onChangeColor={(color) => this.onChangeColor('disabledTextColor', color)}
+                    />
+                    <span className="menu__panel_design-subtitle">Chart Palette</span>
+                    <ColorEditor 
+                        value={design['chartPalette'][0]} 
+                        label="First Color"
+                        onChangeColor={(color) => this.onChangeChartColor(0, color)}
+                    />
+                    <ColorEditor 
+                        value={design['chartPalette'][1]} 
+                        label="Second Color"
+                        onChangeColor={(color) => this.onChangeChartColor(1, color)}
+                    />
+                    <ColorEditor 
+                        value={design['chartPalette'][2]} 
+                        label="Third Color"
+                        onChangeColor={(color) => this.onChangeChartColor(2, color)}
+                    />
+                    <span className="menu__panel_design-subtitle">Areas Palette</span>
+                    <ColorEditor 
+                        value={design['areasPalette']['Priority Issues']} 
+                        label="Priority Issues"
+                        onChangeColor={(color) => this.onChangeAreaPalette('Priority Issues', color)}
+                    />
+                    <ColorEditor 
+                        value={design['areasPalette']['Strength']} 
+                        label="Strength"
+                        onChangeColor={(color) => this.onChangeAreaPalette('Strength', color)}
+                    />
+                    <ColorEditor 
+                        value={design['areasPalette']['Monitor and Improve']} 
+                        label="Monitor and Improve"
+                        onChangeColor={(color) => this.onChangeAreaPalette('Monitor and Improve', color)}
+                    />
+                    <ColorEditor 
+                        value={design['areasPalette']['Maintain']} 
+                        label="Maintain"
+                        onChangeColor={(color) => this.onChangeAreaPalette('Maintain', color)}
                     />
                 </div>
             </div>
