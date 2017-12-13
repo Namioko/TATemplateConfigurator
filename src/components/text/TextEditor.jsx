@@ -18,7 +18,7 @@ class TextEditor extends Component {
             design: design,
             otherParams: {
                 customerLogo: customerLogo,
-                url: showOnlySelectedCategoryTagInHitlist,
+                showOnlySelectedCategoryTagInHitlist: showOnlySelectedCategoryTagInHitlist,
                 sentimentRange: sentimentRange
             }});
 

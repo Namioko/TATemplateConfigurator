@@ -16,7 +16,7 @@ const NavBar = () => {
             design: design,
             otherParams: {
                 customerLogo: customerLogo,
-                url: showOnlySelectedCategoryTagInHitlist,
+                showOnlySelectedCategoryTagInHitlist: showOnlySelectedCategoryTagInHitlist,
                 sentimentRange: sentimentRange
             }});
 
