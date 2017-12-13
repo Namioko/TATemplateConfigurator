@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {buildConfig} from '../utils/config';
 import * as stores from '../stores';
+import {QUESTION_WINDOW} from '../constants';
 
 const NavBar = () => {
 
@@ -18,7 +19,8 @@ const NavBar = () => {
                 customerLogo: customerLogo,
                 showOnlySelectedCategoryTagInHitlist: showOnlySelectedCategoryTagInHitlist,
                 sentimentRange: sentimentRange
-            }});
+            }
+        });
 
         //TODO: Don't work in IE
         let element = document.createElement('a');
@@ -33,8 +35,12 @@ const NavBar = () => {
     return (
         <div className={'navbar'}>
             <Link to="/" className="navbar__item">Design</Link>
-            <Link to="/text" className="navbar__item">Text editor</Link>
-            <button className="green-button" style={{float: 'right', marginTop: '.6rem', marginRight: '1rem'}} onClick={download}>Download configuration</button>
+            <Link to="/text" className="navbar__item"  onClick={() => {
+                stores.componentStore.targetWindow = QUESTION_WINDOW;
+            }}>Text editor</Link>
+            <button className="green-button" style={{float: 'right', marginTop: '.6rem', marginRight: '1rem'}} onClick={download}>Download
+                configuration
+            </button>
         </div>
     )
 };

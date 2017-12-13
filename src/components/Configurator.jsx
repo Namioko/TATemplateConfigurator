@@ -3,7 +3,7 @@ import Menu from './menu';
 import {observer, inject} from 'mobx-react';
 import WindowsWrapper from './windows/WindowWrapper';
 import PreviewWindow from './preview/PreviewWindow';
-import {QUESTION_WINDOW,DESIGN_WINDOW} from '../constants';
+import {QUESTION_WINDOW, DESIGN_WINDOW} from '../constants';
 
 const Configurator = ({componentStore}) => {
 
