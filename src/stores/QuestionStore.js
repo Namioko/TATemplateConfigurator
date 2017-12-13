@@ -120,7 +120,8 @@ class QuestionStore {
         //CorrelationVariableShownName = 'Overall Sentiment'
     ];
 
-    @action addQuestion = ({index}) => {
+    @action
+    addQuestion = ({index}) => {
         const newQuestion = {
             CorrelationVariableShownName: 'Overall Sentiment'
         };
@@ -136,9 +137,14 @@ class QuestionStore {
     };
 
     @action
-    setQuestionProperty({index, propertyName, propertyValue}) {
+    deleteQuestion = ({index}) => {
+        this.questions.splice(index, 1);
+    };
+
+    @action
+    setQuestionProperty = ({index, propertyName, propertyValue}) => {
         this.questions[index][propertyName] = propertyValue;
-    }
+    };
 }
 
 const questionStore = new QuestionStore();

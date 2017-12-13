@@ -15,7 +15,7 @@ const QuestionPanel = () => {
 
 const MenuQuestionAddButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
     const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
-    const {addQuestion} = questionStore;
+    const {questions, addQuestion} = questionStore;
 
     const handleClick = () => {
         changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex});
@@ -23,7 +23,7 @@ const MenuQuestionAddButton = inject('componentStore', 'questionStore')(observer
     };
 
     return (
-        currentQuestionIndex < 0 &&
+        (currentQuestionIndex < 0  || questions.length <= 0) &&
         <div className="add-button">
             <button className="green-button"
                     onClick={handleClick}>
@@ -38,7 +38,7 @@ const QuestionList = inject('componentStore', 'questionStore')(observer(({compon
     const {questions} = questionStore;
 
     return (
-        currentQuestionIndex >= 0 &&
+        currentQuestionIndex >= 0 && questions.length > 0 &&
         <div className='menu__panel_content'>
             {questions.map((item, key) => (
                 <Question key={key} index={key}/>
