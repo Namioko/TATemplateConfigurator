@@ -8,7 +8,7 @@ export function buildConfig({questions, design, otherParams}) {
     static var Url = ${!!otherParams.url}; //set to false if you want to see all categories captured for comment in the hitlist everytime
     ${buildDesign(design)}
 
-    /* Negative-neutral-positive breaking on 1-11 scale)*/
+    /* Negative-neutral-positive breaking on 1-11 scale) */
     static const SentimentRange = {
         Positive: [7,8,9,10,11],
         Neutral: [6],

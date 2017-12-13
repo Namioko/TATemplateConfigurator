@@ -8,13 +8,13 @@ import NavBar from './Navbar';
 const Main = () => {
     return (
         <div className="configurator">
-            <DevTools/>
+            {(process.env.NODE_ENV !== "production") ? (<DevTools position={{top: 0, right: 170}}/>) : ''}
             <NavBar/>
             <div className="main">
-                    <Switch>
-                        <Route exact path='/' component={Configurator}/>
-                        <Route path='/text' component={TextEditor}/>
-                    </Switch>
+                <Switch>
+                    <Route exact path='/' component={Configurator}/>
+                    <Route path='/text' component={TextEditor}/>
+                </Switch>
             </div>
         </div>
     )

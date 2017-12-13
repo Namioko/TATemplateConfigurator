@@ -92,6 +92,7 @@ export default class Toggle extends PureComponent {
           ref={ref => { this.input = ref }}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
+          onChange={this.props.onChange}
           className='react-toggle-screenreader-only'
           type='checkbox' />
       </div>

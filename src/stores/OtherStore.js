@@ -14,7 +14,7 @@ class OtherStore {
         }
     }
 
-    @action setShowOnlySelectedCategoryTagInHitlist = ({showOnlySelectedCategoryTagInHitlist}) => {
+    @action setShowOnlySelectedCategoryTagInHitlist = (showOnlySelectedCategoryTagInHitlist) => {
         this.showOnlySelectedCategoryTagInHitlist = showOnlySelectedCategoryTagInHitlist;
     };
 

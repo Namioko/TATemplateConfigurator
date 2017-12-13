@@ -20,6 +20,7 @@ const NavBar = () => {
                 sentimentRange: sentimentRange
             }});
 
+        //TODO: Don't work in IE
         let element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(textConfig));
         element.setAttribute('download', 'TAConfig.js');
