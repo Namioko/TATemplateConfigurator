@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 const Question = ({componentStore, questionStore, ...props}) => {
     const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
@@ -43,7 +43,7 @@ const Question = ({componentStore, questionStore, ...props}) => {
 };
 
 Question.propTypes = {
-    index: PropTypes.number.isRequired
+    index: propTypes.number.isRequired
 };
 
 export default inject('componentStore', 'questionStore')(observer(Question));

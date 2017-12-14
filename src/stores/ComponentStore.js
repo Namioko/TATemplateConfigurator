@@ -6,13 +6,13 @@ class ComponentStore {
     @observable currentQuestionIndex = -1; //TODO: add computed name + model as ID
     @observable targetWindow = QUESTION_WINDOW; //
 
-    @action changeCurrentQuestion = ({chosenQuestionIndex}) => {
+    @action changeCurrentQuestion = (({chosenQuestionIndex}) => {
         chosenQuestionIndex = chosenQuestionIndex === -1 ? 0 : chosenQuestionIndex;
 
         if (chosenQuestionIndex >= 0) {
             this.currentQuestionIndex = chosenQuestionIndex;
         }
-    };
+    });
 
     @action setTargetWindow = (value) => {
         this.targetWindow = value;

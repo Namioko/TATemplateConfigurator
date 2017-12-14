@@ -89,7 +89,7 @@
 .question-window__question-field-list {
     display: flex;
     flex-direction: column;
-    font-size: 1.3rem; /*TODO: choose fontSize*/
+    font-size: 1.3rem;
     margin: 0 2rem;
 }
 
@@ -108,12 +108,11 @@
     margin-right: 1rem;
     margin-left: auto;
     width: 30rem;
-    font-size: 1.3rem; /*TODO: choose fontSize*/
+    font-size: 1.3rem;
 }
 
 .question-window__question-field_error {
     font-weight: normal;
-    margin-right: 25rem;
-    width: 9rem;
+    width: 35rem;
     color: red;
 }

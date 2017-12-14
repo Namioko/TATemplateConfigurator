@@ -1,5 +1,3 @@
-/*TODO: use other styles*/
-
 div.ReactTags__tags {
     position: relative;
     margin-right: 1rem;
@@ -17,7 +15,7 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
     border: 1px solid #ced4da;
     border-radius: .25rem;
     width: 30rem;
-    font-size: 1.3rem; /*TODO: choose fontSize*/
+    font-size: 1.3rem;
     font-weight: normal;
     line-height: 1.5;
 }

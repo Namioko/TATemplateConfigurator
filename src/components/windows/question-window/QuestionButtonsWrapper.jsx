@@ -21,12 +21,11 @@ const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observe
 }));
 
 const WindowAddBeforeButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
-    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
+    const {currentQuestionIndex} = componentStore;
     const {addQuestion} = questionStore;
 
     const handleClick =
         () => {
-            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex});
             addQuestion({index: currentQuestionIndex});
         };
 
@@ -44,8 +43,8 @@ const WindowAddAfterButton = inject('componentStore', 'questionStore')(observer(
 
     const handleClick =
         () => {
+            addQuestion({index: currentQuestionIndex + 1});
             changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
-            addQuestion({index: currentQuestionIndex});
         };
 
     return (

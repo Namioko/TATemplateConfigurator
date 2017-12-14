@@ -8,9 +8,14 @@ const NavBar = () => {
 
     const download = () => {
 
-        const {questions} = stores.questionStore;
+        const {questions, hasQuestionErrors} = stores.questionStore;
         const {design, customerLogo} = stores.designStore;
         const {showOnlySelectedCategoryTagInHitlist, sentimentRange} = stores.otherStore;
+
+        if(hasQuestionErrors()) {
+            alert('You have some errors in the configuration!');
+            return;
+        }
 
         const textConfig = buildConfig({
             questions: questions,
@@ -38,7 +43,7 @@ const NavBar = () => {
             <Link to="/text" className="navbar__item"  onClick={() => {
                 stores.componentStore.targetWindow = QUESTION_WINDOW;
             }}>Text editor</Link>
-            <button className="green-button" style={{float: 'right', marginTop: '.6rem', marginRight: '1rem'}} onClick={download}>Download
+            <button className="green-button navbar_download-btn" onClick={download}>Download
                 configuration
             </button>
         </div>

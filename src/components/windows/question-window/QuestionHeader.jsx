@@ -1,6 +1,5 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react';
-import questionStore from "../../../stores/QuestionStore";
 import DeleteIcon from '../../../assets/img/icons/ic_delete.svg';
 
 const QuestionHeader = ({componentStore, questionStore}) => {

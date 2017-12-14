@@ -3,6 +3,9 @@ import {observable, action} from 'mobx';
 class QuestionStore {
 
     @observable questions = [];
+    @observable errors = [];
+
+    requiredErrorMessage = '* required';
 
     properties = [
         {
@@ -25,6 +28,7 @@ class QuestionStore {
             isRequired: true,
             isArray: false,
             pattern: /^\d*$|^$/,
+            patternExplanation: 'only digits',
             placeholder: "",
             helpLine: 'Schema containing TA model'
         },
@@ -56,6 +60,7 @@ class QuestionStore {
             isRequired: true,
             isArray: false,
             pattern: /^[A-Za-z]\w*$|^$/,
+            patternExplanation: 'first symbol is letter, rest are letters or digits',
             placeholder: "",
             helpLine: 'The question ID of the Text Analytics verbatim question'
         },
@@ -64,6 +69,7 @@ class QuestionStore {
             isRequired: true,
             isArray: false,
             pattern: /^\d*$|^$/,
+            patternExplanation: 'only digits',
             placeholder: "",
             helpLine: 'The Genius Model ID'
         },
@@ -73,6 +79,7 @@ class QuestionStore {
             isArray: false,
             defaultValue: 'interview_start',
             pattern: /^[A-Za-z]\w*$|^$/,
+            patternExplanation: 'first symbol is letter, rest are letters or digits',
             placeholder: "",
             helpLine: 'Date variable'
         },
@@ -81,6 +88,7 @@ class QuestionStore {
             isRequired: false,
             isArray: true,
             pattern: /^[A-Za-z]\w*$|^$/,
+            patternExplanation: 'first symbol is letter, rest are letters or digits',
             placeholder: "Add variable",
             helpLine: 'Variable to use for breaking detailed analysis table'
         },
@@ -89,6 +97,7 @@ class QuestionStore {
             isRequired: false,
             isArray: true,
             pattern: /^[A-Za-z]\w*$|^$/,
+            patternExplanation: 'first symbol is letter, rest are letters or digits',
             placeholder: "Add column",
             helpLine: 'Additional columns in the hitlists'
         },
@@ -97,6 +106,7 @@ class QuestionStore {
             isRequired: false,
             isArray: true,
             pattern: /^[A-Za-z]\w*$|^$/,
+            patternExplanation: 'first symbol is letter, rest are letters or digits',
             placeholder: "Add variable id",
             helpLine: 'Array of variable Ids for the filter page'
         },
@@ -105,6 +115,7 @@ class QuestionStore {
             isRequired: false,
             isArray: true,
             pattern: /^[A-Za-z]\w*$|^$/,
+            patternExplanation: 'first symbol is letter, rest are letters or digits',
             placeholder: "Add variable id",
             helpLine: 'VariableId to make Impact analysis from'
         },
@@ -114,26 +125,31 @@ class QuestionStore {
             isArray: false,
             defaultValue: 100,
             pattern: /^\d*$|^$/,
+            patternExplanation: 'only digits',
             placeholder: "",
             helpLine: 'If # of respondent for specific category is less than this number, the category will be hidden'
-        },
-        //CorrelationVariableShownName = 'Overall Sentiment'
+        }
     ];
 
     @action
     addQuestion = ({index}) => {
-        const newQuestion = {
-            CorrelationVariableShownName: 'Overall Sentiment'
-        };
+        const newQuestion = {};
+
+        const newQuestionErrors = new Map();
 
         this.properties.forEach((property) => {
             newQuestion[property.name] =
                 property.isArray && property.defaultValue === undefined
                     ? []
                     : property.defaultValue;
+
+            if(property.isRequired && property.defaultValue === undefined) {
+                newQuestionErrors.set(property.name, this.requiredErrorMessage);
+            }
         });
 
         this.questions.splice(index, 0, newQuestion);
+        this.errors.splice(index, 0, newQuestionErrors);
     };
 
     @action
@@ -144,6 +160,11 @@ class QuestionStore {
     @action
     setQuestionProperty = ({index, propertyName, propertyValue}) => {
         this.questions[index][propertyName] = propertyValue;
+    };
+
+    @action
+    hasQuestionErrors = () => {
+        return this.errors.some(item => item.size > 0);
     };
 }
 

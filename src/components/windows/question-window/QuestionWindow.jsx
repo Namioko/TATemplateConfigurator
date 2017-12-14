@@ -16,12 +16,12 @@ const QuestionWindow = ({componentStore, questionStore}) => {
                 <div className="question-window__question-field-list">
                     {
                         properties.map((property) => {
-                            if(!property.isArray) {
+                            if (!property.isArray) {
                                 return <QuestionField key={property.name} {...property}
-                                                      currentQuestionIndex={currentQuestionIndex}/>
+                                                      currentQuestionIndex={currentQuestionIndex}
+                                                      currentQuestionsLength={questions.length}/>
                             } else {
-                                return <QuestionTagField key={property.name} {...property}
-                                               currentQuestionIndex={currentQuestionIndex}/>
+                                return <QuestionTagField key={property.name} {...property}/>
                             }
                         })
                     }

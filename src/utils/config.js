@@ -82,10 +82,10 @@ function buildQuestions(questions) {
             TAModelNo: "${questions[i]['TAModelNo'] || '0'}", // the Genius Model ID
             
             TimeVariableId: '${questions[i]['TimeVariableId'] || ''}', //date variable
-            VariablesToViewBy: ["q_airline"], //variable to use for breaking detailed analysis table
-            HitlistColumns: ["q_airline"],//adiitional columns in the hitlists
-            FilterQuestions: ["status", "lastdevicetype", "period", "q_airline"], //array of variable Ids for the filter page
-            CorrelationVariableId: ['overall_experience_rating', 'responsible_tourism_importance'], //variableId to make Impact analysis from
+            VariablesToViewBy: ${JSON.stringify(questions[i]['VariablesToViewBy'])}, //variable to use for breaking detailed analysis table
+            HitlistColumns: ${JSON.stringify(questions[i]['HitlistColumns'])},//adiitional columns in the hitlists
+            FilterQuestions: ${JSON.stringify(questions[i]['FilterQuestions'])}, //array of variable Ids for the filter page
+            CorrelationVariableId: ${JSON.stringify(questions[i]['CorrelationVariableId'])}, //variableId to make Impact analysis from
             CorrelationSuppressingBase: ${questions[i]['CorrelationSuppressingBase'] || 0} // if # of respondent for specific category is less than this number, the category will be hidden
         }${(i < questions.length - 1) ? ',' : ''}`;
     }
