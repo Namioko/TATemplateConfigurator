@@ -3,7 +3,6 @@ import {observer, inject} from 'mobx-react';
 import propTypes from 'prop-types';
 import InfoIcon from '../../../assets/img/icons/ic_info.svg';
 
-@inject('componentStore')
 @inject('questionStore')
 @observer
 class QuestionField extends Component {
@@ -15,31 +14,36 @@ class QuestionField extends Component {
             currentValue: props.questionStore.questions[props.currentQuestionIndex][props.name],
             setQuestionProperty: props.questionStore.setQuestionProperty,
             questions: props.questionStore.questions,
-            requiredErrorMessage: props.questionStore.requiredErrorMessage
+            errors: props.questionStore.errors,
+            isIdUnique: props.questionStore.isIdUnique,
+            requiredErrorMessage: props.questionStore.requiredErrorMessage,
+            invalidIdErrorMessage: props.questionStore.invalidIdErrorMessage
         }
     }
 
     componentDidUpdate(prevProps) {
+        const currentValue = this.state.questions[this.props.currentQuestionIndex][this.props.name];
+
         if (prevProps.currentQuestionIndex !== this.props.currentQuestionIndex
             || prevProps.currentQuestionsLength !== this.props.currentQuestionsLength) {
-            this.setState({
-                currentValue: this.state.questions[this.props.currentQuestionIndex][this.props.name]
-            });
+            this.setState({currentValue});
+            this.handleChange({target: {value: currentValue || ''}});
         }
     }
 
     handleChange = (event) => {
         if (this.props.isRequired && event.target.value.length <= 0) {
-            this.props.questionStore.errors[this.props.currentQuestionIndex]
-                .set(this.props.name, this.state.requiredErrorMessage);
+            this.state.errors[this.props.currentQuestionIndex].set(this.props.name, this.state.requiredErrorMessage);
         } else {
             if (this.props.pattern !== undefined && !this.props.pattern.test(event.target.value)) {
-                this.props.questionStore.errors[this.props.currentQuestionIndex]
-                    .set(this.props.name, `* invalid value (${this.props.patternExplanation})`);
+                this.state.errors[this.props.currentQuestionIndex].set(this.props.name,
+                    `* invalid value (${this.props.patternExplanation})`);
             } else {
-                this.props.questionStore.errors[this.props.currentQuestionIndex].delete(this.props.name);
+                this.state.errors[this.props.currentQuestionIndex].delete(this.props.name);
             }
         }
+
+        const prevValue = this.state.currentValue;
 
         this.state.setQuestionProperty({
             index: this.props.currentQuestionIndex,
@@ -49,7 +53,75 @@ class QuestionField extends Component {
         this.setState({
             currentValue: event.target.value
         });
+
+        this.checkIdUniqueness({currentValue: event.target.value, prevValue});
     };
+
+    checkIdUniqueness({currentValue, prevValue}) {
+        const currentName = this.state.questions[this.props.currentQuestionIndex].TAQuestionName;
+        const currentModel = this.state.questions[this.props.currentQuestionIndex].TAModelNo;
+
+        if (!this.state.isIdUnique({
+                questionIndex: this.props.currentQuestionIndex,
+                TAQuestionName: this.props.name === 'TAQuestionName'
+                    ? currentValue
+                    : currentName,
+                TAModelNo: this.props.name === 'TAModelNo'
+                    ? currentValue
+                    : currentModel,
+            })) {
+            const prevNameError = this.state.errors[this.props.currentQuestionIndex].get('TAQuestionName');
+            const prevModelError = this.state.errors[this.props.currentQuestionIndex].get('TAModelNo');
+
+            if (prevNameError !== this.state.invalidIdErrorMessage) {
+                this.state.errors[this.props.currentQuestionIndex].set('TAQuestionName2', prevNameError);
+            }
+            if (prevModelError !== this.state.invalidIdErrorMessage) {
+                this.state.errors[this.props.currentQuestionIndex].set('TAModelNo2', prevModelError);
+            }
+
+            this.state.errors[this.props.currentQuestionIndex].set('TAQuestionName', this.state.invalidIdErrorMessage);
+            this.state.errors[this.props.currentQuestionIndex].set('TAModelNo', this.state.invalidIdErrorMessage);
+        } else {
+            this.returnPrevError({questionIndex: this.props.currentQuestionIndex});
+
+            const questionsWithSameId = this.state.questions.filter((item, index) =>
+                (index !== this.props.currentQuestionIndex &&
+                    ((this.props.name === 'TAQuestionName' && item.TAQuestionName === prevValue)
+                        || (this.props.name !== 'TAQuestionName' && item.TAQuestionName === currentName))
+                    && ((this.props.name === 'TAModelNo' && item.TAModelNo === prevValue)
+                        || (this.props.name !== 'TAModelNo' && item.TAModelNo === currentModel))
+                ));
+
+            if (questionsWithSameId.length === 1) {
+                this.returnPrevError({questionIndex: this.state.questions.indexOf(questionsWithSameId[0])});
+            }
+        }
+    }
+
+    returnPrevError({questionIndex}) {
+        const prevNameError = this.state.errors[questionIndex].get('TAQuestionName2');
+        const prevModelError = this.state.errors[questionIndex].get('TAModelNo2');
+
+        const currentNameError = this.state.errors[questionIndex].get('TAQuestionName');
+        const currentModelError = this.state.errors[questionIndex].get('TAModelNo');
+
+        if (currentNameError && currentNameError === this.state.invalidIdErrorMessage) {
+            this.state.errors[questionIndex].set('TAQuestionName', prevNameError);
+        }
+        if (!this.state.errors[questionIndex].get('TAQuestionName')) {
+            this.state.errors[questionIndex].delete('TAQuestionName');
+        }
+        if (currentModelError && currentModelError === this.state.invalidIdErrorMessage) {
+            this.state.errors[questionIndex].set('TAModelNo', prevModelError);
+        }
+        if (!this.state.errors[questionIndex].get('TAModelNo')) {
+            this.state.errors[questionIndex].delete('TAModelNo');
+        }
+
+        this.state.errors[questionIndex].delete('TAQuestionName2');
+        this.state.errors[questionIndex].delete('TAModelNo2');
+    }
 
     render() {
         return (
@@ -59,7 +131,7 @@ class QuestionField extends Component {
                        onChange={this.handleChange} required={this.props.isRequired}/>
                 <img src={InfoIcon} className="question-window_icon" alt="Info" title={this.props.helpLine}/>
                 <span className="question-window__question-field_error">{
-                    this.props.questionStore.errors[this.props.currentQuestionIndex].get(this.props.name)
+                    this.state.errors[this.props.currentQuestionIndex].get(this.props.name)
                 }</span>
             </label>
         )

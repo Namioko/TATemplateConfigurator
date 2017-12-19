@@ -12,7 +12,7 @@ const NavBar = () => {
         const {design, customerLogo} = stores.designStore;
         const {showOnlySelectedCategoryTagInHitlist, sentimentRange} = stores.otherStore;
 
-        if(hasQuestionErrors()) {
+        if(hasQuestionErrors) {
             alert('You have some errors in the configuration!');
             return;
         }

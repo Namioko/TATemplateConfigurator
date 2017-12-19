@@ -30,7 +30,7 @@ const WindowAddBeforeButton = inject('componentStore', 'questionStore')(observer
         };
 
     return (
-        <button className="green-button window-buttons_add-before"
+        <button className="green-button window-buttons_add_before"
                 onClick={handleClick}>
             + Before
         </button>
@@ -48,7 +48,7 @@ const WindowAddAfterButton = inject('componentStore', 'questionStore')(observer(
         };
 
     return (
-        <button className="green-button window-buttons_add-after"
+        <button className="green-button window-buttons_add_after"
                 onClick={handleClick}>
             + After
         </button>

@@ -1,4 +1,4 @@
-import {observable, action} from 'mobx';
+import {observable, action, computed} from 'mobx';
 
 class QuestionStore {
 
@@ -6,6 +6,7 @@ class QuestionStore {
     @observable errors = [];
 
     requiredErrorMessage = '* required';
+    invalidIdErrorMessage = '* the question with that TAQuestionName and TAModelNo already exists';
 
     properties = [
         {
@@ -131,6 +132,11 @@ class QuestionStore {
         }
     ];
 
+    @computed
+    get hasQuestionErrors() {
+        return this.errors.some(item => item.size > 0);
+    };
+
     @action
     addQuestion = ({index}) => {
         const newQuestion = {};
@@ -163,8 +169,9 @@ class QuestionStore {
     };
 
     @action
-    hasQuestionErrors = () => {
-        return this.errors.some(item => item.size > 0);
+    isIdUnique = ({questionIndex, TAQuestionName, TAModelNo}) => {
+        return !this.questions.some((item, index) =>
+            item.TAQuestionName === TAQuestionName && item.TAModelNo === TAModelNo && questionIndex !== index);
     };
 }
 

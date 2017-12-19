@@ -9,7 +9,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
     const {questions, errors, requiredErrorMessage} = questionStore;
     const currentQuestionErrors = errors[currentQuestionIndex];
 
-    const tags = questions[currentQuestionIndex][props.name].map((item, index) => {
+    let tags = questions[currentQuestionIndex][props.name].map((item, index) => {
         return {id: index, text: item};
     });
 
