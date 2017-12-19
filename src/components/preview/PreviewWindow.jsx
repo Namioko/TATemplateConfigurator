@@ -1,12 +1,32 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 
-const PreviewWindow = ({designStore}) => {
-    return (
-        <div className="window-wrapper">
-            <div>Preview Windows</div>
-        </div>
-    )
+@inject('designStore')
+@observer
+class PreviewWindow extends Component {
+
+    onLoad = () => {
+        const {design} = this.props.designStore;
+
+        const css = `body,html{background: ${design['positiveColor']};color: #00f; }`;
+        const frameHead = document.getElementById('preview-frame').contentWindow.document.head;
+        const styleTag = frameHead.getElementsByTagName('style')[0];
+
+        if (styleTag.styleSheet){
+            styleTag.styleSheet.cssText = css;
+        } else {
+            styleTag.appendChild(document.createTextNode(css));
+        }
+        console.log(styleTag); 
+    } 
+
+    render() {
+        return (
+            <div className="window-wrapper">
+                <iframe id="preview-frame" src="/preview/noname.html" onLoad={this.onLoad}/>
+            </div>
+        )
+    }
 }
 
-export default inject('designStore')(observer(PreviewWindow));
+export default PreviewWindow;
