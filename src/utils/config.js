@@ -15,7 +15,7 @@ export function buildConfig({questions, design, otherParams}) {
         Negative: [1,2,3,4,5]
     }
 
-    /* Please do not change anything below this point*/
+    /* Please do not change anything below this point */
         
     static var Colors = {
         NegNeuPosPalette: {
