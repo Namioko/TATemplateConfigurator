@@ -53,6 +53,7 @@
     @apply --button;
     background-color: #6e6f73;
     color: white;
+    width: 2rem;
 }
 
 .window-buttons_add_after {
@@ -109,6 +110,10 @@
     margin-left: auto;
     width: 30rem;
     font-size: 1.3rem;
+}
+
+.question-window__question-field input:focus {
+    outline: none;
 }
 
 .question-window__question-field_error {

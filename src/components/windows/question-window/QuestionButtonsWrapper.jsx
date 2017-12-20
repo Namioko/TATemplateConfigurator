@@ -1,5 +1,7 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react';
+import LeftIcon from '../../../assets/img/icons/ic_arrow_left.svg';
+import RightIcon from '../../../assets/img/icons/ic_arrow_right.svg';
 
 const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
     const {currentQuestionIndex} = componentStore;
@@ -67,11 +69,10 @@ const WindowPrevButton = inject('componentStore')(observer(({componentStore}) =>
         };
 
     return (
-        <button
+        <img src={LeftIcon} alt="Prev"
             className={'gray-button window-buttons_arrow window-buttons_arrow-prev'}
             onClick={handleClick}>
-            &#129136;
-        </button>
+        </img>
     )
 }));
 
@@ -88,11 +89,10 @@ const WindowNextButton = inject('componentStore', 'questionStore')(observer(({co
         };
 
     return (
-        <button
+        <img src={RightIcon} alt="Next"
             className={'gray-button window-buttons_arrow window-buttons_arrow-next'}
             onClick={handleClick}>
-            &#129138;
-        </button>
+        </img>
     )
 }));
 
