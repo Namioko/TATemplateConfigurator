@@ -1,7 +1,7 @@
 import {WithContext as ReactTags} from 'react-tag-input';
 import React from 'react';
 import {observer, inject} from 'mobx-react';
-import InfoIcon from '../../../assets/img/icons/ic_info.svg';
+import InfoIcon from '../../../assets/img/icons/ic_help.svg';
 import propTypes from 'prop-types';
 
 const QuestionTagField = ({componentStore, questionStore, ...props}) => {
@@ -60,7 +60,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
             <span>{props.name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
                        placeholder={props.placeholder} autofocus={false}/>
-            <img src={InfoIcon} className="question-window_icon" alt="Info" title={props.helpLine}/>
+            <img src={InfoIcon} className="question-window_icon" alt="Help" title={props.helpLine}/>
             <span className="question-window__question-field_error">{currentQuestionErrors.get(props.name)}</span>
         </label>
     )

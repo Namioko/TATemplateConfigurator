@@ -83,10 +83,6 @@
 .question-window__content {
     height: calc(100% - 3rem);
     overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .question-window__question-field-list {
