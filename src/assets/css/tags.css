@@ -49,6 +49,7 @@ div.ReactTags__selected span.ReactTags__tag {
     padding: 0.25rem;
     margin: 0 0.5rem 0.3rem 0;
     cursor: move;
+    word-break: break-all;
     border-radius: 2px;
 }
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import propTypes from 'prop-types';
 import InfoIcon from '../../../assets/img/icons/ic_help.svg';
+import Tooltip from '../../ui/Tooltip';
 
 @inject('questionStore')
 @observer
@@ -125,11 +126,14 @@ class QuestionField extends Component {
 
     render() {
         return (
+            //extract tooltip with icon to separate component
             <label className="question-window__question-field">
+            	<Tooltip events delay={100} />
+
                 <span>{this.props.name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
                        onChange={this.handleChange} required={this.props.isRequired}/>
-                <img src={InfoIcon} className="question-window_icon" alt="Help" title={this.props.helpLine}/>
+                <img src={InfoIcon} className="question-window_icon" alt="Help"  data-rh={this.props.helpLine} data-rh-at="right"/>
                 <span className="question-window__question-field_error">{
                     this.state.errors[this.props.currentQuestionIndex].get(this.props.name)
                 }</span>

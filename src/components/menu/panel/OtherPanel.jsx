@@ -14,16 +14,18 @@ const OtherPanel = ({otherStore}) => {
     return (
         <div>
             <PanelHeader name="Other"/>
-            <div className="panel-checkable-item" style={{padding: '.7rem'}}>
-                <span style={{fontSize: '1.3rem', width: '80%', display: 'inline-block'}}>Show Only Selected Category Tag In Hitlist</span>
-                <Toggle
-                    style={{float: 'right'}}
-                    defaultChecked={showTags}
-                    onChange={handleChange} />
-            </div>
-            <p>Sentiment Range</p>
-            <div className="">
-                
+            <div className="menu__panel_content">
+                <div className="panel-checkable-item" style={{padding: '.7rem'}}>
+                    <span style={{fontSize: '1.3rem', width: '80%', display: 'inline-block'}}>Show Only Selected Category Tag In Hitlist</span>
+                    <Toggle
+                        style={{float: 'right'}}
+                        defaultChecked={showTags}
+                        onChange={handleChange} />
+                </div>
+                <span className="menu__panel_design-subtitle">Sentiment Range</span>
+                <p>Positive</p>
+                <p>Neutral</p>
+                <p>Negative</p>
             </div>
         </div>
     )

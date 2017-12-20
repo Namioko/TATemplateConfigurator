@@ -1,0 +1,65 @@
+.react-hint {
+	padding: 5px;
+	position: absolute;
+	z-index: 9999;
+    cursor: default;
+	animation: .5s fadeIn;
+}
+
+.react-hint__content {
+	padding: .5rem;
+	border-radius: .4rem;
+	background: #263238;
+    color: #fff;
+    display: inline-block;
+    width: max-content;
+    max-width: 30rem;
+}
+
+.react-hint:after {
+	content: '';
+	width: 0;
+	height: 0;
+	margin: auto;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 5px solid transparent;
+}
+
+.react-hint--top:after {
+	top: auto;
+	border-bottom: none;
+	border-top-color: #263238;
+}
+
+.react-hint--left:after {
+	left: auto;
+	border-right: none;
+	border-left-color: #263238;
+}
+
+.react-hint--right:after {
+	right: auto;
+	border-left: none;
+	border-right-color: #263238;
+}
+
+.react-hint--bottom:after {
+	bottom: auto;
+	border-top: none;
+	border-bottom-color: #263238;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}

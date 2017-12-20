@@ -3,6 +3,7 @@ import React from 'react';
 import {observer, inject} from 'mobx-react';
 import InfoIcon from '../../../assets/img/icons/ic_help.svg';
 import propTypes from 'prop-types';
+import Tooltip from '../../ui/Tooltip';
 
 const QuestionTagField = ({componentStore, questionStore, ...props}) => {
     const {currentQuestionIndex} = componentStore;
@@ -56,11 +57,14 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
     };
 
     return (
+        //extract tooltip with icon to separate component
         <label className="question-window__question-field">
+            <Tooltip events delay={100} />
+
             <span>{props.name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
                        placeholder={props.placeholder} autofocus={false}/>
-            <img src={InfoIcon} className="question-window_icon" alt="Help" title={props.helpLine}/>
+            <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={props.helpLine} data-rh-at="right"/>
             <span className="question-window__question-field_error">{currentQuestionErrors.get(props.name)}</span>
         </label>
     )
