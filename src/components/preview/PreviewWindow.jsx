@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {observer, inject} from 'mobx-react';
+import {inject} from 'mobx-react';
 import {observe} from 'mobx';
 
 @inject('designStore')
-@observer
 class PreviewWindow extends Component {
 
     constructor(props) {
@@ -36,7 +35,7 @@ class PreviewWindow extends Component {
     render() {
         return (
             <div className="window-wrapper">
-                <iframe id="preview-frame" src="/preview/noname.html" onLoad={this.setStyles}/>
+                <iframe id="preview-frame" src="/preview/noname.html" frameBorder="0" onLoad={this.setStyles} title="Preview"/>
             </div>
         )
     }
