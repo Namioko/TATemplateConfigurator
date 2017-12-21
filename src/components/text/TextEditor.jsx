@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {buildConfig} from '../../utils/config';
+import CodeMirror from 'react-codemirror';
+
+import 'codemirror/mode/javascript/javascript';
+import 'codemirror/lib/codemirror.css';
 
 @inject('questionStore', 'designStore', 'otherStore')
 @observer
@@ -20,23 +24,27 @@ class TextEditor extends Component {
                 customerLogo: customerLogo,
                 showOnlySelectedCategoryTagInHitlist: showOnlySelectedCategoryTagInHitlist,
                 sentimentRange: sentimentRange
-            }});
+            }
+        });
 
         this.state = {
             text: textConfig
         };
     }
 
-    handleTextChange = (e) => {
-        this.setState({text: e.target.value});
+    handleTextChange = (newValue) => {
+        this.setState({text: newValue});
     }
 
     render() {
         return (
-            <textarea 
-                style={{width: '100%', height: 'calc(100% - 4px)', marginTop: '4rem', border: 'none', resize: 'none'}} 
-                value={this.state.text} 
+            <CodeMirror
+                className="text-editor"
+                value={this.state.text}
                 onChange={this.handleTextChange}
+                options={{
+                    mode: 'javascript'
+                }}
             />
         )
     }

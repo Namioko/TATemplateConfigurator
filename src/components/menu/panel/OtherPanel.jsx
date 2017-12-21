@@ -1,15 +1,41 @@
 import React from 'react';
-import { PanelHeader } from './PanelHeader';
+import {PanelHeader} from './PanelHeader';
 import Toggle from '../../ui/Toggle';
 import {observer, inject} from 'mobx-react';
+import MultiRange from '../../ui/Range/index';
 
 const OtherPanel = ({otherStore}) => {
 
-    const handleChange = (event) => {
+    const handleToggleChange = (event) => {
         otherStore.setShowOnlySelectedCategoryTagInHitlist(event.target.checked);
     };
 
-    const { sentimentRange, showOnlySelectedCategoryTagInHitlist: showTags } = otherStore;
+    const handleRangeChange = ({result}) => {
+        let sentiment = {
+            Negative: [],
+            Neutral: [],
+            Positive: []
+        };
+
+        for (let i = result.min; i <= result.value[0]; i++) {
+            sentiment.Negative.push(i);
+        }
+        for (let i = result.value[0] + 1; i < result.value[1]; i++) {
+            sentiment.Neutral.push(i);
+        }
+        for (let i = result.value[1]; i <= result.max; i++) {
+            sentiment.Positive.push(i);
+        }
+
+        otherStore.sentimentRange = sentiment;
+    };
+
+    const {
+        showOnlySelectedCategoryTagInHitlist: showTags,
+        defaultRangeMin,
+        defaultRangeMax,
+        defaultValue
+    } = otherStore;
 
     return (
         <div>
@@ -20,12 +46,13 @@ const OtherPanel = ({otherStore}) => {
                     <Toggle
                         style={{float: 'right'}}
                         defaultChecked={showTags}
-                        onChange={handleChange} />
+                        onChange={handleToggleChange}/>
                 </div>
-                <span className="menu__panel_design-subtitle">Sentiment Range</span>
-                <p>Positive</p>
-                <p>Neutral</p>
-                <p>Negative</p>
+                <div style={{padding: '.7rem'}}>
+                    <span style={{fontSize: '1.3rem', width: '80%', display: 'inline-block'}}>Sentiment Range</span>
+                    <MultiRange defaultMin={defaultRangeMin} defaultMax={defaultRangeMax}
+                                  defaultValue={defaultValue} onChange={handleRangeChange}/>
+                </div>
             </div>
         </div>
     )

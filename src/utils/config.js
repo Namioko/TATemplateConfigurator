@@ -7,13 +7,9 @@ export function buildConfig({questions, design, otherParams}) {
     
     static var ShowOnlySelectedCategoryTagInHitlist = ${!!otherParams.showOnlySelectedCategoryTagInHitlist}; //set to false if you want to see all categories captured for comment in the hitlist everytime
     ${buildDesign(design)}
-
+    
     /* Negative-neutral-positive breaking on 1-11 scale) */
-    static const SentimentRange = {
-        Positive: [7,8,9,10,11],
-        Neutral: [6],
-        Negative: [1,2,3,4,5]
-    }
+    ${buildSentiment(otherParams.sentimentRange)}
 
     /* Please do not change anything below this point */
         
@@ -58,28 +54,27 @@ export function buildConfig({questions, design, otherParams}) {
 }`;
 }
 
-//TODO
 function buildQuestions(questions) {
-    if(questions == null || questions.length === 0) {
+    if (questions == null || questions.length === 0) {
         return `static var TAQuestions = [];`
     }
 
     let content = '';
 
-    for(let i = 0; i < questions.length; i++) {
+    for (let i = 0; i < questions.length; i++) {
         content += `
         {
             TAFolderId: "${questions[i]['TAFolderId'] || ''}", //How to name text Analytics folder in parameters
             
             DatasourceId: "${questions[i]['DatasourceId'] || ''}",  //Datasource Id of the survey
             
-            DatabaseSchemaId: ${questions[i]['DatabaseSchemaId'] || -1}, //Schema containig TA model
+            DatabaseSchemaId: ${questions[i]['DatabaseSchemaId'] || ''}, //Schema containig TA model
             DatabaseTableName: "${questions[i]['DatabaseTableName'] || ''}", //Table containing TA model                   
             RelationshipColumnName: "${questions[i]['RelationshipColumnName'] || ''}", //Column which contains id of parent category in table (usually "parent")
             TextSeparator: "${questions[i]['TextSeparator'] || ''}", //Separator between ParentCategory, subcategory and attribute in category name (usually "|")
                        
             TAQuestionName: "${questions[i]['TAQuestionName'] || ''}", // the question ID of the Text Analytics verbatim quesiton
-            TAModelNo: "${questions[i]['TAModelNo'] || '0'}", // the Genius Model ID
+            TAModelNo: "${questions[i]['TAModelNo'] || ''}", // the Genius Model ID
             
             TimeVariableId: '${questions[i]['TimeVariableId'] || ''}', //date variable
             VariablesToViewBy: ${JSON.stringify(questions[i]['VariablesToViewBy'])}, //variable to use for breaking detailed analysis table
@@ -94,7 +89,7 @@ function buildQuestions(questions) {
 }
 
 function buildDesign(design) {
-    if(design == null) {
+    if (design == null) {
         return `static var Design = null; //for default color scheme`;
     }
 
@@ -123,5 +118,14 @@ function buildDesign(design) {
             "Monitor and Improve": "${design['areasPalette']['Monitor and Improve']}",
             "Maintain": "${design['areasPalette']['Maintain']}"
         }
+    }`;
+}
+
+function buildSentiment(sentimentRange) {
+    return `    
+    static const SentimentRange = {
+        Positive: ${JSON.stringify(sentimentRange.Positive)},
+        Neutral: ${JSON.stringify(sentimentRange.Neutral)},
+        Negative: ${JSON.stringify(sentimentRange.Negative)}
     }`;
 }

@@ -8,12 +8,14 @@ const NavBar = () => {
 
     const download = () => {
 
-        const {questions, hasQuestionErrors} = stores.questionStore;
+        const {changeCurrentQuestion} = stores.componentStore;
+        const {questions, indexOfFirstQuestionErrors} = stores.questionStore;
         const {design, customerLogo} = stores.designStore;
         const {showOnlySelectedCategoryTagInHitlist, sentimentRange} = stores.otherStore;
 
-        if(hasQuestionErrors) {
+        if(indexOfFirstQuestionErrors >= 0) {
             alert('You have some errors in the configuration!');
+            changeCurrentQuestion({chosenQuestionIndex: indexOfFirstQuestionErrors});
             return;
         }
 

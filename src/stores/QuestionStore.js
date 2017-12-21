@@ -133,8 +133,8 @@ class QuestionStore {
     ];
 
     @computed
-    get hasQuestionErrors() {
-        return this.errors.some(item => item.size > 0);
+    get indexOfFirstQuestionErrors() {
+        return this.errors.findIndex(item => item.size > 0);
     };
 
     @action
@@ -161,6 +161,7 @@ class QuestionStore {
     @action
     deleteQuestion = ({index}) => {
         this.questions.splice(index, 1);
+        this.errors.splice(index, 1);
     };
 
     @action

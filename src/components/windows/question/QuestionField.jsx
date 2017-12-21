@@ -55,14 +55,16 @@ class QuestionField extends Component {
             currentValue: event.target.value
         });
 
-        this.checkIdUniqueness({currentValue: event.target.value, prevValue});
+        if (this.props.name === 'TAQuestionName' || this.props.name === 'TAModelNo') {
+            this.checkIdUniqueness({currentValue: event.target.value, prevValue});
+        }
     };
 
     checkIdUniqueness({currentValue, prevValue}) {
         const currentName = this.state.questions[this.props.currentQuestionIndex].TAQuestionName;
         const currentModel = this.state.questions[this.props.currentQuestionIndex].TAModelNo;
 
-        if (!this.state.isIdUnique({
+        if (currentValue && !this.state.isIdUnique({
                 questionIndex: this.props.currentQuestionIndex,
                 TAQuestionName: this.props.name === 'TAQuestionName'
                     ? currentValue

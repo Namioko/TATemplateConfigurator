@@ -20,6 +20,9 @@ const QuestionHeader = ({componentStore, questionStore}) => {
                         ? currentQuestion.TAQuestionName
                         : `q${currentQuestionIndex}`
                 }
+                {
+                    currentQuestion.TAModelNo && `-${currentQuestion.TAModelNo}`
+                }
             </span>
             <img src={DeleteIcon} className="question-window_icon" alt="Info" onClick={handleDeleteClick}/>
         </div>

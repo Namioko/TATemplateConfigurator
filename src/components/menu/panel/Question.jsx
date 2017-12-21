@@ -6,6 +6,7 @@ import propTypes from 'prop-types';
 const Question = ({componentStore, questionStore, ...props}) => {
     const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
     const {questions, deleteQuestion} = questionStore;
+    const currentQuestion = questions[props.index];
 
     const className = classNames({
         'question-list_question': true,
@@ -30,9 +31,12 @@ const Question = ({componentStore, questionStore, ...props}) => {
     return (
         <div className={className} onClick={handleLineClick}>
             {
-                questions[props.index].TAQuestionName
-                    ? questions[props.index].TAQuestionName
+                currentQuestion.TAQuestionName
+                    ? currentQuestion.TAQuestionName
                     : `q${props.index}`
+            }
+            {
+                currentQuestion.TAModelNo && `-${currentQuestion.TAModelNo}`
             }
             {
                 props.index === currentQuestionIndex &&

@@ -17,10 +17,6 @@ body,
     font-size: 10px;
 }
 
-.hidden {
-    display: none !important;
-}
-
 .configurator {
     height: 100%;
     width: 100%;
@@ -49,4 +45,21 @@ body,
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+.range {
+    width: 80%;
+}
+
+.text-editor {
+    width: 100%;
+}
+
+.text-editor > div {
+    width: 100%;
+    height: calc(100% - 4px);
+    margin-top: 4rem;
+    border: none;
+    resize: none;
+    font-size: 1.5rem;
 }
