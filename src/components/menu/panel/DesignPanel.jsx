@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { PanelHeader } from './PanelHeader';
 import {observer, inject} from 'mobx-react';
 import ColorEditor from './ColorEditor';
+import ColorArray from './ColorArray';
 
 @inject('designStore')
 @observer
@@ -11,8 +12,9 @@ class DesignPanel extends Component {
         this.props.designStore.setProperty(name, color.color);
     };
 
-    onChangeChartColor = (index, color) => {
-        this.props.designStore.setChartPalette(index, color.color);
+    onChangeChartColors = (colors) => {
+        console.log("change" + colors);
+        this.props.designStore.setProperty('chartPalette', colors);
     };
 
     onChangeAreaPalette = (area, color) => {
@@ -124,21 +126,7 @@ class DesignPanel extends Component {
                         onChangeColor={(color) => this.onChangeColor('disabledTextColor', color)}
                     />
                     <span className="menu__panel_design-subtitle">Chart Palette</span>
-                    <ColorEditor 
-                        value={design['chartPalette'][0]} 
-                        label="First Color"
-                        onChangeColor={(color) => this.onChangeChartColor(0, color)}
-                    />
-                    <ColorEditor 
-                        value={design['chartPalette'][1]} 
-                        label="Second Color"
-                        onChangeColor={(color) => this.onChangeChartColor(1, color)}
-                    />
-                    <ColorEditor 
-                        value={design['chartPalette'][2]} 
-                        label="Third Color"
-                        onChangeColor={(color) => this.onChangeChartColor(2, color)}
-                    />
+                    <ColorArray onChange={this.onChangeChartColors} colors={design['chartPalette'].slice()}/>
                     <span className="menu__panel_design-subtitle">Areas Palette</span>
                     <ColorEditor 
                         value={design['areasPalette']['Priority Issues']} 

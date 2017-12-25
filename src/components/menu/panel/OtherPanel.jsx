@@ -48,8 +48,8 @@ const OtherPanel = ({otherStore}) => {
                         defaultChecked={showTags}
                         onChange={handleToggleChange}/>
                 </div>
+                <span className="menu__panel_design-subtitle">Sentiment Range</span>
                 <div style={{padding: '.7rem'}}>
-                    <span style={{fontSize: '1.3rem', width: '80%', display: 'inline-block'}}>Sentiment Range</span>
                     <MultiRange defaultMin={defaultRangeMin} defaultMax={defaultRangeMax}
                                   defaultValue={defaultValue} onChange={handleRangeChange}/>
                 </div>

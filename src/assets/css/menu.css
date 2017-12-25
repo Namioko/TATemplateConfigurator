@@ -47,3 +47,12 @@
     padding: .65rem 1rem;
     font-weight: 700;
 }
+
+.colorArray__removeColor {
+    background: url('../img/icons/ic_remove.svg');
+    width: 2rem;
+    height: 2rem;
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 1.7rem;
+}

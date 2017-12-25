@@ -121,3 +121,8 @@
     width: 25rem;
     color: red;
 }
+
+#preview-frame {
+    width: 100rem;
+    height: 100%;
+}

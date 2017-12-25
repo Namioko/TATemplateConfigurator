@@ -13,7 +13,7 @@
     color: #fff;
     display: inline-block;
     width: max-content;
-    max-width: 30rem;
+    max-width: 25rem;
 }
 
 .react-hint:after {

@@ -42,10 +42,6 @@ class DesignStore {
         this.design[propertyName] = propertyValue;
     };
 
-    @action setChartPalette = (index, color) => {
-        this.design['chartPalette'][index] = color;
-    };
-
     @action setAreaPalette = (areaName, areaColor) => {
         this.design['areasPalette'][areaName] = areaColor;
     };
