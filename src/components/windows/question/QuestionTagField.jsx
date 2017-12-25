@@ -6,53 +6,54 @@ import propTypes from 'prop-types';
 import Tooltip from '../../ui/Tooltip';
 
 const QuestionTagField = ({componentStore, questionStore, ...props}) => {
+    const {name, pattern, isRequired, patternExplanation, placeholder, helpLine} = props;
     const {currentQuestionIndex} = componentStore;
     const {questions, errors, requiredErrorMessage} = questionStore;
     const currentQuestionErrors = errors[currentQuestionIndex];
 
-    let tags = questions[currentQuestionIndex][props.name].map((item, index) => {
+    let tags = questions[currentQuestionIndex][name].map((item, index) => {
         return {id: index, text: item};
     });
 
     const handleAddition = (value) => {
-        if (props.pattern === undefined
-            || (props.pattern !== undefined && props.pattern.test(value))) {
+        if (pattern === undefined
+            || (pattern !== undefined && pattern.test(value))) {
             tags.push({
                 id: tags.length + 1,
                 text: value
             });
-            questions[currentQuestionIndex][props.name] = tags.map(item => {
+            questions[currentQuestionIndex][name] = tags.map(item => {
                 return item.text;
             });
 
-            if (props.isRequired) {
-                currentQuestionErrors.delete(props.name);
+            if (isRequired) {
+                currentQuestionErrors.delete(name);
             }
         } else {
-            if (props.isRequired) {
-                currentQuestionErrors.set(props.name, requiredErrorMessage);
+            if (isRequired) {
+                currentQuestionErrors.set(name, requiredErrorMessage);
             } else {
-                currentQuestionErrors.delete(props.name);
+                currentQuestionErrors.delete(name);
             }
         }
     };
     const handleInputChange = (value) => {
-        if (props.pattern !== undefined && !props.pattern.test(value)) {
-            currentQuestionErrors.set(props.name, `* invalid value (${props.patternExplanation})`);
+        if (pattern !== undefined && !pattern.test(value)) {
+            currentQuestionErrors.set(name, `* invalid value (${patternExplanation})`);
         } else {
-            if (props.isRequired && tags.length <= 0) {
-                currentQuestionErrors.set(props.name, requiredErrorMessage);
+            if (isRequired && tags.length <= 0) {
+                currentQuestionErrors.set(name, requiredErrorMessage);
             } else {
-                currentQuestionErrors.delete(props.name);
+                currentQuestionErrors.delete(name);
             }
         }
     };
     const handleDelete = (index) => {
         tags.splice(index, 1);
-        questions[currentQuestionIndex][props.name].splice(index, 1);
+        questions[currentQuestionIndex][name].splice(index, 1);
 
-        if (props.isRequired && tags.length <= 0) {
-            currentQuestionErrors.set(props.name, requiredErrorMessage);
+        if (isRequired && tags.length <= 0) {
+            currentQuestionErrors.set(name, requiredErrorMessage);
         }
     };
 
@@ -61,11 +62,11 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
         <label className="question-window__question-field">
             <Tooltip events delay={100} />
 
-            <span>{props.name}</span>
+            <span>{name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
-                       placeholder={props.placeholder} autofocus={false}/>
-            <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={props.helpLine} data-rh-at="right"/>
-            <span className="question-window__question-field_error">{currentQuestionErrors.get(props.name)}</span>
+                       placeholder={placeholder} autofocus={false}/>
+            <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
+            <span className="question-window__question-field_error">{currentQuestionErrors.get(name)}</span>
         </label>
     )
 };
@@ -73,7 +74,8 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
 QuestionTagField.propTypes = {
     name: propTypes.string.isRequired,
     isRequired: propTypes.bool,
-    isArray: propTypes.bool
+    patternExplanation: propTypes.string,
+    helpLine: propTypes.string
 };
 
 export default inject('componentStore', 'questionStore')(observer(QuestionTagField));

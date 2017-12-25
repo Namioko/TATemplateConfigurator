@@ -62,7 +62,6 @@ const WindowPrevButton = inject('componentStore')(observer(({componentStore}) =>
 
     const handleClick =
         () => {
-            //TODO: make it better
             if (currentQuestionIndex > 0) {
                 changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex - 1});
             }
@@ -82,7 +81,6 @@ const WindowNextButton = inject('componentStore', 'questionStore')(observer(({co
 
     const handleClick =
         () => {
-            //TODO: make it better
             if (currentQuestionIndex < questions.length - 1) {
                 changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
             }

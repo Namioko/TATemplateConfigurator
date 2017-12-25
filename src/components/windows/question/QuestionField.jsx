@@ -128,9 +128,9 @@ class QuestionField extends Component {
 
     render() {
         return (
-            //extract tooltip with icon to separate component
+            //TODO: extract tooltip with icon to separate component
             <label className="question-window__question-field">
-            	<Tooltip events delay={100} />
+                <Tooltip events delay={100} />
 
                 <span>{this.props.name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
