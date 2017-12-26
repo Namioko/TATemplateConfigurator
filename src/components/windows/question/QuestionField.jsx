@@ -11,133 +11,154 @@ class QuestionField extends Component {
     constructor(props) {
         super(props);
 
+        const {questionStore, currentQuestionIndex, name} = props;
+
         this.state = {
-            currentValue: props.questionStore.questions[props.currentQuestionIndex][props.name],
-            setQuestionProperty: props.questionStore.setQuestionProperty,
-            questions: props.questionStore.questions,
-            errors: props.questionStore.errors,
-            isIdUnique: props.questionStore.isIdUnique,
-            requiredErrorMessage: props.questionStore.requiredErrorMessage,
-            invalidIdErrorMessage: props.questionStore.invalidIdErrorMessage
+            currentValue: questionStore.questions[currentQuestionIndex][name]
         }
     }
 
     componentDidUpdate(prevProps) {
-        const currentValue = this.state.questions[this.props.currentQuestionIndex][this.props.name];
+        const {currentQuestionIndex, currentQuestionsLength, name, questionStore} = this.props;
+        const {questions} = questionStore;
 
-        if (prevProps.currentQuestionIndex !== this.props.currentQuestionIndex
-            || prevProps.currentQuestionsLength !== this.props.currentQuestionsLength) {
+        const currentValue = questions[currentQuestionIndex][name];
+
+        if (prevProps.currentQuestionIndex !== currentQuestionIndex
+            || prevProps.currentQuestionsLength !== currentQuestionsLength) {
             this.setState({currentValue});
             this.handleChange({target: {value: currentValue || ''}});
         }
     }
 
     handleChange = (event) => {
-        if (this.props.isRequired && event.target.value.length <= 0) {
-            this.state.errors[this.props.currentQuestionIndex].set(this.props.name, this.state.requiredErrorMessage);
+        const {currentQuestionIndex, name, isRequired,
+            pattern, patternExplanation, questionStore} = this.props;
+        const {requiredErrorMessage, setQuestionProperty, errors} = questionStore;
+
+        const currentError = errors[currentQuestionIndex];
+
+        if (isRequired && event.target.value.length <= 0) {
+            currentError.set(name, requiredErrorMessage);
         } else {
-            if (this.props.pattern !== undefined && !this.props.pattern.test(event.target.value)) {
-                this.state.errors[this.props.currentQuestionIndex].set(this.props.name,
-                    `* invalid value (${this.props.patternExplanation})`);
+            if (pattern !== undefined && !pattern.test(event.target.value)) {
+                currentError.set(name,
+                    `* invalid value (${patternExplanation})`);
             } else {
-                this.state.errors[this.props.currentQuestionIndex].delete(this.props.name);
+                currentError.delete(name);
             }
         }
 
         const prevValue = this.state.currentValue;
 
-        this.state.setQuestionProperty({
-            index: this.props.currentQuestionIndex,
-            propertyName: this.props.name,
+        setQuestionProperty({
+            index: currentQuestionIndex,
+            propertyName: name,
             propertyValue: event.target.value
         });
         this.setState({
             currentValue: event.target.value
         });
 
-        if (this.props.name === 'TAQuestionName' || this.props.name === 'TAModelNo') {
+        if (name === 'TAQuestionName' || name === 'TAModelNo') {
             this.checkIdUniqueness({currentValue: event.target.value, prevValue});
         }
     };
 
     checkIdUniqueness({currentValue, prevValue}) {
-        const currentName = this.state.questions[this.props.currentQuestionIndex].TAQuestionName;
-        const currentModel = this.state.questions[this.props.currentQuestionIndex].TAModelNo;
+        const {currentQuestionIndex, name, questionStore} = this.props;
+        const {isIdUnique, invalidIdErrorMessage, questions, errors} = questionStore;
 
-        if (currentValue && !this.state.isIdUnique({
-                questionIndex: this.props.currentQuestionIndex,
-                TAQuestionName: this.props.name === 'TAQuestionName'
+        const currentName = questions[currentQuestionIndex].TAQuestionName;
+        const currentModel = questions[currentQuestionIndex].TAModelNo;
+        const currentError = errors[currentQuestionIndex];
+
+        if (currentValue && !isIdUnique({
+                questionIndex: currentQuestionIndex,
+                TAQuestionName: name === 'TAQuestionName'
                     ? currentValue
                     : currentName,
-                TAModelNo: this.props.name === 'TAModelNo'
+                TAModelNo: name === 'TAModelNo'
                     ? currentValue
                     : currentModel,
             })) {
-            const prevNameError = this.state.errors[this.props.currentQuestionIndex].get('TAQuestionName');
-            const prevModelError = this.state.errors[this.props.currentQuestionIndex].get('TAModelNo');
+            const prevNameError = currentError.get('TAQuestionName');
+            const prevModelError = currentError.get('TAModelNo');
 
-            if (prevNameError !== this.state.invalidIdErrorMessage) {
-                this.state.errors[this.props.currentQuestionIndex].set('TAQuestionName2', prevNameError);
+            if (prevNameError !== invalidIdErrorMessage) {
+                currentError.set('TAQuestionName2', prevNameError);
             }
-            if (prevModelError !== this.state.invalidIdErrorMessage) {
-                this.state.errors[this.props.currentQuestionIndex].set('TAModelNo2', prevModelError);
+            if (prevModelError !== invalidIdErrorMessage) {
+                currentError.set('TAModelNo2', prevModelError);
             }
 
-            this.state.errors[this.props.currentQuestionIndex].set('TAQuestionName', this.state.invalidIdErrorMessage);
-            this.state.errors[this.props.currentQuestionIndex].set('TAModelNo', this.state.invalidIdErrorMessage);
+            currentError.set('TAQuestionName', invalidIdErrorMessage);
+            currentError.set('TAModelNo', invalidIdErrorMessage);
         } else {
-            this.returnPrevError({questionIndex: this.props.currentQuestionIndex});
+            this.returnPrevError({questionIndex: currentQuestionIndex});
 
-            const questionsWithSameId = this.state.questions.filter((item, index) =>
-                (index !== this.props.currentQuestionIndex &&
-                    ((this.props.name === 'TAQuestionName' && item.TAQuestionName === prevValue)
-                        || (this.props.name !== 'TAQuestionName' && item.TAQuestionName === currentName))
-                    && ((this.props.name === 'TAModelNo' && item.TAModelNo === prevValue)
-                        || (this.props.name !== 'TAModelNo' && item.TAModelNo === currentModel))
+            const questionsWithSameId = questions.filter((item, index) =>
+                (index !== currentQuestionIndex &&
+                    ((name === 'TAQuestionName' && item.TAQuestionName === prevValue)
+                        || (name !== 'TAQuestionName' && item.TAQuestionName === currentName))
+                    && ((name === 'TAModelNo' && item.TAModelNo === prevValue)
+                        || (name !== 'TAModelNo' && item.TAModelNo === currentModel))
                 ));
 
             if (questionsWithSameId.length === 1) {
-                this.returnPrevError({questionIndex: this.state.questions.indexOf(questionsWithSameId[0])});
+                this.returnPrevError({
+                    questionIndex: questions.indexOf(questionsWithSameId[0])
+                });
             }
         }
     }
 
     returnPrevError({questionIndex}) {
-        const prevNameError = this.state.errors[questionIndex].get('TAQuestionName2');
-        const prevModelError = this.state.errors[questionIndex].get('TAModelNo2');
+        const {questionStore} = this.props;
+        const {invalidIdErrorMessage, errors} = questionStore;
 
-        const currentNameError = this.state.errors[questionIndex].get('TAQuestionName');
-        const currentModelError = this.state.errors[questionIndex].get('TAModelNo');
+        const currentError = errors[questionIndex];
 
-        if (currentNameError && currentNameError === this.state.invalidIdErrorMessage) {
-            this.state.errors[questionIndex].set('TAQuestionName', prevNameError);
+        const prevNameError = currentError.get('TAQuestionName2');
+        const prevModelError = currentError.get('TAModelNo2');
+
+        const currentNameError = currentError.get('TAQuestionName');
+        const currentModelError = currentError.get('TAModelNo');
+
+        if (currentNameError && currentNameError === invalidIdErrorMessage) {
+            currentError.set('TAQuestionName', prevNameError);
         }
-        if (!this.state.errors[questionIndex].get('TAQuestionName')) {
-            this.state.errors[questionIndex].delete('TAQuestionName');
+        if (!currentError.get('TAQuestionName')) {
+            currentError.delete('TAQuestionName');
         }
-        if (currentModelError && currentModelError === this.state.invalidIdErrorMessage) {
-            this.state.errors[questionIndex].set('TAModelNo', prevModelError);
+        if (currentModelError && currentModelError === invalidIdErrorMessage) {
+            currentError.set('TAModelNo', prevModelError);
         }
-        if (!this.state.errors[questionIndex].get('TAModelNo')) {
-            this.state.errors[questionIndex].delete('TAModelNo');
+        if (!currentError.get('TAModelNo')) {
+            currentError.delete('TAModelNo');
         }
 
-        this.state.errors[questionIndex].delete('TAQuestionName2');
-        this.state.errors[questionIndex].delete('TAModelNo2');
+        currentError.delete('TAQuestionName2');
+        currentError.delete('TAModelNo2');
     }
 
     render() {
+        const {currentQuestionIndex, helpLine, name, isRequired, questionStore} = this.props;
+        const {errors} = questionStore;
+
+        const currentError = errors[currentQuestionIndex];
+
         return (
             //TODO: extract tooltip with icon to separate component
             <label className="question-window__question-field">
                 <Tooltip events delay={100} />
 
-                <span>{this.props.name}</span>
+                <span>{name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
-                       onChange={this.handleChange} required={this.props.isRequired}/>
-                <img src={InfoIcon} className="question-window_icon" alt="Help"  data-rh={this.props.helpLine} data-rh-at="right"/>
+                       onChange={this.handleChange} required={isRequired}/>
+                <img src={InfoIcon} className="question-window_icon" alt="Help"  data-rh={helpLine} data-rh-at="right"/>
                 <span className="question-window__question-field_error">{
-                    this.state.errors[this.props.currentQuestionIndex].get(this.props.name)
+                    currentError.get(name)
                 }</span>
             </label>
         )

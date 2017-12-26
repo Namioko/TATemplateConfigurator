@@ -75,7 +75,8 @@ QuestionTagField.propTypes = {
     name: propTypes.string.isRequired,
     isRequired: propTypes.bool,
     patternExplanation: propTypes.string,
-    helpLine: propTypes.string
+    helpLine: propTypes.string,
+    placeholder: propTypes.string
 };
 
 export default inject('componentStore', 'questionStore')(observer(QuestionTagField));

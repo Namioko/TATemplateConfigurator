@@ -34,7 +34,7 @@ class ColorArray extends Component {
         return (
            <div>
                {colors.map((color, i) => (
-                   <div style={{display: 'inline-block'}}>
+                   <div key={i} style={{display: 'inline-block'}}>
                     <ColorEditor
                         key={i}
                         value={color} 

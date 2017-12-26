@@ -1,4 +1,5 @@
 import 'rc-slider/assets/index.css';
+import propTypes from 'prop-types';
 
 import React, {Component} from 'react';
 import Slider from 'rc-slider';
@@ -57,5 +58,12 @@ class MultiRange extends Component {
         );
     }
 }
+
+MultiRange.propTypes = {
+    defaultMin: propTypes.number.isRequired,
+    defaultMax: propTypes.number.isRequired,
+    min: propTypes.number,
+    max: propTypes.number
+};
 
 export default MultiRange;
