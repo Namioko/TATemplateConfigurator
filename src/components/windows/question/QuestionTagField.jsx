@@ -62,7 +62,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
         <label className="question-window__question-field">
             <Tooltip events delay={100} />
 
-            <span>{name}</span>
+            <span className="question-window__question-field_title">{name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
                        placeholder={placeholder} autofocus={false}/>
             <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>

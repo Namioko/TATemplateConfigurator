@@ -21,7 +21,7 @@ const Question = ({componentStore, questionStore, ...props}) => {
         isDeleteClicked = true;
     };
     const handleLineClick = () => {
-        if(isDeleteClicked) {
+        if (isDeleteClicked) {
             isDeleteClicked = false;
         } else {
             changeCurrentQuestion({chosenQuestionIndex: props.index});
@@ -30,14 +30,16 @@ const Question = ({componentStore, questionStore, ...props}) => {
 
     return (
         <div className={className} onClick={handleLineClick}>
-            {
-                currentQuestion.TAQuestionName
-                    ? currentQuestion.TAQuestionName
-                    : `q${props.index}`
-            }
-            {
-                currentQuestion.TAModelNo && `-${currentQuestion.TAModelNo}`
-            }
+            <span>
+                {
+                    currentQuestion.TAQuestionName
+                        ? currentQuestion.TAQuestionName
+                        : `q${props.index}`
+                }
+                {
+                    currentQuestion.TAModelNo && `-${currentQuestion.TAModelNo}`
+                }
+            </span>
             {
                 props.index === currentQuestionIndex &&
                 <div className="question-list_delete-btn" onClick={handleDeleteClick}/>

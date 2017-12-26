@@ -10,20 +10,20 @@ const OtherPanel = ({otherStore}) => {
         otherStore.setShowOnlySelectedCategoryTagInHitlist(event.target.checked);
     };
 
-    const handleRangeChange = ({result}) => {
+    const handleRangeChange = ({value}) => {
         let sentiment = {
             Negative: [],
             Neutral: [],
             Positive: []
         };
 
-        for (let i = result.min; i <= result.value[0]; i++) {
+        for (let i = defaultRangeMin; i <= value[0]; i++) {
             sentiment.Negative.push(i);
         }
-        for (let i = result.value[0] + 1; i < result.value[1]; i++) {
+        for (let i = value[0] + 1; i < value[1]; i++) {
             sentiment.Neutral.push(i);
         }
-        for (let i = result.value[1]; i <= result.max; i++) {
+        for (let i = value[1]; i <= defaultRangeMax; i++) {
             sentiment.Positive.push(i);
         }
 

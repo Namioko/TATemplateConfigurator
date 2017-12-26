@@ -7,7 +7,6 @@ import Tooltip from '../../ui/Tooltip';
 @inject('questionStore')
 @observer
 class QuestionField extends Component {
-
     constructor(props) {
         super(props);
 
@@ -32,8 +31,10 @@ class QuestionField extends Component {
     }
 
     handleChange = (event) => {
-        const {currentQuestionIndex, name, isRequired,
-            pattern, patternExplanation, questionStore} = this.props;
+        const {
+            currentQuestionIndex, name, isRequired,
+            pattern, patternExplanation, questionStore
+        } = this.props;
         const {requiredErrorMessage, setQuestionProperty, errors} = questionStore;
 
         const currentError = errors[currentQuestionIndex];
@@ -151,12 +152,12 @@ class QuestionField extends Component {
         return (
             //TODO: extract tooltip with icon to separate component
             <label className="question-window__question-field">
-                <Tooltip events delay={100} />
+                <Tooltip events delay={100}/>
 
-                <span>{name}</span>
+                <span className="question-window__question-field_title">{name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
                        onChange={this.handleChange} required={isRequired}/>
-                <img src={InfoIcon} className="question-window_icon" alt="Help"  data-rh={helpLine} data-rh-at="right"/>
+                <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
                 <span className="question-window__question-field_error">{
                     currentError.get(name)
                 }</span>

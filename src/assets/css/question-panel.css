@@ -20,6 +20,12 @@
     align-items: center;
 }
 
+.question-list_question > span {
+    max-width: 20rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .question-list_question:last-child {
     border-bottom: var(--border);
 }
