@@ -28,18 +28,14 @@ const Question = ({componentStore, questionStore, ...props}) => {
         }
     };
 
+    let name = currentQuestion.TAQuestionName
+        ? currentQuestion.TAQuestionName
+        : `q${props.index}`;
+    name += currentQuestion.TAModelNo ? `-${currentQuestion.TAModelNo}` : '';
+
     return (
         <div className={className} onClick={handleLineClick}>
-            <span>
-                {
-                    currentQuestion.TAQuestionName
-                        ? currentQuestion.TAQuestionName
-                        : `q${props.index}`
-                }
-                {
-                    currentQuestion.TAModelNo && `-${currentQuestion.TAModelNo}`
-                }
-            </span>
+            <span> {name} </span>
             {
                 props.index === currentQuestionIndex &&
                 <div className="question-list_delete-btn" onClick={handleDeleteClick}/>

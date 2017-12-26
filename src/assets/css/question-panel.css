@@ -24,6 +24,7 @@
     max-width: 20rem;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap; /*DO NOT TOUCH!!!*/
 }
 
 .question-list_question:last-child {

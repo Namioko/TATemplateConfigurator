@@ -84,6 +84,7 @@
     line-height: 3rem;
     padding-left: 1rem;
     font-size: 1.35rem;
+    white-space: nowrap; /*DO NOT TOUCH!!!*/
 }
 
 .question-window__content {
