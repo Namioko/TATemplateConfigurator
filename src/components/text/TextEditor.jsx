@@ -5,6 +5,7 @@ import CodeMirror from 'react-codemirror';
 
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
+import 'codemirror/theme/mdn-like.css';
 
 @inject('questionStore', 'designStore', 'otherStore')
 @observer
@@ -43,7 +44,11 @@ class TextEditor extends Component {
                 value={this.state.text}
                 onChange={this.handleTextChange}
                 options={{
-                    mode: 'javascript'
+                    mode: 'javascript',
+                    lineNumbers: true,
+                    styleActiveLine: true,
+                    matchBrackets: true,
+                    theme: 'mdn-like'
                 }}
             />
         )

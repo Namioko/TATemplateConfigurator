@@ -57,7 +57,7 @@ body,
 
 .text-editor > div {
     width: 100%;
-    height: calc(100% - 4px);
+    height: 100%;
     margin-top: 4rem;
     border: none;
     resize: none;
