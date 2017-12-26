@@ -20,27 +20,24 @@ class ColorArray extends Component {
 
     removeColor = (index) => {
         let {colors} = this.props;
-        //colors.splice(index, 1);
+        colors.splice(index, 1);
 
-      //  this.props.onChange(colors);
+        this.props.onChange(colors);
     }
 
     render() {
         
         const {colors} = this.props;
 
-        console.log("render " + colors);
-
         return (
            <div>
                {colors.map((color, i) => (
                    <div key={i} style={{display: 'inline-block'}}>
                     <ColorEditor
-                        key={i}
                         value={color} 
                         onChangeColor={(color) => this.handleChangeColor(i, color)}
                     />
-                    <i className="colorArray__removeColor" onClick={this.removeColor(i)} title="Remove color"></i>
+                    <i className="colorArray__removeColor" onClick={() => this.removeColor(i)} title="Remove color"></i>
                     </div>
                ))}
                 <button className="green-button" style={{ width: '90%', margin: '.5rem 1.3rem'}} onClick={this.addColor}>+ Add</button>

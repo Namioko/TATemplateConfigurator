@@ -28,11 +28,15 @@
     background-color: #57BBF6;
     border-left: .3rem #438BC6 solid;
     color: #fff;
+    position: relative;
 }
 
 .question-list_delete-btn {
     width: 2.3rem;
     height: 2.3rem;
+    position: absolute;
+    top: .1rem;
+    right: 0;
 }
 
 .question-list_delete-btn:hover {

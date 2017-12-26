@@ -13,7 +13,6 @@ class DesignPanel extends Component {
     };
 
     onChangeChartColors = (colors) => {
-        console.log("change" + colors);
         this.props.designStore.setProperty('chartPalette', colors);
     };
 
