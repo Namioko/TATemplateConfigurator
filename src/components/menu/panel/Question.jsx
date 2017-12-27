@@ -5,12 +5,11 @@ import propTypes from 'prop-types';
 
 const Question = ({componentStore, questionStore, ...props}) => {
     const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
-    const {questions, deleteQuestion} = questionStore;
-    const currentQuestion = questions[props.index];
+    const {deleteQuestion, getQuestionId} = questionStore;
 
     const className = classNames({
         'question-list_question': true,
-        'question-list_question_chosen': currentQuestionIndex === props.index //TODO: replace index with ID
+        'question-list_question_chosen': currentQuestionIndex === props.index
     });
 
     let isDeleteClicked = false;
@@ -28,14 +27,9 @@ const Question = ({componentStore, questionStore, ...props}) => {
         }
     };
 
-    let name = currentQuestion.TAQuestionName
-        ? currentQuestion.TAQuestionName
-        : `q${props.index}`;
-    name += currentQuestion.TAModelNo ? `-${currentQuestion.TAModelNo}` : '';
-
     return (
         <div className={className} onClick={handleLineClick}>
-            <span> {name} </span>
+            <span> {getQuestionId({index: props.index})} </span>
             {
                 props.index === currentQuestionIndex &&
                 <div className="question-list_delete-btn" onClick={handleDeleteClick}/>
