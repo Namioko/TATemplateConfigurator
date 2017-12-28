@@ -2,7 +2,6 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {buildConfig} from '../utils/config';
 import * as stores from '../stores';
-import {QUESTION_WINDOW} from '../constants';
 
 const NavBar = () => {
 
@@ -42,11 +41,9 @@ const NavBar = () => {
     return (
         <div className={'navbar'}>
             <Link to="/" className="navbar__item">Design</Link>
-            <Link to="/text" className="navbar__item"  onClick={() => {
-                stores.componentStore.targetWindow = QUESTION_WINDOW;
-            }}>Text editor</Link>
-            <button className="green-button navbar_download-btn" onClick={download}>Download
-                configuration
+            <Link to="/text" className="navbar__item">Text editor</Link>
+            <button className="green-button navbar_download-btn" onClick={download}>
+                Download configuration
             </button>
         </div>
     )

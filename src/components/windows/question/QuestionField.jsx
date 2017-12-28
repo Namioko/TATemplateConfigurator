@@ -32,8 +32,14 @@ class QuestionField extends Component {
     }
 
     handleChange = (event) => {
-        const {currentQuestionIndex, name, isRequired,
-            pattern, patternExplanation, questionStore} = this.props;
+        const {
+            currentQuestionIndex, 
+            name, 
+            isRequired,
+            pattern, 
+            patternExplanation, 
+            questionStore
+        } = this.props;
         const {requiredErrorMessage, setQuestionProperty, errors} = questionStore;
 
         const currentError = errors[currentQuestionIndex];
@@ -42,8 +48,7 @@ class QuestionField extends Component {
             currentError.set(name, requiredErrorMessage);
         } else {
             if (pattern !== undefined && !pattern.test(event.target.value)) {
-                currentError.set(name,
-                    `* invalid value (${patternExplanation})`);
+                currentError.set(name, `* invalid value (${patternExplanation})`);
             } else {
                 currentError.delete(name);
             }
@@ -56,6 +61,7 @@ class QuestionField extends Component {
             propertyName: name,
             propertyValue: event.target.value
         });
+        
         this.setState({
             currentValue: event.target.value
         });

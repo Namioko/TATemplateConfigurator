@@ -33,11 +33,11 @@ class ColorArray extends Component {
            <div>
                {colors.map((color, i) => (
                    <div key={i} style={{display: 'inline-block'}}>
-                    <ColorEditor
-                        value={color} 
-                        onChangeColor={(color) => this.handleChangeColor(i, color)}
-                    />
-                    <i className="colorArray__removeColor" onClick={() => this.removeColor(i)} title="Remove color"></i>
+                        <ColorEditor
+                            value={color} 
+                            onChangeColor={(color) => this.handleChangeColor(i, color)}
+                        />
+                        <i className="colorArray__removeColor" onClick={() => this.removeColor(i)} title="Remove color"></i>
                     </div>
                ))}
                 <button className="green-button" style={{ width: '90%', margin: '.5rem 1.3rem'}} onClick={this.addColor}>+ Add</button>

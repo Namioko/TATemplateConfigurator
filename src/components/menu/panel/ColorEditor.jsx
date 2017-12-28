@@ -9,8 +9,9 @@ const ColorEditor = (props) => {
 
     return (
         <div style={{ display: 'inline-block', float: 'left', padding: '.3rem 1rem' }}>
-            <span style={{ 'fontSize': '1.3rem' }}>{label}</span>
-            <br/>
+            {(label) ? (
+                <span style={{ 'fontSize': '1.3rem', 'marginBottom': '1.3rem' }}>{label}</span>
+            ) : ''}
             <input type="text" className="form-control" value={value} style={{ float: 'left' }} readOnly/>
             <div style={{ float: 'left', 'marginLeft': '1rem' }}>
                 <ColorPicker
@@ -23,10 +24,10 @@ const ColorEditor = (props) => {
     )
 }
 
-export default ColorEditor;
-
 ColorEditor.propTypes = {
     label: PropTypes.string,
     value: PropTypes.string.isRequired,
     onChangeColor: PropTypes.func.isRequired
 };
+
+export default ColorEditor;

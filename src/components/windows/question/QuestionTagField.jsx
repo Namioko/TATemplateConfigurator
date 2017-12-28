@@ -58,7 +58,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
     };
 
     return (
-        //extract tooltip with icon to separate component
+        //TODO: extract tooltip with icon to separate component
         <label className="question-window__question-field">
             <Tooltip events delay={100} />
 

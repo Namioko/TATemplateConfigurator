@@ -50,8 +50,12 @@ const OtherPanel = ({otherStore}) => {
                 </div>
                 <span className="menu__panel_design-subtitle">Sentiment Range</span>
                 <div style={{padding: '.7rem'}}>
-                    <MultiRange defaultMin={defaultRangeMin} defaultMax={defaultRangeMax}
-                                  defaultValue={defaultValue} onChange={handleRangeChange}/>
+                    <MultiRange 
+                        defaultMin={defaultRangeMin} 
+                        defaultMax={defaultRangeMax}
+                        defaultValue={defaultValue} 
+                        onChange={handleRangeChange}
+                    />
                 </div>
             </div>
         </div>

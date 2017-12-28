@@ -12,17 +12,23 @@ import {QUESTION_WINDOW, DESIGN_WINDOW} from '../../constants';
 
 const Menu = ({componentStore}) => {
 
-    const changeTargetWindow = (value) => {
-        componentStore.setTargetWindow(value);
+    const changeTab = (tabName, targetWindow) => {
+        componentStore.setCurrentTab(tabName);
+
+        if(targetWindow !== -1) {
+            componentStore.setTargetWindow(targetWindow);
+        }
     };
+
+    const {currentTab} = componentStore;
 
     return (
         <div className='menu'>
-            <Tabs defaultTab="tab-questions" vertical>
+            <Tabs defaultTab={currentTab} vertical>
                 <TabList>
-                    <Tab tabFor="tab-questions" onClick={() => changeTargetWindow(QUESTION_WINDOW)}><img src={SmsIcon} className="tab-icon" alt="Questions"/></Tab>
-                    <Tab tabFor="tab-design" onClick={() => changeTargetWindow(DESIGN_WINDOW)}><img src={DesignIcon} className="tab-icon" alt="Design"/></Tab>
-                    <Tab tabFor="tab-another"><img src={MoreIcon} className="tab-icon" alt="Another"/></Tab>
+                    <Tab tabFor="tab-questions" onClick={() => changeTab("tab-questions", QUESTION_WINDOW)}><img src={SmsIcon} className="tab-icon" alt="Questions"/></Tab>
+                    <Tab tabFor="tab-design" onClick={() => changeTab("tab-design", DESIGN_WINDOW)}><img src={DesignIcon} className="tab-icon" alt="Design"/></Tab>
+                    <Tab tabFor="tab-other" onClick={() => changeTab("tab-other", -1)}><img src={MoreIcon} className="tab-icon" alt="Other"/></Tab>
                 </TabList>
                 <TabPanel tabId="tab-questions">
                     <QuestionPanel/>
@@ -30,7 +36,7 @@ const Menu = ({componentStore}) => {
                 <TabPanel tabId="tab-design">
                     <DesignPanel/>
                 </TabPanel>
-                <TabPanel tabId="tab-another">
+                <TabPanel tabId="tab-other">
                     <OtherPanel/>
                 </TabPanel>
             </Tabs>

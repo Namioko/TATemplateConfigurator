@@ -5,6 +5,7 @@ class ComponentStore {
 
     @observable currentQuestionIndex = -1; //TODO: add computed name + model as ID
     @observable targetWindow = QUESTION_WINDOW;
+    @observable currentTab = "tab-questions";
 
     @action changeCurrentQuestion = (({chosenQuestionIndex}) => {
         chosenQuestionIndex = chosenQuestionIndex === -1 ? 0 : chosenQuestionIndex;
@@ -16,6 +17,10 @@ class ComponentStore {
 
     @action setTargetWindow = (value) => {
         this.targetWindow = value;
+    };
+
+    @action setCurrentTab  = (tabName) => {
+        this.currentTab = tabName;
     };
 }
 

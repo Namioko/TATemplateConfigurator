@@ -4,6 +4,7 @@ import LeftIcon from '../../../assets/img/icons/ic_arrow_left.svg';
 import RightIcon from '../../../assets/img/icons/ic_arrow_right.svg';
 
 const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
+    
     const {currentQuestionIndex} = componentStore;
     const {questions} = questionStore;
 
@@ -22,18 +23,22 @@ const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observe
     )
 }));
 
+const WindowAddButton = (props) => {
+    return (
+        <button className={props.className} onClick={props.onClick}>{props.text}</button>
+    )
+};
+
 const WindowAddBeforeButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
     const {currentQuestionIndex} = componentStore;
     const {addQuestion} = questionStore;
 
-    const handleClick =
-        () => {
-            addQuestion({index: currentQuestionIndex});
-        };
+    const handleClick = () => {
+        addQuestion({index: currentQuestionIndex});
+    };
 
     return (
-        <button className="green-button window-buttons_add_before"
-                onClick={handleClick}>
+        <button className="green-button window-buttons_add_before" onClick={handleClick}>
             + Before
         </button>
     )
@@ -43,15 +48,13 @@ const WindowAddAfterButton = inject('componentStore', 'questionStore')(observer(
     const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
     const {addQuestion} = questionStore;
 
-    const handleClick =
-        () => {
-            addQuestion({index: currentQuestionIndex + 1});
-            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
-        };
+    const handleClick = () => {
+        addQuestion({index: currentQuestionIndex + 1});
+        changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
+    };
 
     return (
-        <button className="green-button window-buttons_add_after"
-                onClick={handleClick}>
+        <button className="green-button window-buttons_add_after" onClick={handleClick}>
             + After
         </button>
     )
@@ -68,10 +71,11 @@ const WindowPrevButton = inject('componentStore')(observer(({componentStore}) =>
         };
 
     return (
-        <img src={LeftIcon} alt="Prev"
-            className={'gray-button window-buttons_arrow window-buttons_arrow-prev'}
-            onClick={handleClick}>
-        </img>
+        <img 
+            src={LeftIcon} 
+            alt="Prev"
+            className="gray-button window-buttons_arrow window-buttons_arrow-prev"
+            onClick={handleClick}/>
     )
 }));
 
@@ -79,18 +83,18 @@ const WindowNextButton = inject('componentStore', 'questionStore')(observer(({co
     const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
     const {questions} = questionStore;
 
-    const handleClick =
-        () => {
-            if (currentQuestionIndex < questions.length - 1) {
-                changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
-            }
-        };
+    const handleClick = () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
+        }
+    };
 
     return (
-        <img src={RightIcon} alt="Next"
-            className={'gray-button window-buttons_arrow window-buttons_arrow-next'}
-            onClick={handleClick}>
-        </img>
+        <img 
+            src={RightIcon} 
+            alt="Next"
+            className="gray-button window-buttons_arrow window-buttons_arrow-next"
+            onClick={handleClick}/>
     )
 }));
 
