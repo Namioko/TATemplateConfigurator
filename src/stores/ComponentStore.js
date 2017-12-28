@@ -3,7 +3,7 @@ import {QUESTION_WINDOW} from '../constants';
 
 class ComponentStore {
 
-    @observable currentQuestionIndex = -1; //TODO: add computed name + model as ID
+    @observable currentQuestionIndex = -1;
     @observable targetWindow = QUESTION_WINDOW;
     @observable currentTab = "tab-questions";
 

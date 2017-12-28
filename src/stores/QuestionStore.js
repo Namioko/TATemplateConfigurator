@@ -5,9 +5,6 @@ class QuestionStore {
     @observable questions = [];
     @observable errors = [];
 
-    requiredErrorMessage = '* required';
-    invalidIdErrorMessage = '* the question with that TAQuestionName and TAModelNo already exists';
-
     properties = [
         {
             name: 'TAFolderId',
@@ -149,7 +146,7 @@ class QuestionStore {
                     ? []
                     : property.defaultValue;
 
-            if(property.isRequired && property.defaultValue === undefined) {
+            if (property.isRequired && property.defaultValue === undefined) {
                 newQuestionErrors.set(property.name, this.requiredErrorMessage);
             }
         });
@@ -169,11 +166,20 @@ class QuestionStore {
         this.questions[index][propertyName] = propertyValue;
     };
 
-    @action
+    @observable
     isIdUnique = ({questionIndex, TAQuestionName, TAModelNo}) => {
         return !this.questions.some((item, index) =>
             item.TAQuestionName === TAQuestionName && item.TAModelNo === TAModelNo && questionIndex !== index);
     };
+
+    @observable
+    getQuestionId = ({index}) => {
+        const tempQuestion = this.questions[index];
+        let name = tempQuestion.TAQuestionName
+            ? tempQuestion.TAQuestionName
+            : `q${index}`;
+        return name + (tempQuestion.TAModelNo ? `-${tempQuestion.TAModelNo}` : '');
+    }
 }
 
 const questionStore = new QuestionStore();

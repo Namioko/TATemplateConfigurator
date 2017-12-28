@@ -1,69 +1,23 @@
-import 'rc-slider/assets/index.css';
 import propTypes from 'prop-types';
-
 import React, {Component} from 'react';
-import Slider from 'rc-slider';
+import RangeSlider from './RangeSlider';
 
-const createSliderWithTooltip = Slider.createSliderWithTooltip;
-const Range = createSliderWithTooltip(Slider.Range);
-
-class MultiRange extends Component {
-    constructor(props) {
-        super(props);
-
-        let min = props.defaultMin;
-        let max = props.defaultMax;
-
-        if (props.min !== undefined) {
-            min = props.min;
-        }
-        if (props.max !== undefined) {
-            max = props.max;
-        }
-
-        if (props.min > props.defaultValue[0]) {
-            min = props.defaultValue[0];
-        }
-        if (props.max < props.defaultValue[1]) {
-            max = props.defaultValue[1];
-        }
-
-        this.state = {
-            min,
-            max
-        };
-    }
-
-    onChange = (value) => {
-        this.props.onChange({
-            result: {
-                value,
-                min: this.state.min,
-                max: this.state.max
-            }
-        });
-    };
-
-    //TODO: fix colors
+class Range extends Component {
     render() {
+        const {colors, values, max, min} = this.props;
+
         return (
-            <div className="range">
-                <Range defaultValue={this.props.defaultValue} min={this.state.min} max={this.state.max}
-                            onChange={this.onChange} tipFormatter={value => value} allowCross={false}
-                            trackStyle={[{backgroundColor: 'red'}, {backgroundColor: 'green'}]}
-                            handleStyle={[{backgroundColor: 'red'}, {backgroundColor: 'green'}]}
-                            railStyle={{backgroundColor: 'grey'}}
-                />
-            </div>
+            <RangeSlider colors={colors} values={values} max={max} min={min}/>
         );
     }
 }
 
-MultiRange.propTypes = {
-    defaultMin: propTypes.number.isRequired,
-    defaultMax: propTypes.number.isRequired,
-    min: propTypes.number,
-    max: propTypes.number
+Range.propTypes = {
+    colors: propTypes.arrayOf(propTypes.string),
+    values: propTypes.arrayOf(propTypes.number).isRequired,
+    max: propTypes.number.isRequired,
+    min: propTypes.number.isRequired,
+
 };
 
-export default MultiRange;
+export default Range;

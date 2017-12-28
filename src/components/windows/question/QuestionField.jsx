@@ -3,11 +3,11 @@ import {observer, inject} from 'mobx-react';
 import propTypes from 'prop-types';
 import InfoIcon from '../../../assets/img/icons/ic_help.svg';
 import Tooltip from '../../ui/Tooltip';
+import {INVALID_ID_ERROR_MESSAGE, REQUIRED_ERROR_MESSAGE} from '../../../constants';
 
 @inject('questionStore')
 @observer
 class QuestionField extends Component {
-
     constructor(props) {
         super(props);
 
@@ -45,7 +45,7 @@ class QuestionField extends Component {
         const currentError = errors[currentQuestionIndex];
 
         if (isRequired && event.target.value.length <= 0) {
-            currentError.set(name, requiredErrorMessage);
+            currentError.set(name, REQUIRED_ERROR_MESSAGE);
         } else {
             if (pattern !== undefined && !pattern.test(event.target.value)) {
                 currentError.set(name, `* invalid value (${patternExplanation})`);
@@ -73,7 +73,7 @@ class QuestionField extends Component {
 
     checkIdUniqueness({currentValue, prevValue}) {
         const {currentQuestionIndex, name, questionStore} = this.props;
-        const {isIdUnique, invalidIdErrorMessage, questions, errors} = questionStore;
+        const {isIdUnique, questions, errors} = questionStore;
 
         const currentName = questions[currentQuestionIndex].TAQuestionName;
         const currentModel = questions[currentQuestionIndex].TAModelNo;
@@ -91,15 +91,15 @@ class QuestionField extends Component {
             const prevNameError = currentError.get('TAQuestionName');
             const prevModelError = currentError.get('TAModelNo');
 
-            if (prevNameError !== invalidIdErrorMessage) {
+            if (prevNameError !== INVALID_ID_ERROR_MESSAGE) {
                 currentError.set('TAQuestionName2', prevNameError);
             }
-            if (prevModelError !== invalidIdErrorMessage) {
+            if (prevModelError !== INVALID_ID_ERROR_MESSAGE) {
                 currentError.set('TAModelNo2', prevModelError);
             }
 
-            currentError.set('TAQuestionName', invalidIdErrorMessage);
-            currentError.set('TAModelNo', invalidIdErrorMessage);
+            currentError.set('TAQuestionName', INVALID_ID_ERROR_MESSAGE);
+            currentError.set('TAModelNo', INVALID_ID_ERROR_MESSAGE);
         } else {
             this.returnPrevError({questionIndex: currentQuestionIndex});
 
@@ -121,7 +121,7 @@ class QuestionField extends Component {
 
     returnPrevError({questionIndex}) {
         const {questionStore} = this.props;
-        const {invalidIdErrorMessage, errors} = questionStore;
+        const {errors} = questionStore;
 
         const currentError = errors[questionIndex];
 
@@ -131,13 +131,13 @@ class QuestionField extends Component {
         const currentNameError = currentError.get('TAQuestionName');
         const currentModelError = currentError.get('TAModelNo');
 
-        if (currentNameError && currentNameError === invalidIdErrorMessage) {
+        if (currentNameError && currentNameError === INVALID_ID_ERROR_MESSAGE) {
             currentError.set('TAQuestionName', prevNameError);
         }
         if (!currentError.get('TAQuestionName')) {
             currentError.delete('TAQuestionName');
         }
-        if (currentModelError && currentModelError === invalidIdErrorMessage) {
+        if (currentModelError && currentModelError === INVALID_ID_ERROR_MESSAGE) {
             currentError.set('TAModelNo', prevModelError);
         }
         if (!currentError.get('TAModelNo')) {
@@ -157,12 +157,12 @@ class QuestionField extends Component {
         return (
             //TODO: extract tooltip with icon to separate component
             <label className="question-window__question-field">
-                <Tooltip events delay={100} />
+                <Tooltip events delay={100}/>
 
-                <span>{name}</span>
+                <span className="question-window__question-field_title">{name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
                        onChange={this.handleChange} required={isRequired}/>
-                <img src={InfoIcon} className="question-window_icon" alt="Help"  data-rh={helpLine} data-rh-at="right"/>
+                <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
                 <span className="question-window__question-field_error">{
                     currentError.get(name)
                 }</span>

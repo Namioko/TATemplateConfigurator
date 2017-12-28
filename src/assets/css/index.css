@@ -4,6 +4,7 @@
 @import "windows.css";
 @import "tags.css";
 @import "navbar.css";
+@import "range.css";
 
 html,
 body,
@@ -45,10 +46,6 @@ body,
     border: 1px solid #ced4da;
     border-radius: .25rem;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-}
-
-.range {
-    width: 80%;
 }
 
 .text-editor {

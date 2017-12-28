@@ -4,11 +4,12 @@ import {observer, inject} from 'mobx-react';
 import InfoIcon from '../../../assets/img/icons/ic_help.svg';
 import propTypes from 'prop-types';
 import Tooltip from '../../ui/Tooltip';
+import {REQUIRED_ERROR_MESSAGE} from '../../../constants';
 
 const QuestionTagField = ({componentStore, questionStore, ...props}) => {
     const {name, pattern, isRequired, patternExplanation, placeholder, helpLine} = props;
     const {currentQuestionIndex} = componentStore;
-    const {questions, errors, requiredErrorMessage} = questionStore;
+    const {questions, errors} = questionStore;
     const currentQuestionErrors = errors[currentQuestionIndex];
 
     let tags = questions[currentQuestionIndex][name].map((item, index) => {
@@ -31,7 +32,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
             }
         } else {
             if (isRequired) {
-                currentQuestionErrors.set(name, requiredErrorMessage);
+                currentQuestionErrors.set(name, REQUIRED_ERROR_MESSAGE);
             } else {
                 currentQuestionErrors.delete(name);
             }
@@ -42,7 +43,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
             currentQuestionErrors.set(name, `* invalid value (${patternExplanation})`);
         } else {
             if (isRequired && tags.length <= 0) {
-                currentQuestionErrors.set(name, requiredErrorMessage);
+                currentQuestionErrors.set(name, REQUIRED_ERROR_MESSAGE);
             } else {
                 currentQuestionErrors.delete(name);
             }
@@ -53,7 +54,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
         questions[currentQuestionIndex][name].splice(index, 1);
 
         if (isRequired && tags.length <= 0) {
-            currentQuestionErrors.set(name, requiredErrorMessage);
+            currentQuestionErrors.set(name, REQUIRED_ERROR_MESSAGE);
         }
     };
 
@@ -62,7 +63,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
         <label className="question-window__question-field">
             <Tooltip events delay={100} />
 
-            <span>{name}</span>
+            <span className="question-window__question-field_title">{name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
                        placeholder={placeholder} autofocus={false}/>
             <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
