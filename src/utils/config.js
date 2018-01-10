@@ -68,7 +68,7 @@ function buildQuestions(questions) {
             
             DatasourceId: "${questions[i]['DatasourceId'] || ''}",  //Datasource Id of the survey
             
-            DatabaseSchemaId: ${questions[i]['DatabaseSchemaId'] || ''}, //Schema containig TA model
+            DatabaseSchemaId: ${questions[i]['DatabaseSchemaId'] || 0}, //Schema containig TA model
             DatabaseTableName: "${questions[i]['DatabaseTableName'] || ''}", //Table containing TA model                   
             RelationshipColumnName: "${questions[i]['RelationshipColumnName'] || ''}", //Column which contains id of parent category in table (usually "parent")
             TextSeparator: "${questions[i]['TextSeparator'] || ''}", //Separator between ParentCategory, subcategory and attribute in category name (usually "|")

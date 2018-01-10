@@ -7,12 +7,19 @@ const ColorEditor = (props) => {
 
     const { value, label, onChangeColor } = props;
 
+    const textValue = value.replace("#", '');
+
     return (
         <div style={{ display: 'inline-block', float: 'left', padding: '.3rem 1rem' }}>
             {(label) ? (
-                <span style={{ 'fontSize': '1.3rem', 'marginBottom': '1.3rem' }}>{label}</span>
+                <span style={{ 'fontSize': '1.3rem', 'float': 'left', 'width': '100%', 'marginBottom': '.5rem' }}>{label}</span>
             ) : ''}
-            <input type="text" className="form-control" value={value} style={{ float: 'left' }} readOnly/>
+            <div class="input-group" style={{'width': '15rem', 'float': 'left'}}>
+                <div class="input-group-prepend">
+                    <div class="input-group-text" style={{'fontSize': '1.2rem'}}>#</div>
+                </div>
+                <input type="text" className="form-control" value={textValue} style={{ float: 'left', fontSize: '1.2rem', width: '10rem' }} readOnly/>
+            </div>
             <div style={{ float: 'left', 'marginLeft': '1rem' }}>
                 <ColorPicker
                     animation="slide-up"

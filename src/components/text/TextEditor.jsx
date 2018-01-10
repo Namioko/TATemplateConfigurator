@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {buildConfig} from '../../utils/config';
+import {extractVariable} from '../../utils/parser';
 import CodeMirror from 'react-codemirror';
 
 import 'codemirror/mode/javascript/javascript';
@@ -29,28 +30,52 @@ class TextEditor extends Component {
         });
 
         this.state = {
-            text: textConfig
+            text: textConfig,
+            isChanged: false
         };
     }
 
     handleTextChange = (newValue) => {
-        this.setState({text: newValue});
+        this.setState({text: newValue, isChanged: true});
+    }
+
+    handleApplyChanges = () => {
+        //TODO: validate values and save in store
+        console.log(extractVariable(this.state.text, "TAQuestions"));
+        console.log(extractVariable(this.state.text, "CustomerLogo"));
+        console.log(extractVariable(this.state.text, "ShowOnlySelectedCategoryTagInHitlist"));
+        console.log(extractVariable(this.state.text, "Design"));
+        console.log(extractVariable(this.state.text, "SentimentRange"));       
     }
 
     render() {
+
+    const {text, isChanged} = this.state;
+
         return (
-            <CodeMirror
-                className="text-editor"
-                value={this.state.text}
-                onChange={this.handleTextChange}
-                options={{
-                    mode: 'javascript',
-                    lineNumbers: true,
-                    styleActiveLine: true,
-                    matchBrackets: true,
-                    theme: 'mdn-like'
-                }}
-            />
+            <div style={{width: '100%', height: '100%'}}>
+                <CodeMirror
+                    className="text-editor"
+                    value={text}
+                    onChange={this.handleTextChange}
+                    options={{
+                        mode: 'javascript',
+                        lineNumbers: true,
+                        styleActiveLine: true,
+                        matchBrackets: true,
+                        theme: 'mdn-like'
+                    }}
+                />
+
+                {(isChanged) && 
+                    <button 
+                        className="green-button" 
+                        style={{position: "fixed", right: "2rem", bottom: "2rem", zIndex: '9999'}} 
+                        onClick={this.handleApplyChanges}>
+                        Apply changes
+                    </button>
+                }
+            </div>
         )
     }
 }
