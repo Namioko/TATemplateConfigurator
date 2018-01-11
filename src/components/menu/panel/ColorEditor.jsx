@@ -14,9 +14,9 @@ const ColorEditor = (props) => {
             {(label) ? (
                 <span style={{ 'fontSize': '1.3rem', 'float': 'left', 'width': '100%', 'marginBottom': '.5rem' }}>{label}</span>
             ) : ''}
-            <div class="input-group" style={{'width': '15rem', 'float': 'left'}}>
-                <div class="input-group-prepend">
-                    <div class="input-group-text" style={{'fontSize': '1.2rem'}}>#</div>
+            <div className="input-group" style={{'width': '15rem', 'float': 'left'}}>
+                <div className="input-group-prepend">
+                    <div className="input-group-text" style={{'fontSize': '1.2rem'}}>#</div>
                 </div>
                 <input type="text" className="form-control" value={textValue} style={{ float: 'left', fontSize: '1.2rem', width: '10rem' }} readOnly/>
             </div>

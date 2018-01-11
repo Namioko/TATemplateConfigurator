@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {buildConfig} from '../../utils/config';
 import {extractVariable} from '../../utils/parser';
+import {validColor} from '../../utils/validation';
+import {DEFAULT_COLORS, DEFAULT_AREAS_PALETTE} from '../../constants/design';
 import CodeMirror from 'react-codemirror';
 
 import 'codemirror/mode/javascript/javascript';
@@ -40,17 +42,71 @@ class TextEditor extends Component {
     }
 
     handleApplyChanges = () => {
+        const {questionStore, designStore, otherStore} = this.props;
+
+        otherStore.setShowOnlySelectedCategoryTagInHitlist(
+            !!extractVariable(this.state.text, "ShowOnlySelectedCategoryTagInHitlist")
+        );
+
+        designStore.setCustomerLogo(
+            extractVariable(this.state.text, "CustomerLogo").toString()
+        );
+
+        const configDesign = extractVariable(this.state.text, "Design");
+
+        if(!configDesign) { 
+            //TODO: Design is null! Set default values
+        } else {
+            for (let key in DEFAULT_COLORS) {
+                const color = configDesign[key];
+
+                designStore.setProperty(
+                    key,
+                    (color != null && validColor(color)) ? color : DEFAULT_COLORS[key]
+                );
+            }
+
+            for(let key in DEFAULT_AREAS_PALETTE) {
+                const color = configDesign['areasPalette'][key];
+
+                designStore.setAreaPalette(
+                    key,
+                    (color != null && validColor(color)) ? color : DEFAULT_AREAS_PALETTE[key]
+                );
+            }
+
+            const chartPalette = configDesign['chartPalette'];
+            if(chartPalette == null || !(chartPalette instanceof Array)) {
+                designStore.setProperty('chartPalette', []);
+            } else {
+                let validChartColors = [];
+
+                for(let i = 0; i < chartPalette.length; i++) {
+                    if(validColor(chartPalette[i])) {
+                        validChartColors.push(chartPalette[i]);
+                    }
+                }
+
+                designStore.setProperty('chartPalette', validChartColors);
+            }
+        }
+
         //TODO: validate values and save in store
-        console.log(extractVariable(this.state.text, "TAQuestions"));
-        console.log(extractVariable(this.state.text, "CustomerLogo"));
-        console.log(extractVariable(this.state.text, "ShowOnlySelectedCategoryTagInHitlist"));
-        console.log(extractVariable(this.state.text, "Design"));
-        console.log(extractVariable(this.state.text, "SentimentRange"));       
+        const questions = extractVariable(this.state.text, "TAQuestions");
+        for(let i = 0; i < questions.length; i++) {
+            const currentQuestion = questions[i];
+            //validation and save...
+        }
+
+        const sentimentRange = extractVariable(this.state.text, "SentimentRange");
+
+        console.log(questions);
+        console.log(sentimentRange);       
     }
 
     render() {
 
-    const {text, isChanged} = this.state;
+        const {text, isChanged} = this.state;
 
         return (
             <div style={{width: '100%', height: '100%'}}>

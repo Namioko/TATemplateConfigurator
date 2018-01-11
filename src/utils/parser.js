@@ -38,9 +38,9 @@ function parseValue(text, startPos) {
 }
 
 function parseBoolean(text, startPosition) {
-    var str = "";
+    let str = "";
 
-    for(var i = startPosition; i < text.length; i++) {
+    for(let i = startPosition; i < text.length; i++) {
         if(text[i] === " " || text[i] === ';' || text[i] === '\n') {
             break;
         }
@@ -48,13 +48,17 @@ function parseBoolean(text, startPosition) {
         str += text[i];
     }
 
+    if(str === 'null') {
+        return null; //Ooooops...
+    }
+
     return str === 'true';
 }
 
 function parseInteger(text, startPosition) {
-    var str = "";
+    let str = "";
 
-    for(var i = startPosition; i < text.length; i++) {
+    for(let i = startPosition; i < text.length; i++) {
         if(!isNumber(text[i])) {
             break;
         }
@@ -66,16 +70,16 @@ function parseInteger(text, startPosition) {
         return 0;
     }
 
-    return parseInt(str);
+    return parseInt(str, 10);
 }
 
 function parseString(text, startPosition) {
-    var resultString = "";
-    var escape = false;
-    var stringSymbol = text[startPosition]; //Check ' or "
+    let resultString = "";
+    let escape = false;
+    const stringSymbol = text[startPosition]; //Check ' or "
 
-    for(var i = startPosition + 1; i < text.length; i++) {
-        if(text[i] == stringSymbol && !escape) {
+    for(let i = startPosition + 1; i < text.length; i++) {
+        if(text[i] === stringSymbol && !escape) {
             break;
         }
 
@@ -87,13 +91,13 @@ function parseString(text, startPosition) {
 }
 
 function parseArray(text, startPosition) {
-    var resultArray = [];
+    let resultArray = [];
 
-    var bracketsCount = 1;
-    var arrayStr = "";
+    let bracketsCount = 1;
+    let arrayStr = "";
 
-    for(var i = startPosition + 1; i < text.length; i++) {
-        var currentSymbol = text[i];
+    for(let i = startPosition + 1; i < text.length; i++) {
+        const currentSymbol = text[i];
 
         if(currentSymbol === '[') {
             bracketsCount++;
@@ -119,15 +123,15 @@ function parseArray(text, startPosition) {
         return [];
     }
 
-    var start = 0;
+    let start = 0;
 
-    var specialOpen = ["\"", "[", "{"];
-    var specialClose = ["\"", "]", "}"];
-    var escape = false;
-    var stack = [];
+    const specialOpen = ["\"", "[", "{"];
+    const specialClose = ["\"", "]", "}"];
+    let escape = false;
+    let stack = [];
 
-    for(var i = 0; i < arrayStr.length; i++) {
-        var currentSymbol = arrayStr[i];
+    for(let i = 0; i < arrayStr.length; i++) {
+        const currentSymbol = arrayStr[i];
 
         if(currentSymbol === ' ') {
             continue;
@@ -135,8 +139,8 @@ function parseArray(text, startPosition) {
 
         escape = currentSymbol === '\\' && !escape;
 
-        var openInd = specialOpen.indexOf(currentSymbol);
-        var closeInd = specialClose.indexOf(currentSymbol);
+        const openInd = specialOpen.indexOf(currentSymbol);
+        const closeInd = specialClose.indexOf(currentSymbol);
         if(openInd !== -1 && !escape) {
             stack.push(currentSymbol);
         }
@@ -146,7 +150,7 @@ function parseArray(text, startPosition) {
         }
 
         if((currentSymbol === ',' || i === arrayStr.length - 1) && stack.length === 0) {
-            var value = parseValue(arrayStr.substring(start, i !== arrayStr.length - 1 ? i : arrayStr.length).trim(), 0);
+            const value = parseValue(arrayStr.substring(start, i !== arrayStr.length - 1 ? i : arrayStr.length).trim(), 0);
             resultArray.push(value);            
             start = i + 1;
         }
@@ -156,13 +160,13 @@ function parseArray(text, startPosition) {
 }
 
 function parseObject(text, startPosition) { 
-    var resultObject = {};
+    let resultObject = {};
 
-    var objectStr = "";
-    var bracketsCount = 1;
+    let objectStr = "";
+    let bracketsCount = 1;
 
-    for(var i = startPosition + 1; i < text.length; i++) {
-        var currentSymbol = text[i];
+    for(let i = startPosition + 1; i < text.length; i++) {
+        const currentSymbol = text[i];
 
         if(currentSymbol === "{") {
             bracketsCount++;
@@ -185,20 +189,20 @@ function parseObject(text, startPosition) {
     objectStr = objectStr.trim();
 
 
-    var start = 0;
-    var pos = objectStr.indexOf(":", start);
+    let start = 0;
+    let pos = objectStr.indexOf(":", start);
 
     if(pos === -1) {
         return {};
     }
 
-    var specialOpen = ["\"", "[", "{"];
-    var specialClose = ["\"", "]", "}"];
-    var escape = false;
-    var stack = [];
+    const specialOpen = ["\"", "[", "{"];
+    const specialClose = ["\"", "]", "}"];
+    let escape = false;
+    let stack = [];
         
-    for(var i = pos; i < objectStr.length; i++) {
-        var currentSymbol = objectStr[i];
+    for(let i = pos; i < objectStr.length; i++) {
+        const currentSymbol = objectStr[i];
 
         if(currentSymbol === ' ') {
             continue;
@@ -206,8 +210,8 @@ function parseObject(text, startPosition) {
 
         escape = currentSymbol === '\\' && !escape;
 
-        var openInd = specialOpen.indexOf(currentSymbol);
-        var closeInd = specialClose.indexOf(currentSymbol);
+        const openInd = specialOpen.indexOf(currentSymbol);
+        const closeInd = specialClose.indexOf(currentSymbol);
         if(openInd !== -1 && !escape) {
             stack.push(currentSymbol);
         }
@@ -217,7 +221,7 @@ function parseObject(text, startPosition) {
         }
 
         if((currentSymbol === ',' || i === objectStr.length - 1) && stack.length === 0) {
-            var keyValue = parseKeyValue(objectStr.substring(start, i !== objectStr.length - 1 ? i : objectStr.length).trim());
+            const keyValue = parseKeyValue(objectStr.substring(start, i !== objectStr.length - 1 ? i : objectStr.length).trim());
             resultObject[keyValue.key] = keyValue.value;
             start = i + 1;
         }
@@ -227,15 +231,15 @@ function parseObject(text, startPosition) {
 }
 
 function parseKeyValue(strPair) {
-    var index = strPair.indexOf(":");
+    const index = strPair.indexOf(":");
 
     if(index === -1) {
         return null;
     }
 
-    var key = strPair.substring(0, index).trim();
-    var strValue = strPair.substring(index + 1, strPair.length).trim();
-    var value = parseValue(strValue, 0);
+    const key = strPair.substring(0, index).replace(/\"/g, '').trim();
+    const strValue = strPair.substring(index + 1, strPair.length).trim();
+    const value = parseValue(strValue, 0);
 
     return {
         key: key,

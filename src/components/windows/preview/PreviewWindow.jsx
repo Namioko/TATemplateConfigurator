@@ -18,7 +18,13 @@ class PreviewWindow extends Component {
         const {design} = this.props.designStore;
 
         const css = `body,html{background: ${design['positiveColor']};color: #00f; }`;
-        const frameHead = document.getElementById('preview-frame').contentWindow.document.head;
+        const previewFrame = document.getElementById('preview-frame');
+
+        if(previewFrame == null) {
+            return;
+        }
+
+        const frameHead = previewFrame .contentWindow.document.head;
         const styleTag = frameHead.getElementsByTagName('style')[0];
 
         if (styleTag.styleSheet){
