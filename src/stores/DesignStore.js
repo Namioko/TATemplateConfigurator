@@ -8,11 +8,15 @@ class DesignStore {
 
     constructor() {
         this.customerLogo = Constants.DEFAULT_CUSTOMER_LOGO;
+        this.setDefaultDesign();
+    }
+
+    @action setDefaultDesign = () => {
         this.design = Object.assign({}, Constants.DEFAULT_COLORS, {
             chartPalette: Constants.DEFAULT_CHART_PALETTE.slice(),
             areasPalette: Object.assign({}, Constants.DEFAULT_AREAS_PALETTE)
         });
-    }
+    };
 
     @action setCustomerLogo = (customerLogo) => {
         this.customerLogo = customerLogo;

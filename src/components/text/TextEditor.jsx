@@ -55,7 +55,7 @@ class TextEditor extends Component {
         const configDesign = extractVariable(this.state.text, "Design");
 
         if(!configDesign) { 
-            //TODO: Design is null! Set default values
+            designStore.setDefaultDesign();
         } else {
             for (let key in DEFAULT_COLORS) {
                 const color = configDesign[key];
