@@ -101,7 +101,7 @@ class TextEditor extends Component {
         const sentimentRange = extractVariable(this.state.text, "SentimentRange");
 
         console.log(questions);
-        console.log(sentimentRange);       
+        console.log(sentimentRange);
     }
 
     render() {

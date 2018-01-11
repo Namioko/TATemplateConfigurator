@@ -6,7 +6,6 @@
   "scripts": {
     "test": "react-scripts test",
     "start": "react-scripts start",
-    "eject": "react-scripts eject",
     "build": "react-scripts build"
   },
   "author": "",
@@ -22,6 +21,9 @@
   },
   "dependencies": {
     "custom-react-scripts": "^0.2.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest-enzyme": "^4.0.2",
     "mobx": "^3.3.1",
     "mobx-react": "^4.3.4",
     "prop-types": "^15.6.0",
@@ -31,6 +33,7 @@
     "react-codemirror": "^1.0.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
-    "react-tag-input": "^4.7.2"
+    "react-tag-input": "^4.7.2",
+    "react-test-renderer": "^16.2.0"
   }
 }
