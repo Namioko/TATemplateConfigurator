@@ -2,8 +2,8 @@ import React from 'react';
 import {PanelHeader} from './PanelHeader';
 import Toggle from '../../ui/Toggle';
 import {observer, inject} from 'mobx-react';
-import Range from '../../ui/Range/index';
 import {SENTIMENT_MAX_VALUE, SENTIMENT_MIN_VALUE} from '../../../constants';
+import MultiSlider from '../../ui/MultiSlider';
 
 const OtherPanel = ({otherStore, designStore}) => {
 
@@ -11,33 +11,43 @@ const OtherPanel = ({otherStore, designStore}) => {
         otherStore.setShowOnlySelectedCategoryTagInHitlist(event.target.checked);
     };
 
-    const handleRangeChange = ({values}) => {
+    const handleRangeChange = (values) => {
         let sentiment = {
             Negative: [],
             Neutral: [],
             Positive: []
         };
 
-        for (let i = SENTIMENT_MIN_VALUE; i <= values[0]; i++) {
-            sentiment.Negative.push(i);
+        let current = SENTIMENT_MIN_VALUE;
+
+        for (let i = 0; i < values[0]; i++) {
+            sentiment.Negative.push(current);
+            current++;
         }
-        for (let i = values[0] + 1; i < values[1]; i++) {
-            sentiment.Neutral.push(i);
+        for (let i = 0; i < values[1]; i++) {
+            sentiment.Neutral.push(current);
+            current++;
         }
-        for (let i = values[1]; i <= SENTIMENT_MAX_VALUE; i++) {
-            sentiment.Positive.push(i);
+        for (let i = 0; i < SENTIMENT_MAX_VALUE - values[0] - values[1]; i++) {
+            sentiment.Positive.push(current);
+            current++;
         }
 
-        otherStore.sentimentRange = sentiment;
+        console.log(values);
+        console.log(sentiment);
+
+        otherStore.setSentimentRange(sentiment);
     };
 
     const {
         showOnlySelectedCategoryTagInHitlist: showTags,
-        defaultValue
+        defaultValue,
+        sentimentRange
     } = otherStore;
 
     const {design} = designStore;
     const colors = [design.negativeColor, design.neutralColor, design.positiveColor];
+    const values = [sentimentRange.Negative.length, sentimentRange.Neutral.length, sentimentRange.Positive.length < 2 ? 0 : sentimentRange.Positive.length - 1];
 
     return (
         <div>
@@ -54,7 +64,11 @@ const OtherPanel = ({otherStore, designStore}) => {
                 </div>
                 <span className="menu__panel_design-subtitle">Sentiment Range</span>
                 <div style={{padding: '.7rem'}}>
-                    <Range colors={colors} values={defaultValue} min={SENTIMENT_MIN_VALUE} max={SENTIMENT_MAX_VALUE}/>
+                    <MultiSlider
+                        colors={colors}
+                        values={values}
+                        onChange={handleRangeChange}
+                    />
                 </div>
             </div>
         </div>
