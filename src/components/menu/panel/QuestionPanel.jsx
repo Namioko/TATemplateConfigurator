@@ -37,12 +37,6 @@ const QuestionList = inject('componentStore', 'questionStore')(observer(({compon
     const {currentQuestionIndex} = componentStore;
     const {questions} = questionStore;
 
-    
-    console.log(questions);
-    console.log(currentQuestionIndex);
-    console.log(questions.length);
-    console.log(currentQuestionIndex >= 0 && questions.length > 0);
-
     return (
         currentQuestionIndex >= 0 && questions.length > 0 &&
         <div className='menu__panel_content'>

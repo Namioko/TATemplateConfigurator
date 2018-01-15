@@ -117,8 +117,6 @@ class TextEditor extends Component {
             questionStore.addQuestionToEnd(newQuestion);
         }
 
-        console.log(componentStore)
-
         if(questions.length > 0) {
             componentStore.changeCurrentQuestion({chosenQuestionIndex: 0});
         } else {
@@ -150,6 +148,8 @@ class TextEditor extends Component {
         }
 
         otherStore.setSentimentRange(sentiment);
+
+        this.setState({isChanged: false});
     }
 
     render() {
