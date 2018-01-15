@@ -156,6 +156,11 @@ class QuestionStore {
     };
 
     @action
+    setQuestions = (questions) => {
+        this.questions = questions;
+    }
+
+    @action
     deleteQuestion = ({index}) => {
         this.questions.splice(index, 1);
         this.errors.splice(index, 1);

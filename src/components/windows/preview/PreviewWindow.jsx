@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {inject} from 'mobx-react';
 import {observe} from 'mobx';
+import {getStyles} from '../../../utils/css-config';
 
 @inject('designStore')
 class PreviewWindow extends Component {
@@ -11,13 +12,13 @@ class PreviewWindow extends Component {
         observe(this.props.designStore.design, (change) => {
             this.setStyles();
         });
-
     }
 
     setStyles = () => {
         const {design} = this.props.designStore;
 
-        const css = `body,html{background: ${design['positiveColor']};color: #00f; }`;
+        //const css = getStyles(design);
+        const css = `body,html{background: ${design['positiveColor']};color: #00f; }` + getStyles(design); //For example
         const previewFrame = document.getElementById('preview-frame');
 
         if(previewFrame == null) {

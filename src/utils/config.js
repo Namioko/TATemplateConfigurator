@@ -95,24 +95,24 @@ function buildDesign(design) {
 
     return `
     static var Design = {
-        positiveColor: "${design['positiveColor']}",       //positive color
-        neutralColor: "${design['neutralColor']}",        //neutral color
-        negativeColor: "${design['negativeColor']}",       //negatine color
-        backgroundColor: "${design['backgroundColor']}",     //Background, inactive navigation tabs
-        headerBackgroundColor: "${design['headerBackgroundColor']}",  //background for navigation panel, pagetitle and logo
-        headerTextColor: "${design['headerTextColor']}",        //text color for pagetitle
-        lightPrimaryColor: "${design['lightPrimaryColor']}",   //active navigation tabs, tiles background, table headers background, filter-page button
-        buttonTextColor: "${design['buttonTextColor']}",     //text color for buttons
-        buttonHoverColor: "${design['buttonHoverColor']}",    //color of hovered button
-        buttonMainColor: "${design['buttonMainColor']}",     //buttons and links color
-        tableColumnColor: "${design['tableColumnColor']}",    //Color of even columns in the table, background for reportal filters and tabs in hitlist
-        primaryTextColor: "${design['primaryTextColor']}",    //Text color
-        secondaryTextColor: "${design['secondaryTextColor']}",  //labels color
-        dividerColor: "${design['dividerColor']}",           //color for inputs borders
-        lightDividerColor: "${design['lightDividerColor']}",   //separation line between table rows
-        disabledTextColor: "${design['disabledTextColor']}",      //disabled text color
-        chartPalette: ${JSON.stringify(design['chartPalette'])},    //correlation chart points colors
-        areasPalette: {                                     //colors for correlation chart areas
+        positiveColor: "${design['positiveColor']}", //positive color
+        neutralColor: "${design['neutralColor']}", //neutral color
+        negativeColor: "${design['negativeColor']}", //negatine color
+        backgroundColor: "${design['backgroundColor']}", //Background, inactive navigation tabs
+        headerBackgroundColor: "${design['headerBackgroundColor']}", //background for navigation panel, pagetitle and logo
+        headerTextColor: "${design['headerTextColor']}", //text color for pagetitle
+        lightPrimaryColor: "${design['lightPrimaryColor']}", //active navigation tabs, tiles background, table headers background, filter-page button
+        buttonTextColor: "${design['buttonTextColor']}", //text color for buttons
+        buttonHoverColor: "${design['buttonHoverColor']}", //color of hovered button
+        buttonMainColor: "${design['buttonMainColor']}", //buttons and links color
+        tableColumnColor: "${design['tableColumnColor']}", //Color of even columns in the table, background for reportal filters and tabs in hitlist
+        primaryTextColor: "${design['primaryTextColor']}", //Text color
+        secondaryTextColor: "${design['secondaryTextColor']}", //labels color
+        dividerColor: "${design['dividerColor']}", //color for inputs borders
+        lightDividerColor: "${design['lightDividerColor']}", //separation line between table rows
+        disabledTextColor: "${design['disabledTextColor']}", //disabled text color
+        chartPalette: ${JSON.stringify(design['chartPalette'])}, //correlation chart points colors
+        areasPalette: { //colors for correlation chart areas
             "Priority Issues": "${design['areasPalette']['Priority Issues']}",
             "Strength": "${design['areasPalette']['Strength']}",
             "Monitor and Improve": "${design['areasPalette']['Monitor and Improve']}",

@@ -5,6 +5,8 @@ import {extractVariable} from '../../utils/parser';
 import {validColor} from '../../utils/validation';
 import {DEFAULT_COLORS, DEFAULT_AREAS_PALETTE} from '../../constants/design';
 import CodeMirror from 'react-codemirror';
+import {SENTIMENT_MAX_VALUE, SENTIMENT_MIN_VALUE} from '../../constants';
+import {QUESTION_PROPERTIES} from '../../utils/validation';
 
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
@@ -91,17 +93,47 @@ class TextEditor extends Component {
             }
         }
 
-        //TODO: validate values and save in store
         const questions = extractVariable(this.state.text, "TAQuestions");
+        let newQuestions = [];
         for(let i = 0; i < questions.length; i++) {
             const currentQuestion = questions[i];
-            //validation and save...
+            let newQuestion = {};
+
+            for (let key in QUESTION_PROPERTIES) {
+                //TODO: simple validation (is number, is array, is null)
+                newQuestion[key] = currentQuestion[key];
+            }
+
+            newQuestions.push(newQuestion);
         }
 
-        const sentimentRange = extractVariable(this.state.text, "SentimentRange");
+        questionStore.setQuestions(newQuestions);
 
-        console.log(questions);
-        console.log(sentimentRange);
+        const sentimentRange = extractVariable(this.state.text, "SentimentRange");
+        const sentiment = {
+            Negative: [],
+            Neutral: [],
+            Positive: []
+        };
+
+        let current = SENTIMENT_MIN_VALUE;
+        for(let i = 0; i < sentimentRange.Negative.length; i++) {
+            sentiment.Negative.push(current);
+            current++;
+        }
+
+        for(let i = 0; i < sentimentRange.Neutral.length; i++) {
+            sentiment.Neutral.push(current);
+            current++;
+        }
+
+        const count = SENTIMENT_MAX_VALUE - current + 1;
+        for(let i = 0; i < count; i++) {
+            sentiment.Positive.push(current);
+            current++;
+        }
+
+        otherStore.setSentimentRange(sentiment);
     }
 
     render() {

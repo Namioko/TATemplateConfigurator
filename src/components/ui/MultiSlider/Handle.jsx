@@ -55,7 +55,7 @@ export default class Handle extends React.Component {
           r={size - strokeWidth}
           fill={bg}
         />
-        <text x={x - 10} y={y + 30} font-size="13px">{value}</text>
+        <text x={x - 10} y={y + 30} fontSize="13px">{value}</text>
       </g>
     );
   }

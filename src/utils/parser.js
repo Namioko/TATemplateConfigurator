@@ -237,7 +237,7 @@ function parseKeyValue(strPair) {
         return null;
     }
 
-    const key = strPair.substring(0, index).replace(/\"/g, '').trim();
+    const key = strPair.substring(0, index).replace(/"/g, '').trim();
     const strValue = strPair.substring(index + 1, strPair.length).trim();
     const value = parseValue(strValue, 0);
 

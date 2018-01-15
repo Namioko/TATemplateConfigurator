@@ -1,5 +1,4 @@
 import {observable, action, computed} from 'mobx';
-import {SENTIMENT_NEGATIVE_END, SENTIMENT_POSITIVE_START} from '../constants';
 
 class OtherStore {
 
@@ -14,20 +13,6 @@ class OtherStore {
             Negative: [1, 2, 3, 4, 5]
         }
     }
-
-    @computed
-    get defaultValue() { //TODO: add error
-        const {Negative, Positive} = this.sentimentRange;
-
-        const negativeEnd = Negative[Negative.length - 1];
-        const positiveStart = Positive[0];
-
-        if (negativeEnd === undefined || positiveStart === undefined || positiveStart < negativeEnd) {
-            return [SENTIMENT_NEGATIVE_END, SENTIMENT_POSITIVE_START];
-        } else {
-            return [negativeEnd, positiveStart];
-        }
-    };
 
     @action setShowOnlySelectedCategoryTagInHitlist = (showOnlySelectedCategoryTagInHitlist) => {
         this.showOnlySelectedCategoryTagInHitlist = showOnlySelectedCategoryTagInHitlist;

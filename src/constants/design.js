@@ -22,8 +22,8 @@ export const DEFAULT_COLORS = {
 export const DEFAULT_CHART_PALETTE = ["#FD9900", "#CDD1D9", "#7CC700"];
 
 export const DEFAULT_AREAS_PALETTE = {
-    "Priority Issues": "#EE627D",
-    "Strength": "#7CC700",
-    "Monitor and Improve": "#FFB944",
-    "Maintain": "#82B8EC"
+    "Priority Issues":      "#EE627D",
+    "Strength":             "#7CC700",
+    "Monitor and Improve":  "#FFB944",
+    "Maintain":             "#82B8EC"
 };
