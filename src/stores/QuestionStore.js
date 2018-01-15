@@ -1,10 +1,12 @@
 import {observable, action, computed} from 'mobx';
+import {QUESTION_PROPERTIES} from '../utils/validation';
 
 class QuestionStore {
 
     @observable questions = [];
     @observable errors = [];
 
+    //TODO: must die!1!!!!11
     properties = [
         {
             name: 'TAFolderId',
@@ -134,31 +136,49 @@ class QuestionStore {
         return this.errors.findIndex(item => item.size > 0);
     };
 
+    //TODO: Refactoring
     @action
     addQuestion = ({index}) => {
         const newQuestion = {};
 
         const newQuestionErrors = new Map();
 
-        this.properties.forEach((property) => {
-            newQuestion[property.name] =
-                property.isArray && property.defaultValue === undefined
-                    ? []
-                    : property.defaultValue;
+        for(let key in QUESTION_PROPERTIES) {
+            const property = QUESTION_PROPERTIES[key];
+            newQuestion[key] = property.isArray && property.defaultValue === undefined
+                ? []
+                : property.defaultValue;
 
             if (property.isRequired && property.defaultValue === undefined) {
-                newQuestionErrors.set(property.name, this.requiredErrorMessage);
+                newQuestionErrors.set(key, this.requiredErrorMessage);
             }
-        });
+        }
 
         this.questions.splice(index, 0, newQuestion);
         this.errors.splice(index, 0, newQuestionErrors);
     };
 
     @action
-    setQuestions = (questions) => {
-        this.questions = questions;
-    }
+    addQuestionToEnd = (newQuestion) => {
+        const newQuestionErrors = new Map();
+
+        for(let key in QUESTION_PROPERTIES) {
+            const property = QUESTION_PROPERTIES[key];
+
+            if (property.isRequired && property.defaultValue === undefined) {
+                newQuestionErrors.set(key, this.requiredErrorMessage);
+            }
+        }
+
+        this.questions.push(newQuestion);
+        this.errors.push(newQuestionErrors);
+    };
+
+    @action
+    clearQuestions = () => {
+        this.questions.length = 0;
+        this.errors.length = 0;
+    };
 
     @action
     deleteQuestion = ({index}) => {

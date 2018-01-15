@@ -5,12 +5,14 @@ export function validColor(color) {
 
 export const QUESTION_PROPERTIES = {
     'TAFolderId': {
+        type: String,
         isRequired: true,
-        isArray: false,
+        isArray: false, //TODO: delete
         placeholder: "",
         helpLine: 'How to name text Analytics folder in parameters'
     },
     'DatasourceId': {
+        type: String,
         isRequired: true,
         isArray: false,
         defaultValue: 'ds0',
@@ -18,6 +20,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Datasource Id of the survey'
     },
     'DatabaseSchemaId': {
+        type: Number,
         isRequired: true,
         isArray: false,
         pattern: /^\d*$|^$/,
@@ -26,12 +29,14 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Schema containing TA model'
     },
     'DatabaseTableName': {
+        type: String,
         isRequired: true,
         isArray: false,
         placeholder: "",
         helpLine: 'Table containing TA model'
     },
     'RelationshipColumnName': {
+        type: String,
         isRequired: false,
         isArray: false,
         defaultValue: 'parent',
@@ -39,6 +44,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Column which contains id of parent category in table (usually "parent")'
     },
     'TextSeparator': {
+        type: String,
         isRequired: false,
         isArray: false,
         defaultValue: '|',
@@ -46,6 +52,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Separator between ParentCategory, subcategory and attribute in category name (usually "|")'
     },
     'TAQuestionName': {
+        type: String,
         isRequired: true,
         isArray: false,
         pattern: /^[A-Za-z]\w*$|^$/,
@@ -54,6 +61,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'The question ID of the Text Analytics verbatim question'
     },
     'TAModelNo': {
+        type: Number,
         isRequired: true,
         isArray: false,
         pattern: /^\d*$|^$/,
@@ -62,6 +70,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'The Genius Model ID'
     },
     'TimeVariableId': {
+        type: String,
         isRequired: true,
         isArray: false,
         defaultValue: 'interview_start',
@@ -71,6 +80,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Date variable'  
     },
     'VariablesToViewBy': {
+        type: Array,
         isRequired: false,
         isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
@@ -79,6 +89,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Variable to use for breaking detailed analysis table'
     },
     'HitlistColumns': {
+        type: Array,
         isRequired: false,
         isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
@@ -87,6 +98,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Additional columns in the hitlists'
     }, 
     'FilterQuestions': {
+        type: Array,
         isRequired: false,
         isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
@@ -95,6 +107,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'Array of variable Ids for the filter page'
     },
     'CorrelationVariableId': {
+        type: Array,
         isRequired: false,
         isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
@@ -103,6 +116,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'VariableId to make Impact analysis from'
     },
     'CorrelationSuppressingBase': {
+        type: Number,
         isRequired: false,
         isArray: false,
         defaultValue: 100,

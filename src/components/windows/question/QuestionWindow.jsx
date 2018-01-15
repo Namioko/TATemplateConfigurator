@@ -3,6 +3,7 @@ import {observer, inject} from 'mobx-react';
 import QuestionField from './QuestionField';
 import QuestionTagField from './QuestionTagField';
 import QuestionHeader from './QuestionHeader';
+import {QUESTION_PROPERTIES} from '../../../utils/validation';
 
 const QuestionWindow = ({componentStore, questionStore}) => {
     const {currentQuestionIndex} = componentStore;

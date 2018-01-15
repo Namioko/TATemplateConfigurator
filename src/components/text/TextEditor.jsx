@@ -12,7 +12,7 @@ import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/mdn-like.css';
 
-@inject('questionStore', 'designStore', 'otherStore')
+@inject('questionStore', 'designStore', 'otherStore', 'componentStore')
 @observer
 class TextEditor extends Component {
 
@@ -44,7 +44,7 @@ class TextEditor extends Component {
     }
 
     handleApplyChanges = () => {
-        const {questionStore, designStore, otherStore} = this.props;
+        const {questionStore, designStore, otherStore, componentStore} = this.props;
 
         otherStore.setShowOnlySelectedCategoryTagInHitlist(
             !!extractVariable(this.state.text, "ShowOnlySelectedCategoryTagInHitlist")
@@ -94,20 +94,36 @@ class TextEditor extends Component {
         }
 
         const questions = extractVariable(this.state.text, "TAQuestions");
-        let newQuestions = [];
+        questionStore.clearQuestions();
+
         for(let i = 0; i < questions.length; i++) {
             const currentQuestion = questions[i];
             let newQuestion = {};
 
             for (let key in QUESTION_PROPERTIES) {
-                //TODO: simple validation (is number, is array, is null)
-                newQuestion[key] = currentQuestion[key];
+                let propertyType = QUESTION_PROPERTIES[key].type;
+
+                if(propertyType == Number && !(typeof currentQuestion[key] === "number")) {
+                    newQuestion[key] = 0;
+                } else if(propertyType == String && !(typeof currentQuestion[key]  === "string")) {
+                    newQuestion[key] = "";
+                } else if(propertyType == Array && !(currentQuestion[key] instanceof Array)) {
+                    newQuestion[key] = [];
+                } else {
+                    newQuestion[key] = currentQuestion[key];
+                }
             }
 
-            newQuestions.push(newQuestion);
+            questionStore.addQuestionToEnd(newQuestion);
         }
 
-        questionStore.setQuestions(newQuestions);
+        console.log(componentStore)
+
+        if(questions.length > 0) {
+            componentStore.changeCurrentQuestion({chosenQuestionIndex: 0});
+        } else {
+            componentStore.resetCurrentQuestion();
+        }
 
         const sentimentRange = extractVariable(this.state.text, "SentimentRange");
         const sentiment = {
