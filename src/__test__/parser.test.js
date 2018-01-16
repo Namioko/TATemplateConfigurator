@@ -1,4 +1,5 @@
 import {extractVariable} from '../utils/parser';
+import {arrayСomparison} from './test-utils';
 
 test('parse numbers', () => {
     const code = "static const IntVal = 17;";
@@ -71,10 +72,16 @@ test('parse object', () => {
     expect(result["bar"]).toBe(1);
 });
 
-function arrayСomparison(target, expected) {
-    expect(target.length).toBe(expected.length);
+test('parse nested object', () => {
+    const code = "static const NestedObj = {foo: {foo: \"bar\"}, bar: 1};";
 
-    for(let i = 0; i < expected.length; i++) {
-        expect(target[i]).toBe(expected[i]);
-    }
-}
+    const result = extractVariable(code, "NestedObj");
+    expect(result.bar).toBe(1);
+    expect(result.foo.foo).toBe("bar");
+});
+
+test('parse nonexistent variable', () => {
+    const result = extractVariable('', "Var");
+
+    expect(result).toBe(null);
+});
