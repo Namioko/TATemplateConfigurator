@@ -18,34 +18,21 @@ export default class Handle extends React.Component {
     });
 
   render() {
-    var state = this.state;
-    var hover = state.hover;
-    var props = this.props;
-    var active = props.active;
-    var x = props.x;
-    var y = props.y;
-    var size = props.size;
-    var strokeWidth = props.strokeWidth;
-    var innerRadius = props.innerRadius;
-    var bg = props.bg;
-    var color = props.color;
-    const value = this.props.value;
-    var events = objectAssign(
+    const hover = this.state.hover;
+    let {active, x, y, size, strokeWidth, bg, color, value} = this.props;
+
+    let events = objectAssign(
       useTouches()
         ? {}
         : {
             onMouseEnter: this.hoverIn,
             onMouseLeave: this.hoverOut,
           },
-      props.events
+      this.props.events
     );
-    var style = {
-      cursor: active ? "ew-resize" : "pointer",
-      WebkitTapHighlightColor: "rgba(0,0,0,0)",
-    };
 
     return (
-      <g style={style} {...events}>
+      <g {...events}>
         <circle key="1" cx={x} cy={y} r={size} fill={color} />
         <circle
           key="2"
@@ -55,7 +42,7 @@ export default class Handle extends React.Component {
           r={size - strokeWidth}
           fill={bg}
         />
-        <text x={x - 10} y={y + 30} fontSize="13px">{value}</text>
+        <text x={x - 2} y={y + 36} fontSize="13px">{value}</text>
       </g>
     );
   }

@@ -7,7 +7,24 @@ import {QUESTION_PROPERTIES} from '../../../utils/validation';
 
 const QuestionWindow = ({componentStore, questionStore}) => {
     const {currentQuestionIndex} = componentStore;
-    const {questions, properties} = questionStore;
+    const {questions} = questionStore;
+
+    const makeFieldList = () => {
+        let fields = [];
+
+        for(let key in QUESTION_PROPERTIES) {
+            const property = QUESTION_PROPERTIES[key];
+            if (!property.isArray) {
+                fields.push(<QuestionField key={key} name={key} {...property}
+                                      currentQuestionIndex={currentQuestionIndex}
+                                      currentQuestionsLength={questions.length}/>)
+            } else {
+                fields.push(<QuestionTagField key={key} name={key} {...property}/>)
+            }
+        }
+
+        return fields;
+    };
 
     return (
         currentQuestionIndex >= 0 && questions.length > 0 &&
@@ -16,15 +33,7 @@ const QuestionWindow = ({componentStore, questionStore}) => {
             <div className="question-window__content">
                 <div className="question-window__question-field-list">
                     {
-                        properties.map((property) => {
-                            if (!property.isArray) {
-                                return <QuestionField key={property.name} {...property}
-                                                      currentQuestionIndex={currentQuestionIndex}
-                                                      currentQuestionsLength={questions.length}/>
-                            } else {
-                                return <QuestionTagField key={property.name} {...property}/>
-                            }
-                        })
+                        makeFieldList()
                     }
                 </div>
             </div>

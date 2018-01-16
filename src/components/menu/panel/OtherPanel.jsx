@@ -18,19 +18,22 @@ const OtherPanel = ({otherStore, designStore}) => {
             Positive: []
         };
 
-        let current = SENTIMENT_MIN_VALUE;
+        let negativeRange = values[0];
+        let positiveRange = values[1];
 
-        for (let i = 0; i < values[0]; i++) {
-            sentiment.Negative.push(current);
-            current++;
+        // if(values[0] === 0) {
+        //     negativeRange++;
+        //     neutralRange--;
+        // }
+
+        for (let i = SENTIMENT_MIN_VALUE; i <= negativeRange; i++) {
+            sentiment.Negative.push(i);
         }
-        for (let i = 0; i < values[1]; i++) {
-            sentiment.Neutral.push(current);
-            current++;
+        for (let i = negativeRange + 1; i < positiveRange; i++) {
+            sentiment.Neutral.push(i);
         }
-        for (let i = 0; i < SENTIMENT_MAX_VALUE - values[0] - values[1]; i++) {
-            sentiment.Positive.push(current);
-            current++;
+        for (let i = positiveRange; i <= SENTIMENT_MAX_VALUE; i++) {
+            sentiment.Positive.push(i);
         }
 
         console.log(values);
@@ -41,13 +44,25 @@ const OtherPanel = ({otherStore, designStore}) => {
 
     const {
         showOnlySelectedCategoryTagInHitlist: showTags,
-        defaultValue,
         sentimentRange
     } = otherStore;
 
+    const negativeEnd = sentimentRange.Negative.length;
+    const postitiveStart = sentimentRange.Negative.length + sentimentRange.Neutral.length + 1;
+
+    // let negativeCount = sentimentRange.Negative.length === 1 ? 0 : sentimentRange.Negative.length - 1;
+    // let neutralCount = sentimentRange.Negative.length === 1 ? sentimentRange.Neutral.length + 1 : sentimentRange.Neutral.length;
+    // let positiveCount = sentimentRange.Positive.length < 2 ? 0 : sentimentRange.Positive.length - 1;
+
+    // if(neutralCount === 1) {
+    //     positiveCount--;
+    //     neutralCount++;
+    // }
+
     const {design} = designStore;
     const colors = [design.negativeColor, design.neutralColor, design.positiveColor];
-    const values = [sentimentRange.Negative.length, sentimentRange.Neutral.length, sentimentRange.Positive.length < 2 ? 0 : sentimentRange.Positive.length - 1];
+
+    // const values = [negativeCount, neutralCount, positiveCount];
 
     return (
         <div>
@@ -66,7 +81,8 @@ const OtherPanel = ({otherStore, designStore}) => {
                 <div style={{padding: '.7rem'}}>
                     <MultiSlider
                         colors={colors}
-                        values={values}
+                        negativeEnd={negativeEnd}
+                        positiveStart={postitiveStart}
                         onChange={handleRangeChange}
                     />
                 </div>

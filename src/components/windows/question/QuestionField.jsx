@@ -40,7 +40,7 @@ class QuestionField extends Component {
             patternExplanation, 
             questionStore
         } = this.props;
-        const {requiredErrorMessage, setQuestionProperty, errors} = questionStore;
+        const {setQuestionProperty, errors} = questionStore;
 
         const currentError = errors[currentQuestionIndex];
 

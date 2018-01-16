@@ -1,7 +1,8 @@
 import React from 'react';
 import {observer, inject} from 'mobx-react';
-import LeftIcon from '../../../assets/img/icons/ic_arrow_left.svg';
-import RightIcon from '../../../assets/img/icons/ic_arrow_right.svg';
+import WindowAddButton from './buttons/WindowAddButton';
+import WindowPrevButton from './buttons/WindowPrevButton';
+import WindowNextButton from './buttons/WindowNextButton';
 
 const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
 
@@ -35,49 +36,6 @@ const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observe
                 <WindowNextButton/>
             </div>
         </div>
-    )
-}));
-
-const WindowAddButton = (props) => {
-    return (
-        <button className={props.className} onClick={props.onClick}>{props.text}</button>
-    )
-};
-
-const WindowPrevButton = inject('componentStore')(observer(({componentStore}) => {
-    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
-
-    const handleClick = () => {
-        if (currentQuestionIndex > 0) {
-            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex - 1});
-        }
-    };
-
-    return (
-        <img 
-            src={LeftIcon} 
-            alt="Prev"
-            className="gray-button window-buttons_arrow window-buttons_arrow-prev"
-            onClick={handleClick}/>
-    )
-}));
-
-const WindowNextButton = inject('componentStore', 'questionStore')(observer(({componentStore, questionStore}) => {
-    const {currentQuestionIndex, changeCurrentQuestion} = componentStore;
-    const {questions} = questionStore;
-
-    const handleClick = () => {
-        if (currentQuestionIndex < questions.length - 1) {
-            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
-        }
-    };
-
-    return (
-        <img 
-            src={RightIcon} 
-            alt="Next"
-            className="gray-button window-buttons_arrow window-buttons_arrow-next"
-            onClick={handleClick}/>
     )
 }));
 
