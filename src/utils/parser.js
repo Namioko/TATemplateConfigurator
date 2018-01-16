@@ -18,7 +18,7 @@ function parseValue(text, startPos) {
         return parseBoolean(text, startPos);
     }
 
-    if(isNumber(startSymbol)) {
+    if(isNumber(startSymbol) || startSymbol === '-') {
         return parseInteger(text, startPos);
     }
 
@@ -57,6 +57,11 @@ function parseBoolean(text, startPosition) {
 
 function parseInteger(text, startPosition) {
     let str = "";
+
+    if(text[startPosition] === '-') {
+        str += '-';
+        startPosition++;
+    }
 
     for(let i = startPosition; i < text.length; i++) {
         if(!isNumber(text[i])) {
@@ -115,8 +120,8 @@ function parseArray(text, startPosition) {
     }
     
     //Remove comments
-    arrayStr = arrayStr.replace(new RegExp('\/\\*(.*)\\*\/', 'gs'), '');
-    arrayStr = arrayStr.replace(new RegExp('\/\/(.*?)$','gm'), '');
+    arrayStr = arrayStr.replace(new RegExp('\/\\*(.*)\\*\/', 'g'), '');
+    arrayStr = arrayStr.replace(new RegExp('\/\/(.*?)$', 'gm'), '');
     arrayStr = arrayStr.trim();
 
     if(arrayStr.length === 0) {
@@ -184,7 +189,7 @@ function parseObject(text, startPosition) {
     }
 
     //Remove comments
-    objectStr = objectStr.replace(new RegExp('\/\\*(.*)\\*\/', 'gs'), '');
+    objectStr = objectStr.replace(new RegExp('\/\\*(.*)\\*\/', 'g'), '');
     objectStr = objectStr.replace(new RegExp('\/\/(.*?)$','gm'), '');
     objectStr = objectStr.trim();
 

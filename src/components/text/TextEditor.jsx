@@ -149,6 +149,7 @@ class TextEditor extends Component {
 
         otherStore.setSentimentRange(sentiment);
 
+        alert("Changes successfully applied!");
         this.setState({isChanged: false});
     }
 
