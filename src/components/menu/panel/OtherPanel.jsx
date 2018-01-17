@@ -12,17 +12,17 @@ const OtherPanel = ({otherStore, designStore}) => {
     };
 
     const handleRangeChange = (values) => {
-        let sentiment = {
+        const sentiment = {
             Negative: [],
             Neutral: [],
             Positive: []
         };
 
-        let current = SENTIMENT_MIN_VALUE;
-
         const negativeRange = Math.max(0, values[0]);
         const positiveRange = Math.max(1, values[2] + 1);
         const neutralRange = SENTIMENT_MAX_VALUE - (negativeRange + positiveRange) - 1;
+
+        let current = SENTIMENT_MIN_VALUE;
 
         for (let i = 0; i <= negativeRange; i++) {
             sentiment.Negative.push(current);
@@ -46,27 +46,14 @@ const OtherPanel = ({otherStore, designStore}) => {
         showOnlySelectedCategoryTagInHitlist: showTags,
         sentimentRange
     } = otherStore;
+    const {design} = designStore;
 
     const {Negative, Neutral, Positive} = sentimentRange;
 
-    let first = Negative.length;
-    let third = Positive.length;
-
-    if(first === 1) {
-        first = 0;
-    } else {
-        first--;
-    }
-
-    if(third === 1) {
-        third = 0;
-    } else {
-        third--;
-    }
-
-    let second = SENTIMENT_MAX_VALUE - (third + first) - 1;
-
-    const {design} = designStore;
+    const first = Negative.length === 1 ? 0 : Negative.length - 1;
+    const third = Positive.length=== 1 ? 0 : Positive.length - 1;
+    const second = SENTIMENT_MAX_VALUE - (third + first) - 1;
+    
     const colors = [design.negativeColor, design.neutralColor, design.positiveColor];
     const values = [first, second, third];
  

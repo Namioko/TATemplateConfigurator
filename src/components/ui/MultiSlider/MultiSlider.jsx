@@ -42,10 +42,10 @@ export default class MultiSlider extends React.Component {
   };
 
   xForEvent(e) {
-    var node = this.refs.root;
-    var clientX = e.clientX;
-    var m = node.getScreenCTM();
-    var p = node.createSVGPoint();
+    let node = this.refs.root;
+    let clientX = e.clientX;
+    let m = node.getScreenCTM();
+    let p = node.createSVGPoint();
     if (useTouches()) {
       // There is a bug in touch events and we need to compute the real clientX
       // http://stackoverflow.com/questions/5885808/includes-touch-events-clientx-y-scrolling-or-not
@@ -68,32 +68,29 @@ export default class MultiSlider extends React.Component {
     });
   }
 
-  // map a value to an x position
   x(value) {
-    var props = this.props;
-    var width = props.width;
-    var padX = props.padX;
-    var sum = this.sum();
+    const width = this.props.width;
+    const padX = this.props.padX;
+    const sum = this.sum();
     return Math.round(padX + value * (width - 2 * padX) / sum);
   }
 
   reverseX(x) {
-    var props = this.props;
-    var width = props.width;
-    var padX = props.padX;
-    var sum = this.sum();
+    const width = this.props.width;
+    const padX = this.props.padX;
+    const sum = this.sum();
     return sum * ((x - padX) / (width - 2 * padX));
   }
 
   concernedEvent = e => {
-    var down = this.state.down;
+    const down = this.state.down;
     if (!useTouches()) {
       return e;
     } else {
       if (!down) return e.targetTouches[0];
-      var touchId = down.touchId;
-      var touches = e.changedTouches;
-      for (var i = 0; i < touches.length; ++i) {
+      const touchId = down.touchId;
+      const touches = e.changedTouches;
+      for (let i = 0; i < touches.length; ++i) {
         if (touches[i].identifier === touchId) return touches[i];
       }
       return null;
@@ -113,7 +110,7 @@ export default class MultiSlider extends React.Component {
     });
   };
   onHandleMove = e => {
-    var event = this.concernedEvent(e);
+    const event = this.concernedEvent(e);
     if (!event) return;
     e.preventDefault();
     var x = this.xForEvent(event);
@@ -132,7 +129,7 @@ export default class MultiSlider extends React.Component {
     var right = w - left;
 
     if (left !== leftValue && right !== rightValue
-        && (leftIndex === 1 && left > 1 || rightIndex === 1 && right > 1)) {
+        && ((leftIndex === 1 && left > 1) || (rightIndex === 1 && right > 1))) {
       values = [].concat(values);
       values[leftIndex] = left;
       values[rightIndex] = right;
@@ -140,14 +137,14 @@ export default class MultiSlider extends React.Component {
     }
   };
   onHandleEnd = e => {
-    var event = this.concernedEvent(e);
+    const event = this.concernedEvent(e);
     if (!event) return;
     this.setState({
       down: null,
     });
   };
   onHandleAbort = e => {
-    var event = this.concernedEvent(e);
+    const event = this.concernedEvent(e);
     if (!event) return;
     this.setState({
       down: null,
@@ -172,11 +169,11 @@ export default class MultiSlider extends React.Component {
     var centerY = height / 2;
     var touchEvents = useTouches();
 
-    var tracks = [];
-    var handles = [];
-    var prev = 0;
+    let tracks = [];
+    let handles = [];
+    let prev = 0;
     var prevColor = bg;
-    for (var i = 0; i < len; ++i) {
+    for (let i = 0; i < len; ++i) {
       var value = values[i];
       var next = prev + value;
       var fromX = this.x(prev);
@@ -214,7 +211,7 @@ export default class MultiSlider extends React.Component {
             x={fromX}
             y={centerY}
             bg={bg}
-            color={(i != len - 1) ? prevColor : colors[colors.length - 1]}
+            color={(i !== len - 1) ? prevColor : colors[colors.length - 1]}
             strokeWidth={handleStrokeSize}
             innerRadius={handleInnerDotSize}
             size={handleSize}
