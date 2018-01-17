@@ -1,24 +1,24 @@
 export function getStyles(design) { 
-    const backgroundColor = design.backgroundColor;
-    const headerBackgroundColor = design.headerBackgroundColor;
-    const headerTextColor = design.headerTextColor;
-    const lightPrimaryColor = design.lightPrimaryColor;
-    const buttonTextColor = design.buttonTextColor;
-    const buttonHoverColor = design.buttonHoverColor;
-    const buttonMainColor = design.buttonMainColor;
-    const tableColumnColor = design.tableColumnColor;
-    const primaryTextColor = design.primaryTextColor;
-    const secondaryTextColor = design.secondaryTextColor;
-    const disabledTextColor = design.disabledTextColor;
-    const dividerColor = design.dividerColor;
-    const lightDividerColor = design.lightDividerColor;
-    const positiveColor = design.positiveColor;
-    const neutralColor = design.neutralColor;
-    const negativeColor = design.negativeColor;
-    const issues = design['areasPalette']['Priority Issues'];
-    const strength = design['areasPalette']['Strength'];
-    const monitor = design['areasPalette']['Monitor and Improve'];
-    const maintain = design['areasPalette']['Maintain'];
+    const backgroundColor = design.backgroundColor + '!important';
+    const headerBackgroundColor = design.headerBackgroundColor + '!important';
+    const headerTextColor = design.headerTextColor + '!important';
+    const lightPrimaryColor = design.lightPrimaryColor + '!important';
+    const buttonTextColor = design.buttonTextColor + '!important';
+    const buttonHoverColor = design.buttonHoverColor + '!important';
+    const buttonMainColor = design.buttonMainColor + '!important';
+    const tableColumnColor = design.tableColumnColor + '!important';
+    const primaryTextColor = design.primaryTextColor + '!important';
+    const secondaryTextColor = design.secondaryTextColor + '!important';
+    const disabledTextColor = design.disabledTextColor + '!important';
+    const dividerColor = design.dividerColor + '!important';
+    const lightDividerColor = design.lightDividerColor + '!important';
+    const positiveColor = design.positiveColor + '!important';
+    const neutralColor = design.neutralColor + '!important';
+    const negativeColor = design.negativeColor + '!important';
+    const issues = design['areasPalette']['Priority Issues'] + '!important';
+    const strength = design['areasPalette']['Strength'] + '!important';
+    const monitor = design['areasPalette']['Monitor and Improve'] + '!important';
+    const maintain = design['areasPalette']['Maintain'] + '!important';
    
     return "* {outline-color: " + buttonHoverColor + 
         "\n;}a:hover, .link:hover {color: " + buttonHoverColor + 

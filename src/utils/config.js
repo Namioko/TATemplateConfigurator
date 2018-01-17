@@ -74,7 +74,7 @@ function buildQuestions(questions) {
             TextSeparator: "${questions[i]['TextSeparator'] || ''}", //Separator between ParentCategory, subcategory and attribute in category name (usually "|")
                        
             TAQuestionName: "${questions[i]['TAQuestionName'] || ''}", // the question ID of the Text Analytics verbatim quesiton
-            TAModelNo: "${questions[i]['TAModelNo'] || ''}", // the Genius Model ID
+            TAModelNo: "${questions[i]['TAModelNo'] || 0}", // the Genius Model ID
             
             TimeVariableId: '${questions[i]['TimeVariableId'] || ''}', //date variable
             VariablesToViewBy: ${JSON.stringify(questions[i]['VariablesToViewBy'])}, //variable to use for breaking detailed analysis table

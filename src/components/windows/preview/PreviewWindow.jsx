@@ -17,8 +17,7 @@ class PreviewWindow extends Component {
     setStyles = () => {
         const {design} = this.props.designStore;
 
-        //const css = getStyles(design);
-        const css = `body,html{background: ${design['positiveColor']};color: #00f; }` + getStyles(design); //For example
+        const css = getStyles(design);
         const previewFrame = document.getElementById('preview-frame');
 
         if(previewFrame == null) {

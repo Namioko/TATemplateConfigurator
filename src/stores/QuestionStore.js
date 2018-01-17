@@ -12,7 +12,6 @@ class QuestionStore {
         return this.errors.findIndex(item => item.size > 0);
     };
 
-    //TODO: Refactoring
     @action
     addQuestion = ({index}) => {
         const newQuestion = {};
@@ -41,7 +40,8 @@ class QuestionStore {
         for(let key in QUESTION_PROPERTIES) {
             const property = QUESTION_PROPERTIES[key];
 
-            if (property.isRequired && property.defaultValue === undefined) {
+            if (property.isRequired && property.defaultValue === undefined
+                && (newQuestion[key] === undefined || newQuestion[key] === [] || newQuestion[key] === '')) {
                 newQuestionErrors.set(key, REQUIRED_ERROR_MESSAGE);
             }
         }
