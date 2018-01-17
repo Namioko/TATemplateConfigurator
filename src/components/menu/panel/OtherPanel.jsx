@@ -20,7 +20,7 @@ const OtherPanel = ({otherStore, designStore}) => {
 
         let current = SENTIMENT_MIN_VALUE;
 
-        const negativeRange = Math.max(1, values[0]);
+        const negativeRange = Math.max(0, values[0]);
         const positiveRange = Math.max(1, values[2] + 1);
         const neutralRange = SENTIMENT_MAX_VALUE - (negativeRange + positiveRange) - 1;
 
@@ -38,10 +38,6 @@ const OtherPanel = ({otherStore, designStore}) => {
             sentiment.Positive.push(current);
             current++;
         }
-
-        console.log("\n");
-        console.log("Handler values = " + values);
-        console.log("Handler sentiment = " + JSON.stringify(sentiment));
 
         otherStore.setSentimentRange(sentiment);
     };
@@ -72,9 +68,7 @@ const OtherPanel = ({otherStore, designStore}) => {
     const {design} = designStore;
     const colors = [design.negativeColor, design.neutralColor, design.positiveColor];
     const values = [first, second, third];
-
-    console.log("Render values = " + values);
-    //TODO: Congratulations! New bug - can not set (-4)
+ 
     return (
         <div>
             <PanelHeader name="Other"/>
