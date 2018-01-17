@@ -1,24 +1,24 @@
 export function getStyles(design) { 
-    let backgroundColor = design.backgroundColor;
-    let headerBackgroundColor = design.headerBackgroundColor;
-    let headerTextColor = design.headerTextColor;
-    let lightPrimaryColor = design.lightPrimaryColor;
-    let buttonTextColor = design.buttonTextColor;
-    let buttonHoverColor = design.buttonHoverColor;
-    let buttonMainColor = design.buttonMainColor;
-    let tableColumnColor = design.tableColumnColor;
-    let primaryTextColor = design.primaryTextColor;
-    let secondaryTextColor = design.secondaryTextColor;
-    let disabledTextColor = design.disabledTextColor;
-    let dividerColor = design.dividerColor;
-    let lightDividerColor = design.lightDividerColor;
-    let positiveColor = design.positiveColor;
-    let neutralColor = design.neutralColor;
-    let negativeColor = design.negativeColor;
-    let issues = design['areasPalette']['Priority Issues'];
-    let strength = design['areasPalette']['Strength'];
-    let monitor = design['areasPalette']['Monitor and Improve'];
-    let maintain = design['areasPalette']['Maintain'];
+    const backgroundColor = design.backgroundColor;
+    const headerBackgroundColor = design.headerBackgroundColor;
+    const headerTextColor = design.headerTextColor;
+    const lightPrimaryColor = design.lightPrimaryColor;
+    const buttonTextColor = design.buttonTextColor;
+    const buttonHoverColor = design.buttonHoverColor;
+    const buttonMainColor = design.buttonMainColor;
+    const tableColumnColor = design.tableColumnColor;
+    const primaryTextColor = design.primaryTextColor;
+    const secondaryTextColor = design.secondaryTextColor;
+    const disabledTextColor = design.disabledTextColor;
+    const dividerColor = design.dividerColor;
+    const lightDividerColor = design.lightDividerColor;
+    const positiveColor = design.positiveColor;
+    const neutralColor = design.neutralColor;
+    const negativeColor = design.negativeColor;
+    const issues = design['areasPalette']['Priority Issues'];
+    const strength = design['areasPalette']['Strength'];
+    const monitor = design['areasPalette']['Monitor and Improve'];
+    const maintain = design['areasPalette']['Maintain'];
    
     return "* {outline-color: " + buttonHoverColor + 
         "\n;}a:hover, .link:hover {color: " + buttonHoverColor + 

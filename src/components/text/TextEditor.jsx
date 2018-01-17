@@ -103,11 +103,11 @@ class TextEditor extends Component {
             for (let key in QUESTION_PROPERTIES) {
                 let propertyType = QUESTION_PROPERTIES[key].type;
 
-                if(propertyType == Number && !(typeof currentQuestion[key] === "number")) {
+                if(propertyType === Number && !(typeof currentQuestion[key] === "number")) {
                     newQuestion[key] = (QUESTION_PROPERTIES[key].defaultValue != null) ? QUESTION_PROPERTIES[key].defaultValue : 0;
-                } else if(propertyType == String && !(typeof currentQuestion[key]  === "string")) {
+                } else if(propertyType === String && !(typeof currentQuestion[key]  === "string")) {
                     newQuestion[key] = (QUESTION_PROPERTIES[key].defaultValue != null) ? QUESTION_PROPERTIES[key].defaultValue : "";
-                } else if(propertyType == Array && !(currentQuestion[key] instanceof Array)) {
+                } else if(propertyType === Array && !(currentQuestion[key] instanceof Array)) {
                     newQuestion[key] = (QUESTION_PROPERTIES[key].defaultValue != null) ? QUESTION_PROPERTIES[key].defaultValue : [];
                 } else {
                     newQuestion[key] = currentQuestion[key];

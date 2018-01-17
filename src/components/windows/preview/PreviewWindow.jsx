@@ -25,7 +25,7 @@ class PreviewWindow extends Component {
             return;
         }
 
-        const frameHead = previewFrame .contentWindow.document.head;
+        const frameHead = previewFrame.contentWindow.document.head;
         const styleTag = frameHead.getElementsByTagName('style')[0];
 
         if (styleTag.styleSheet){
