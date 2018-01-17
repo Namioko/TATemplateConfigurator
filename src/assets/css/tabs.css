@@ -21,8 +21,8 @@
 
 .rwt__tab {
 	background: transparent;
-	width: 3.5rem;
-	height: 3.5rem;
+	width: 6.2rem;
+	height: 6rem;
 	border: 0;
 	font-family: inherit;
 	font-size: inherit;
@@ -62,4 +62,10 @@
 .tab-icon {
 	width: 2.3rem;
 	height: 2.3rem;
+}
+
+.tabLabel {
+	float:left;
+	width: 100%;
+	font-size: 1.15rem;
 }

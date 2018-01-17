@@ -22,7 +22,7 @@ input:invalid{
 }
 
 .menu {
-    width: 30rem;
+    width: 33rem;
     border-right: var(--border);
     background-color: white;
 }
@@ -45,6 +45,7 @@ input:invalid{
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+    width: 26.8rem;
 }
 
 .menu__panel_design-logo {
