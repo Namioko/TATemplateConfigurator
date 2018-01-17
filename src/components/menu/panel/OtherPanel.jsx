@@ -22,9 +22,9 @@ const OtherPanel = ({otherStore, designStore}) => {
 
         const negativeRange = Math.max(1, values[0]);
         const positiveRange = Math.max(1, values[2] + 1);
-        const neutralRange = SENTIMENT_MAX_VALUE - (negativeRange + positiveRange);
+        const neutralRange = SENTIMENT_MAX_VALUE - (negativeRange + positiveRange) - 1;
 
-        for (let i = 0; i < negativeRange; i++) {
+        for (let i = 0; i <= negativeRange; i++) {
             sentiment.Negative.push(current);
             current++;
         }
@@ -57,6 +57,8 @@ const OtherPanel = ({otherStore, designStore}) => {
 
     if(first === 1) {
         first = 0;
+    } else {
+        first--;
     }
 
     if(third === 1) {
