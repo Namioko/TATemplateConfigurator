@@ -21,7 +21,7 @@ class QuestionStore {
 
         for(let key in QUESTION_PROPERTIES) {
             const property = QUESTION_PROPERTIES[key];
-            newQuestion[key] = property.isArray && property.defaultValue === undefined
+            newQuestion[key] = property.type.name === 'Array' && property.defaultValue === undefined
                 ? []
                 : property.defaultValue;
 

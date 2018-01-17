@@ -42,7 +42,7 @@ export default class Handle extends React.Component {
           r={size - strokeWidth}
           fill={bg}
         />
-        <text x={x - 2} y={y + 36} fontSize="13px">{value}</text>
+        <text className="range-slider_text" x={x - 5} y={y - 20} fontSize="17px">{value}</text>
       </g>
     );
   }

@@ -7,14 +7,12 @@ export const QUESTION_PROPERTIES = {
     'TAFolderId': {
         type: String,
         isRequired: true,
-        isArray: false, //TODO: delete
         placeholder: "",
         helpLine: 'How to name text Analytics folder in parameters'
     },
     'DatasourceId': {
         type: String,
         isRequired: true,
-        isArray: false,
         defaultValue: 'ds0',
         placeholder: "",
         helpLine: 'Datasource Id of the survey'
@@ -22,7 +20,6 @@ export const QUESTION_PROPERTIES = {
     'DatabaseSchemaId': {
         type: Number,
         isRequired: true,
-        isArray: false,
         pattern: /^\d*$|^$/,
         patternExplanation: 'only digits',
         placeholder: "",
@@ -31,14 +28,12 @@ export const QUESTION_PROPERTIES = {
     'DatabaseTableName': {
         type: String,
         isRequired: true,
-        isArray: false,
         placeholder: "",
         helpLine: 'Table containing TA model'
     },
     'RelationshipColumnName': {
         type: String,
         isRequired: false,
-        isArray: false,
         defaultValue: 'parent',
         placeholder: "",
         helpLine: 'Column which contains id of parent category in table (usually "parent")'
@@ -46,7 +41,6 @@ export const QUESTION_PROPERTIES = {
     'TextSeparator': {
         type: String,
         isRequired: false,
-        isArray: false,
         defaultValue: '|',
         placeholder: "",
         helpLine: 'Separator between ParentCategory, subcategory and attribute in category name (usually "|")'
@@ -54,7 +48,6 @@ export const QUESTION_PROPERTIES = {
     'TAQuestionName': {
         type: String,
         isRequired: true,
-        isArray: false,
         pattern: /^[A-Za-z]\w*$|^$/,
         patternExplanation: 'first symbol is letter, rest are letters or digits',
         placeholder: "",
@@ -63,7 +56,6 @@ export const QUESTION_PROPERTIES = {
     'TAModelNo': {
         type: Number,
         isRequired: true,
-        isArray: false,
         pattern: /^\d*$|^$/,
         patternExplanation: 'only digits',
         placeholder: "",
@@ -72,7 +64,6 @@ export const QUESTION_PROPERTIES = {
     'TimeVariableId': {
         type: String,
         isRequired: true,
-        isArray: false,
         defaultValue: 'interview_start',
         pattern: /^[A-Za-z]\w*$|^$/,
         patternExplanation: 'first symbol is letter, rest are letters or digits',
@@ -82,7 +73,6 @@ export const QUESTION_PROPERTIES = {
     'VariablesToViewBy': {
         type: Array,
         isRequired: false,
-        isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
         patternExplanation: 'first symbol is letter, rest are letters or digits',
         placeholder: "Add variable",
@@ -91,7 +81,6 @@ export const QUESTION_PROPERTIES = {
     'HitlistColumns': {
         type: Array,
         isRequired: false,
-        isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
         patternExplanation: 'first symbol is letter, rest are letters or digits',
         placeholder: "Add column",
@@ -100,7 +89,6 @@ export const QUESTION_PROPERTIES = {
     'FilterQuestions': {
         type: Array,
         isRequired: false,
-        isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
         patternExplanation: 'first symbol is letter, rest are letters or digits',
         placeholder: "Add variable id",
@@ -109,7 +97,6 @@ export const QUESTION_PROPERTIES = {
     'CorrelationVariableId': {
         type: Array,
         isRequired: false,
-        isArray: true,
         pattern: /^[A-Za-z]\w*$|^$/,
         patternExplanation: 'first symbol is letter, rest are letters or digits',
         placeholder: "Add variable id",
@@ -118,7 +105,6 @@ export const QUESTION_PROPERTIES = {
     'CorrelationSuppressingBase': {
         type: Number,
         isRequired: false,
-        isArray: false,
         defaultValue: 100,
         pattern: /^\d*$|^$/,
         patternExplanation: 'only digits',

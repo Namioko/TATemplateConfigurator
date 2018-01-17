@@ -1,3 +1,8 @@
 .range-slider {
     width: 100%;
+    user-select: none;
+}
+
+.range-slider_text {
+    pointer-events: none;
 }

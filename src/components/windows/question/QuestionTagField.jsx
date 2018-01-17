@@ -64,7 +64,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
 
             <span className="question-window__question-field_title">{name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
-                       placeholder={placeholder} autofocus={false}/>
+                       placeholder={placeholder} autofocus={false} required={currentQuestionErrors.get(name) === REQUIRED_ERROR_MESSAGE}/>
             <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
             <span className="question-window__question-field_error">{currentQuestionErrors.get(name)}</span>
         </label>
@@ -73,10 +73,11 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
 
 QuestionTagField.propTypes = {
     name: propTypes.string.isRequired,
-    isRequired: propTypes.bool,
+    isRequired: propTypes.bool.isRequired,
+    type: propTypes.func.isRequired,
     patternExplanation: propTypes.string,
+    placeholder: propTypes.string,
     helpLine: propTypes.string,
-    placeholder: propTypes.string
 };
 
 export default inject('componentStore', 'questionStore')(observer(QuestionTagField));

@@ -6,6 +6,21 @@
     };
 }
 
+a,
+a:visited {
+    text-decoration: none;
+    color: black;
+}
+
+input:required {
+    border: 1px solid #FF0000AA;
+    outline: none;
+}
+
+input:invalid{
+    box-shadow:none;
+}
+
 .menu {
     width: 30rem;
     border-right: var(--border);

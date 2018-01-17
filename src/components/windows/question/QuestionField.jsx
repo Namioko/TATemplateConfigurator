@@ -160,7 +160,7 @@ class QuestionField extends Component {
 
                 <span className="question-window__question-field_title">{name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
-                       onChange={this.handleChange} required={isRequired}/>
+                       onChange={this.handleChange} required={currentError.get(name) === REQUIRED_ERROR_MESSAGE}/>
                 <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
                 <span className="question-window__question-field_error">{
                     currentError.get(name)
@@ -172,8 +172,11 @@ class QuestionField extends Component {
 
 QuestionField.propTypes = {
     name: propTypes.string.isRequired,
-    isRequired: propTypes.bool,
-    isArray: propTypes.bool,
+    isRequired: propTypes.bool.isRequired,
+    type: propTypes.func.isRequired,
+    patternExplanation: propTypes.string,
+    placeholder: propTypes.string,
+    helpLine: propTypes.string,
 
     //can't use just componentStore because this component doesn't update when currentQuestionIndex updates
     currentQuestionIndex: propTypes.number.isRequired,

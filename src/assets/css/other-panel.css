@@ -1,0 +1,13 @@
+.other-panel_block {
+    padding: .7rem;
+}
+
+.other-panel_block span {
+    font-size: 1.3rem;
+    display: inline-block;
+    width: 100%;
+}
+
+.panel-checkable-item span {
+    width: 80%;
+}

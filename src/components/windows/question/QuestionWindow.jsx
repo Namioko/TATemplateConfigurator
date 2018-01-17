@@ -14,7 +14,7 @@ const QuestionWindow = ({componentStore, questionStore}) => {
 
         for(let key in QUESTION_PROPERTIES) {
             const property = QUESTION_PROPERTIES[key];
-            if (!property.isArray) {
+            if (property.type.name !== 'Array') {
                 fields.push(<QuestionField key={key} name={key} {...property}
                                       currentQuestionIndex={currentQuestionIndex}
                                       currentQuestionsLength={questions.length}/>)

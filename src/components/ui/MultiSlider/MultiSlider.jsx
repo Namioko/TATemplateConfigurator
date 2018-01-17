@@ -168,6 +168,7 @@ export default class MultiSlider extends React.Component {
     var handleStrokeSize = props.handleStrokeSize;
     var handleInnerDotSize = props.handleInnerDotSize;
     var bg = props.bg;
+    var offset = props.offset;
     var centerY = height / 2;
     var touchEvents = useTouches();
 
@@ -189,6 +190,8 @@ export default class MultiSlider extends React.Component {
           lineWidth={trackSize}
           fromX={fromX}
           toX={toX}
+          leftLabel={(i === 0) ? prev + offset : undefined}
+          rightLabel={(i === len - 1) ? next + offset : undefined}
         />
       );
       if (i !== 0) {
@@ -216,7 +219,7 @@ export default class MultiSlider extends React.Component {
             innerRadius={handleInnerDotSize}
             size={handleSize}
             events={handleEvents}
-            value={prev + props.offset}
+            value={prev + offset}
           />
         );
       }
