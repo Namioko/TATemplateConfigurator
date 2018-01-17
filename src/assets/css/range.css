@@ -4,5 +4,6 @@
 }
 
 .range-slider_text {
+    user-select: none;
     pointer-events: none;
 }
