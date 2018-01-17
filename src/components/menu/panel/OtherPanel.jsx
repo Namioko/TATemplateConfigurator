@@ -44,7 +44,6 @@ const OtherPanel = ({otherStore, designStore}) => {
 
     const {
         showOnlySelectedCategoryTagInHitlist: showTags,
-        defaultValue,
         sentimentRange
     } = otherStore;
 

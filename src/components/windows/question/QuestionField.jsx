@@ -155,7 +155,6 @@ class QuestionField extends Component {
         const currentError = errors[currentQuestionIndex];
 
         return (
-            //TODO: extract tooltip with icon to separate component
             <label className="question-window__question-field">
                 <Tooltip events delay={100}/>
 

@@ -132,7 +132,7 @@ export default class MultiSlider extends React.Component {
     var right = w - left;
 
     if (left !== leftValue && right !== rightValue
-        && (leftIndex === 1 && left !== 0 || rightIndex === 1 && right !== 0)) {
+        && (leftIndex === 1 && left > 1 || rightIndex === 1 && right > 1)) {
       values = [].concat(values);
       values[leftIndex] = left;
       values[rightIndex] = right;
