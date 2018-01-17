@@ -149,7 +149,7 @@ class QuestionField extends Component {
     }
 
     render() {
-        const {currentQuestionIndex, helpLine, name, isRequired, questionStore} = this.props;
+        const {currentQuestionIndex, helpLine, name, questionStore} = this.props;
         const {errors} = questionStore;
 
         const currentError = errors[currentQuestionIndex];
