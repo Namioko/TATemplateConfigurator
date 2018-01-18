@@ -1,6 +1,6 @@
 export function validColor(color) {
-    //#fff or #ffffff
-    return !!color.match(/^#[0-9a-f]{3}([0-9a-f]{3})?$/i);
+    //#fff or #ffffff or #ffffff00
+    return [4, 7, 9].indexOf(color.length) !== -1 && !!color.match(/^#[0-9a-f]+$/i);
 }
 
 export const QUESTION_PROPERTIES = {

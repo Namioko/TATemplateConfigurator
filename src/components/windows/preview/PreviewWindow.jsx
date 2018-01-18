@@ -9,7 +9,13 @@ class PreviewWindow extends Component {
     constructor(props) {
         super(props);
 
-        observe(this.props.designStore.design, (change) => {
+        const {design} = this.props.designStore;
+
+        observe(design, (change) => {
+            this.setStyles();
+        });
+
+        observe(design['areasPalette'], (change) => {
             this.setStyles();
         });
     }

@@ -13,4 +13,4 @@ const WindowWrapper = () => {
     }
 ;
 
-export default observer(WindowWrapper);
+export default WindowWrapper;
