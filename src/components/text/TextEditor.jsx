@@ -175,7 +175,7 @@ class TextEditor extends Component {
                 {(isChanged) && 
                     <button 
                         className="green-button" 
-                        style={{position: "fixed", right: "2rem", bottom: "2rem", zIndex: '9999'}} 
+                        style={{position: "fixed", right: "2rem", top: "5rem", zIndex: '9999'}}
                         onClick={this.handleApplyChanges}>
                         Apply changes
                     </button>
