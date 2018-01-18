@@ -5,6 +5,11 @@ div.ReactTags__tags {
     width: 31.75rem;
 }
 
+div.ReactTags__selected_error {
+    border: 1px solid #FF0000AA !important;
+    outline: none;
+}
+
 div.ReactTags__tagInput {
     width: 100px;
     display: inline-block;
