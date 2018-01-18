@@ -33,11 +33,11 @@ class QuestionField extends Component {
 
     handleChange = (event) => {
         const {
-            currentQuestionIndex, 
-            name, 
+            currentQuestionIndex,
+            name,
             isRequired,
-            pattern, 
-            patternExplanation, 
+            pattern,
+            patternExplanation,
             questionStore
         } = this.props;
         const {setQuestionProperty, errors} = questionStore;
@@ -61,7 +61,7 @@ class QuestionField extends Component {
             propertyName: name,
             propertyValue: event.target.value
         });
-        
+
         this.setState({
             currentValue: event.target.value
         });
@@ -160,7 +160,7 @@ class QuestionField extends Component {
 
                 <span className="question-window__question-field_title">{name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
-                       onChange={this.handleChange} required={currentError.get(name) === REQUIRED_ERROR_MESSAGE}/>
+                       onChange={this.handleChange} required={currentError.get(name) !== undefined}/>
                 <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
                 <span className="question-window__question-field_error">{
                     currentError.get(name)

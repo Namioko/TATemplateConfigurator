@@ -54,7 +54,7 @@ export const QUESTION_PROPERTIES = {
         helpLine: 'The question ID of the Text Analytics verbatim question'
     },
     'TAModelNo': {
-        type: Number,
+        type: String,
         isRequired: true,
         pattern: /^\d*$|^$/,
         patternExplanation: 'only digits',

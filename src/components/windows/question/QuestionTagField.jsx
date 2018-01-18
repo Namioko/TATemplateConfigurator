@@ -64,7 +64,7 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
 
             <span className="question-window__question-field_title">{name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
-                       placeholder={placeholder} autofocus={false} required={currentQuestionErrors.get(name) === REQUIRED_ERROR_MESSAGE}/>
+                       placeholder={placeholder} autofocus={false} required={currentQuestionErrors.get(name) !== undefined}/>
             <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
             <span className="question-window__question-field_error">{currentQuestionErrors.get(name)}</span>
         </label>

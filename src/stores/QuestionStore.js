@@ -1,6 +1,6 @@
 import {observable, action, computed} from 'mobx';
 import {QUESTION_PROPERTIES} from '../utils/validation';
-import {REQUIRED_ERROR_MESSAGE} from "../constants/index";
+import {INVALID_ID_ERROR_MESSAGE, REQUIRED_ERROR_MESSAGE} from "../constants/index";
 
 class QuestionStore {
 
@@ -18,7 +18,7 @@ class QuestionStore {
 
         const newQuestionErrors = new Map();
 
-        for(let key in QUESTION_PROPERTIES) {
+        for (let key in QUESTION_PROPERTIES) {
             const property = QUESTION_PROPERTIES[key];
             newQuestion[key] = property.type.name === 'Array' && property.defaultValue === undefined
                 ? []
@@ -36,17 +36,46 @@ class QuestionStore {
     @action
     addQuestionToEnd = (newQuestion) => {
         const newQuestionErrors = new Map();
+        let tempQuestion = Object.assign({}, newQuestion);
 
-        for(let key in QUESTION_PROPERTIES) {
+        for (let key in QUESTION_PROPERTIES) {
             const property = QUESTION_PROPERTIES[key];
+            const {isRequired, defaultValue, pattern, patternExplanation, type} = property;
 
-            if (property.isRequired && property.defaultValue === undefined
-                && (newQuestion[key] === undefined || newQuestion[key] === [] || newQuestion[key] === '')) {
+            if (type.name === 'Number') {
+                tempQuestion[key] = `${tempQuestion[key]}`;
+            }
+
+            if (isRequired && defaultValue === undefined
+                && (tempQuestion[key] === undefined || tempQuestion[key] === [] || tempQuestion[key] === '')) {
                 newQuestionErrors.set(key, REQUIRED_ERROR_MESSAGE);
+            }
+
+            if (type.name !== 'Array') {
+                if (pattern !== undefined && !pattern.test(tempQuestion[key])) {
+                    newQuestionErrors.set(key, `* invalid value (${patternExplanation})`);
+                }
+
+                if(key === 'TAQuestionName' || key === 'TAModelNo') {
+                    //index is '-1' because the question is not added yet
+                    if (!this.isIdUnique({
+                            questionIndex: -1,
+                            TAQuestionName: tempQuestion['TAQuestionName'],
+                            TAModelNo: tempQuestion['TAModelNo']
+                    })) {
+                        newQuestionErrors.set(key, INVALID_ID_ERROR_MESSAGE);
+                    }
+                }
+            } else {
+                tempQuestion[key].forEach(item => {
+                    if (pattern !== undefined && !pattern.test(item)) {
+                        newQuestionErrors.set(key, `* invalid value (${patternExplanation})`);
+                    }
+                });
             }
         }
 
-        this.questions.push(newQuestion);
+        this.questions.push(tempQuestion);
         this.errors.push(newQuestionErrors);
     };
 
