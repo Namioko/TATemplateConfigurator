@@ -15,7 +15,7 @@ const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observe
 
     const addQuestionAfter = () => {
         addQuestion({index: currentQuestionIndex + 1});
-        changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
+        changeCurrentQuestion(currentQuestionIndex + 1);
     };
 
     return (

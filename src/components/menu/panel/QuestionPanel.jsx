@@ -18,7 +18,7 @@ const MenuQuestionAddButton = inject('componentStore', 'questionStore')(observer
     const {questions, addQuestion} = questionStore;
 
     const handleClick = () => {
-        changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex});
+        changeCurrentQuestion(currentQuestionIndex);
         addQuestion({index: currentQuestionIndex});
     };
 

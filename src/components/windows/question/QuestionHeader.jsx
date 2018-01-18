@@ -8,7 +8,7 @@ const QuestionHeader = ({componentStore, questionStore}) => {
 
     const handleDeleteClick = () => {
         deleteQuestion({index: currentQuestionIndex});
-        changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex - 1});
+        changeCurrentQuestion(currentQuestionIndex - 1);
     };
 
     return (

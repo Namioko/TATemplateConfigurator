@@ -55,17 +55,6 @@ class QuestionStore {
                 if (pattern !== undefined && !pattern.test(tempQuestion[key])) {
                     newQuestionErrors.set(key, `* invalid value (${patternExplanation})`);
                 }
-
-                if(key === 'TAQuestionName' || key === 'TAModelNo') {
-                    //index is '-1' because the question is not added yet
-                    if (!this.isIdUnique({
-                            questionIndex: -1,
-                            TAQuestionName: tempQuestion['TAQuestionName'],
-                            TAModelNo: tempQuestion['TAModelNo']
-                    })) {
-                        newQuestionErrors.set(key, INVALID_ID_ERROR_MESSAGE);
-                    }
-                }
             } else {
                 tempQuestion[key].forEach(item => {
                     if (pattern !== undefined && !pattern.test(item)) {
@@ -77,6 +66,17 @@ class QuestionStore {
 
         this.questions.push(tempQuestion);
         this.errors.push(newQuestionErrors);
+
+        this.questions.forEach((item, index) => {
+            if (!this.isIdUnique({
+                    questionIndex: index,
+                    TAQuestionName: item['TAQuestionName'],
+                    TAModelNo: item['TAModelNo']
+                })) {
+                this.errors[index].set('TAQuestionName', INVALID_ID_ERROR_MESSAGE);
+                this.errors[index].set('TAModelNo', INVALID_ID_ERROR_MESSAGE);
+            }
+        });
     };
 
     @action

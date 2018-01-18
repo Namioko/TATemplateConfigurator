@@ -44,7 +44,7 @@ const NavBar = () => {
 
         if(indexOfFirstQuestionErrors >= 0) {
             alert('You have some errors in the configuration!');
-            changeCurrentQuestion({chosenQuestionIndex: indexOfFirstQuestionErrors});
+            changeCurrentQuestion(indexOfFirstQuestionErrors);
             return;
         }
 

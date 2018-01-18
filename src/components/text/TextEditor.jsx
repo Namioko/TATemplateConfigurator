@@ -118,7 +118,7 @@ class TextEditor extends Component {
         }
 
         if(questions.length > 0) {
-            componentStore.changeCurrentQuestion({chosenQuestionIndex: 0});
+            componentStore.changeCurrentQuestion(0);
         } else {
             componentStore.resetCurrentQuestion();
         }

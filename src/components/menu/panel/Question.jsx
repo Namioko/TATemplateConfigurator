@@ -16,14 +16,14 @@ const Question = ({componentStore, questionStore, ...props}) => {
 
     const handleDeleteClick = () => {
         deleteQuestion({index: props.index});
-        changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex - 1});
+        changeCurrentQuestion(currentQuestionIndex - 1);
         isDeleteClicked = true;
     };
     const handleLineClick = () => {
         if (isDeleteClicked) {
             isDeleteClicked = false;
         } else {
-            changeCurrentQuestion({chosenQuestionIndex: props.index});
+            changeCurrentQuestion(props.index);
         }
     };
 

@@ -7,7 +7,7 @@ const WindowPrevButton = inject('componentStore')(observer(({componentStore}) =>
 
     const handleClick = () => {
         if (currentQuestionIndex > 0) {
-            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex - 1});
+            changeCurrentQuestion(currentQuestionIndex - 1);
         }
     };
 

@@ -7,7 +7,7 @@ class ComponentStore {
     @observable targetWindow = QUESTION_WINDOW;
     @observable currentTab = "tab-questions";
 
-    @action changeCurrentQuestion = ({chosenQuestionIndex}) => {
+    @action changeCurrentQuestion = (chosenQuestionIndex) => {
         chosenQuestionIndex = chosenQuestionIndex === -1 ? 0 : chosenQuestionIndex;
 
         if (chosenQuestionIndex >= 0) {

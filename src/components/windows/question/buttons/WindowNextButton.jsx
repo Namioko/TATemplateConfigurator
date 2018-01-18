@@ -8,7 +8,7 @@ const WindowNextButton = inject('componentStore', 'questionStore')(observer(({co
 
     const handleClick = () => {
         if (currentQuestionIndex < questions.length - 1) {
-            changeCurrentQuestion({chosenQuestionIndex: currentQuestionIndex + 1});
+            changeCurrentQuestion(currentQuestionIndex + 1);
         }
     };
 

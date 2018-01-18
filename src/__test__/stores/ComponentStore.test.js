@@ -16,17 +16,17 @@ test('set current tab', () => {
 
 test('change current question', () => {
     const componentStore = new ComponentStore();
-    componentStore.changeCurrentQuestion({chosenQuestionIndex: 17});
+    componentStore.changeCurrentQuestion(17);
 
     expect(componentStore.currentQuestionIndex).toBe(17);
 
-    componentStore.changeCurrentQuestion({chosenQuestionIndex: -1});
+    componentStore.changeCurrentQuestion(-1);
     expect(componentStore.currentQuestionIndex).toBe(0);
 });
 
 test('reset current question', () => {
     const componentStore = new ComponentStore();
-    componentStore.changeCurrentQuestion({chosenQuestionIndex: 17});
+    componentStore.changeCurrentQuestion(17);
     componentStore.resetCurrentQuestion();
 
     expect(componentStore.currentQuestionIndex).toBe(-1);
