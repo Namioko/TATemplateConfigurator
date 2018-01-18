@@ -155,14 +155,14 @@ class QuestionField extends Component {
         const currentError = errors[currentQuestionIndex];
 
         return (
-            <label className="question-window__question-field">
+            <label className="window__question-field">
                 <Tooltip events delay={100}/>
 
-                <span className="question-window__question-field_title">{name}</span>
+                <span className="window__question-field_title">{name}</span>
                 <input type="text" className="form-control" value={this.state.currentValue === undefined ? '' : this.state.currentValue}
                        onChange={this.handleChange} required={currentError.get(name) !== undefined}/>
-                <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
-                <span className="question-window__question-field_error">{
+                <img src={InfoIcon} className="window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
+                <span className="window__question-field_error">{
                     currentError.get(name)
                 }</span>
             </label>

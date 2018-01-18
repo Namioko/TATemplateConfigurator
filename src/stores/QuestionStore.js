@@ -56,11 +56,13 @@ class QuestionStore {
                     newQuestionErrors.set(key, `* invalid value (${patternExplanation})`);
                 }
             } else {
-                tempQuestion[key].forEach(item => {
-                    if (pattern !== undefined && !pattern.test(item)) {
-                        newQuestionErrors.set(key, `* invalid value (${patternExplanation})`);
-                    }
-                });
+                if (tempQuestion[key] !== undefined) {
+                    tempQuestion[key].forEach(item => {
+                        if (pattern !== undefined && !pattern.test(item)) {
+                            newQuestionErrors.set(key, `* invalid value (${patternExplanation})`);
+                        }
+                    });
+                }
             }
         }
 

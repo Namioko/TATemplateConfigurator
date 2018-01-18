@@ -28,10 +28,10 @@ const QuestionWindow = ({componentStore, questionStore}) => {
 
     return (
         currentQuestionIndex >= 0 && questions.length > 0 &&
-        <div className="question-window">
+        <div className="window">
             <QuestionHeader/>
-            <div className="question-window__content">
-                <div className="question-window__question-field-list">
+            <div className="window__content">
+                <div className="window__question-field-list">
                     {
                         makeFieldList()
                     }

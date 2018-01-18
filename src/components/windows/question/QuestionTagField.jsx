@@ -59,10 +59,10 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
     };
 
     return (
-        <label className="question-window__question-field">
+        <label className="window__question-field">
             <Tooltip events delay={100}/>
 
-            <span className="question-window__question-field_title">{name}</span>
+            <span className="window__question-field_title">{name}</span>
             <ReactTags tags={tags} handleDelete={handleDelete} handleAddition={handleAddition} handleInputChange={handleInputChange}
                        placeholder={placeholder} autofocus={false}
                        classNames={{
@@ -70,8 +70,8 @@ const QuestionTagField = ({componentStore, questionStore, ...props}) => {
                            + (currentQuestionErrors.get(name) !== undefined
                                ? ' ReactTags__selected_error' : '')
                        }}/>
-            <img src={InfoIcon} className="question-window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
-            <span className="question-window__question-field_error">{currentQuestionErrors.get(name)}</span>
+            <img src={InfoIcon} className="window_icon" alt="Help" data-rh={helpLine} data-rh-at="right"/>
+            <span className="window__question-field_error">{currentQuestionErrors.get(name)}</span>
         </label>
     )
 };

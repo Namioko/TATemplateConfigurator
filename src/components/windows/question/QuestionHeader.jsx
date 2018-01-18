@@ -12,11 +12,11 @@ const QuestionHeader = ({componentStore, questionStore}) => {
     };
 
     return (
-        <div className="question-window_header">
-            <span className="question-window_header_title">
+        <div className="window_header">
+            <span className="window_header_title">
                 {getQuestionId({index: currentQuestionIndex})}
             </span>
-            <img src={DeleteIcon} className="question-window_icon" alt="Info" onClick={handleDeleteClick} title="Remove this question"/>
+            <img src={DeleteIcon} className="window_icon" alt="Info" onClick={handleDeleteClick} title="Remove this question"/>
         </div>
     )
 };

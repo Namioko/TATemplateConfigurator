@@ -47,11 +47,11 @@ class PreviewWindow extends Component {
     render() {
         return (
             <div className="window-wrapper">
-                <div className="question-window">
-                    <div className="question-window_header">
-                        <span className="question-window_header_title">Preview</span>
+                <div className="window">
+                    <div className="window_header">
+                        <span className="window_header_title">Preview</span>
                     </div>
-                    <div className="question-window__content">
+                    <div className="window__content">
                         <iframe id="preview-frame" src="/preview/dashboard.html" frameBorder="0" onLoad={this.setStyles} title="Preview"/>
                     </div>
                 </div>
