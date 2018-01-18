@@ -65,7 +65,7 @@ const NavBar = () => {
         <div className={'navbar'}>
             <Link to="/" className="navbar__item">Design</Link>
             <Link to="/text" className="navbar__item">Text editor</Link>
-            <button className="green-button navbar_download-btn" onClick={download}>
+            <button className="green-button navbar_download-btn" onClick={download} title="Download configuration as JS file">
                 Download configuration
             </button>
         </div>

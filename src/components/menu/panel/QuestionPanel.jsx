@@ -26,7 +26,8 @@ const MenuQuestionAddButton = inject('componentStore', 'questionStore')(observer
         (currentQuestionIndex < 0  || questions.length <= 0) &&
         <div className="add-button">
             <button className="green-button"
-                    onClick={handleClick}>
+                    onClick={handleClick}
+                    title="Add new question">
                 + Add
             </button>
         </div>

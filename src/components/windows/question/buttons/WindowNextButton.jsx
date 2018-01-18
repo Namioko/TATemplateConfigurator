@@ -17,6 +17,7 @@ const WindowNextButton = inject('componentStore', 'questionStore')(observer(({co
             src={RightIcon}
             alt="Next"
             className="gray-button window-buttons_arrow window-buttons_arrow-next"
+            title="Next question"
             onClick={handleClick}/>
     )
 }));

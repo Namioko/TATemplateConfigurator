@@ -16,6 +16,7 @@ const WindowPrevButton = inject('componentStore')(observer(({componentStore}) =>
             src={LeftIcon}
             alt="Prev"
             className="gray-button window-buttons_arrow window-buttons_arrow-prev"
+            title="Previous question"
             onClick={handleClick}/>
     )
 }));

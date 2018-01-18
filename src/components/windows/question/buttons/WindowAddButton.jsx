@@ -2,7 +2,7 @@ import React from 'react';
 
 const WindowAddButton = (props) => {
     return (
-        <button className={props.className} onClick={props.onClick}>{props.text}</button>
+        <button className={props.className} onClick={props.onClick} title={props.title}>{props.text}</button>
     )
 };
 

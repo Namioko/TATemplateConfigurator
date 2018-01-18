@@ -25,10 +25,12 @@ const QuestionButtonsWrapper = inject('componentStore', 'questionStore')(observe
                 <WindowAddButton
                     className="green-button window-buttons_add_before"
                     text="+ Before"
+                    title="Add new question before the current one"
                     onClick={addQuestionBefore}/>
                 <WindowAddButton
                     className="green-button window-buttons_add_after"
                     text="+ After"
+                    title="Add new question after the current one"
                     onClick={addQuestionAfter}/>
             </div>
             <div className="window-buttons__nav-container">
