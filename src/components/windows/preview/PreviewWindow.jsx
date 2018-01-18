@@ -52,7 +52,7 @@ class PreviewWindow extends Component {
                         <span className="question-window_header_title">Preview</span>
                     </div>
                     <div className="question-window__content">
-                        <iframe id="preview-frame" src="/preview/noname.html" frameBorder="0" onLoad={this.setStyles} title="Preview"/>
+                        <iframe id="preview-frame" src="/preview/dashboard.html" frameBorder="0" onLoad={this.setStyles} title="Preview"/>
                     </div>
                 </div>
             </div>
