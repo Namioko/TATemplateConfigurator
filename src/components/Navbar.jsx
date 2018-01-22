@@ -92,7 +92,7 @@ class NavBar extends Component {
                         Import file
                     </button>
                 </div>
-                <Modal isOpen={this.state.isModalOpen} onClose={() => this.closeModal()}>
+                <Modal isOpen={this.state.isModalOpen} title="Import file" onClose={() => this.closeModal()}>
                     <FileImporter />
                 </Modal>
             </div>

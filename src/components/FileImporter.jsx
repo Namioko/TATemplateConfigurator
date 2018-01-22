@@ -43,7 +43,6 @@ class FileImporter extends Component {
     render() {
         return (
             <div>
-                <h1>Import file</h1>
                 <button onClick={() => this.openFile()}>Select file</button>
                 <input id="file-input" type="file" style={{ display: "none" }} onChange={(e) => this.readTextFromFile(e.target, this.parseFile)} />
             </div>
