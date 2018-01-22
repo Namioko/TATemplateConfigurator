@@ -4,6 +4,7 @@ import { inject } from 'mobx-react';
 import { parseTextConfig } from '../utils/text-parser';
 import {DEFAULT_COLORS, DEFAULT_AREAS_PALETTE} from '../constants/design';
 import Dropzone from 'react-dropzone';
+import CloudUpload from '../assets/img/icons/ic_cloud_upload.svg';
 
 @inject('questionStore', 'designStore', 'otherStore', 'componentStore')
 class FileImporter extends Component {
@@ -84,7 +85,10 @@ class FileImporter extends Component {
                     disabled={!isActive} 
                     style={{width: "500px", height: "150px", borderWidth: "3px", borderColor: "#ecebe9", borderStyle: "dashed", borderRadius: "5px"}}>
                     {isActive ? (
-                        <p style={{ width: "100%", height: "100%", verticalAlign: "middle", display: "table-cell", color: "#ecebe9"}}>Try dropping your configuration file here, or click to select file to upload.</p>
+                        <div style={{width: "100%", height: "100%"}}>
+                            <img src={CloudUpload} alt="Upload" style={{width: "10rem", margin: "0 auto", display: "table-cell"}}/>
+                            <p style={{ width: "100%", height: "100%", display: "table-cell", color: "#ecebe9"}}>Try dropping your configuration file here, or click to select file to upload.</p>
+                        </div>
                     ) : (
                         <p>Not supported</p>
                     )}

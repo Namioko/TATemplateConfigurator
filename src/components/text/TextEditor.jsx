@@ -1,12 +1,9 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
 import {buildConfig} from '../../utils/config';
-import {extractVariable} from '../../utils/parser';
-import {validColor} from '../../utils/validation';
+import { parseTextConfig } from '../../utils/text-parser';
 import {DEFAULT_COLORS, DEFAULT_AREAS_PALETTE} from '../../constants/design';
 import CodeMirror from 'react-codemirror';
-import {SENTIMENT_MAX_VALUE, SENTIMENT_MIN_VALUE} from '../../constants';
-import {QUESTION_PROPERTIES} from '../../utils/validation';
 import UndoIcon from '../../assets/img/icons/ic_undo.svg';
 import RedoIcon from '../../assets/img/icons/ic_redo.svg';
 
@@ -54,109 +51,32 @@ class TextEditor extends Component {
 
     handleApplyChanges = (text) => {
         const {questionStore, designStore, otherStore, componentStore} = this.props;
+        const parsedConfig = parseTextConfig(text);
 
-        otherStore.setShowOnlySelectedCategoryTagInHitlist(
-            !!extractVariable(text, "ShowOnlySelectedCategoryTagInHitlist")
-        );
+        otherStore.setShowOnlySelectedCategoryTagInHitlist(parsedConfig.ShowOnlySelectedCategoryTagInHitlist);
+        otherStore.setSentimentRange(parsedConfig.SentimentRange);
 
-        designStore.setCustomerLogo(
-            extractVariable(text, "CustomerLogo").toString()
-        );
-
-        const configDesign = extractVariable(text, "Design");
-
-        if (!configDesign) {
-            designStore.setDefaultDesign();
-        } else {
-            for (let key in DEFAULT_COLORS) {
-                const color = configDesign[key];
-
-                designStore.setProperty(
-                    key,
-                    (color != null && validColor(color)) ? color : DEFAULT_COLORS[key]
-                );
-            }
-
-            for (let key in DEFAULT_AREAS_PALETTE) {
-                const color = configDesign['areasPalette'][key];
-
-                designStore.setAreaPalette(
-                    key,
-                    (color != null && validColor(color)) ? color : DEFAULT_AREAS_PALETTE[key]
-                );
-            }
-
-            const chartPalette = configDesign['chartPalette'];
-            if (chartPalette == null || !(chartPalette instanceof Array)) {
-                designStore.setProperty('chartPalette', []);
-            } else {
-                let validChartColors = [];
-
-                for (let i = 0; i < chartPalette.length; i++) {
-                    if (validColor(chartPalette[i])) {
-                        validChartColors.push(chartPalette[i]);
-                    }
-                }
-
-                designStore.setProperty('chartPalette', validChartColors);
-            }
+        //Design
+        designStore.setCustomerLogo(parsedConfig.CustomerLogo);
+        for (let key in DEFAULT_COLORS) {
+            designStore.setProperty(key, parsedConfig.Design[key]);
         }
+        for(let key in DEFAULT_AREAS_PALETTE) {
+            designStore.setAreaPalette(key, parsedConfig.Design['areasPalette'][key]);
+        }
+        designStore.setProperty('chartPalette', parsedConfig.Design['chartPalette']);
 
-        const questions = extractVariable(text, "TAQuestions");
+        //Questions
         questionStore.clearQuestions();
-
-        for (let i = 0; i < questions.length; i++) {
-            const currentQuestion = questions[i];
-            let newQuestion = {};
-
-            for (let key in QUESTION_PROPERTIES) {
-                let propertyType = QUESTION_PROPERTIES[key].type;
-
-                if (propertyType === Number && !(typeof currentQuestion[key] === "number")) {
-                    newQuestion[key] = (QUESTION_PROPERTIES[key].defaultValue != null) ? QUESTION_PROPERTIES[key].defaultValue : 0;
-                } else if (propertyType === String && !(typeof currentQuestion[key] === "string")) {
-                    newQuestion[key] = (QUESTION_PROPERTIES[key].defaultValue != null) ? QUESTION_PROPERTIES[key].defaultValue : "";
-                } else if (propertyType === Array && !(currentQuestion[key] instanceof Array)) {
-                    newQuestion[key] = (QUESTION_PROPERTIES[key].defaultValue != null) ? QUESTION_PROPERTIES[key].defaultValue : [];
-                } else {
-                    newQuestion[key] = currentQuestion[key];
-                }
-            }
-
-            questionStore.addQuestionToEnd(newQuestion);
+        for(let i = 0; i < parsedConfig.Questions.length; i++) {
+            questionStore.addQuestionToEnd(parsedConfig.Questions[i]);
         }
 
-        if (questions.length > 0) {
+        if(parsedConfig.Questions.length > 0) {
             componentStore.changeCurrentQuestion(0);
         } else {
             componentStore.resetCurrentQuestion();
         }
-
-        const sentimentRange = extractVariable(text, "SentimentRange");
-        const sentiment = {
-            Negative: [],
-            Neutral: [],
-            Positive: []
-        };
-
-        let current = SENTIMENT_MIN_VALUE;
-        for (let i = 0; i < sentimentRange.Negative.length; i++) {
-            sentiment.Negative.push(current);
-            current++;
-        }
-
-        for (let i = 0; i < sentimentRange.Neutral.length; i++) {
-            sentiment.Neutral.push(current);
-            current++;
-        }
-
-        const count = SENTIMENT_MAX_VALUE - current + 1;
-        for (let i = 0; i < count; i++) {
-            sentiment.Positive.push(current);
-            current++;
-        }
-
-        otherStore.setSentimentRange(sentiment);
 
         alert("Changes successfully applied!");
         this.setState({isChanged: false});

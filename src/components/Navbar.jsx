@@ -4,6 +4,7 @@ import { buildConfig } from '../utils/config';
 import * as stores from '../stores';
 import Modal from './ui/Modal';
 import FileImporter from './FileImporter';
+import UploadIcon from '../assets/img/icons/ic_file_upload.svg';
 
 class NavBar extends Component {
 
@@ -89,7 +90,7 @@ class NavBar extends Component {
                         Download configuration
                     </button>
                     <button className="green-button navbar_download-btn" title="Import your configuration from file" onClick={this.openModal}>
-                        Import file
+                        <img src={UploadIcon} alt="Upload" style={{height: "18px", verticalAlign: "middle", marginRight: "5px"}}/> Import file
                     </button>
                 </div>
                 <Modal isOpen={this.state.isModalOpen} title="Import file" onClose={() => this.closeModal()}>

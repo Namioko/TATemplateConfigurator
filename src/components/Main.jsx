@@ -29,7 +29,7 @@ export default class Main extends Component {
     render() {
         return (
             <div className="configurator">
-                {(process.env.NODE_ENV !== "production") ? (<DevTools position={{top: 0, right: 250}}/>) : ''}
+                {(process.env.NODE_ENV !== "production") ? (<DevTools position={{top: 0, right: 300}}/>) : ''}
                 <NavBar/>
                 <div className="main">
                     <Switch>
