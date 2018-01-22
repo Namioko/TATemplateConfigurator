@@ -11,6 +11,10 @@ export function extractVariable(text, varName) {
     return parseValue(text, startPos);
 }
 
+export function containsVariable(text, varName) {
+    return !!text.match(new RegExp('static\\s+(var|const)\\s+' + varName + '\\s+=\\s+'));
+}
+
 function parseValue(text, startPos) {
     const startSymbol = text[startPos];
 

@@ -1,7 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { isValidTextConfig } from '../utils/validation';
+import { inject } from 'mobx-react';
+import { parseTextConfig } from '../utils/text-parser';
 
-export default class FileImporter extends Component {
-    
+@inject('questionStore', 'designStore', 'otherStore', 'componentStore')
+class FileImporter extends Component {
+
     readTextFromFile = (filePath, callback) => {
         let reader = new FileReader();
 
@@ -16,24 +20,35 @@ export default class FileImporter extends Component {
     };
 
     parseFile = (content) => {
-        console.log(content);
+        const { questionStore, designStore, otherStore, componentStore } = this.props;
+
+        if (!isValidTextConfig(content)) {
+            console.log("Invalid!!!");
+            return;
+        }
+
+        const parsedConfig = parseTextConfig(content);
+
+        console.log(parsedConfig);
     };
 
     openFile = () => {
-        if(window.File && window.FileReader && window.FileList && window.Blob) {
-            document.getElementById('file-input').click(); 
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+            document.getElementById('file-input').click();
         } else {
             alert("Not supported");
         }
     };
 
     render() {
-        return(
+        return (
             <div>
                 <h1>Import file</h1>
                 <button onClick={() => this.openFile()}>Select file</button>
-                <input id="file-input" type="file" style={{display: "none"}} onChange={(e) => this.readTextFromFile(e.target, this.parseFile)}/>
+                <input id="file-input" type="file" style={{ display: "none" }} onChange={(e) => this.readTextFromFile(e.target, this.parseFile)} />
             </div>
         )
     }
 }
+
+export default FileImporter;

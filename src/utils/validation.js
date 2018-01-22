@@ -1,6 +1,12 @@
+import {containsVariable} from './parser';
+
 export function validColor(color) {
     //#fff or #ffffff or #ffffff00
     return [4, 7, 9].indexOf(color.length) !== -1 && !!color.match(/^#[0-9a-f]+$/i);
+}
+
+export function isValidTextConfig(content) {
+    return containsVariable(content, 'TAQuestions') || containsVariable(content, 'Design');
 }
 
 export const QUESTION_PROPERTIES = {
