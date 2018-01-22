@@ -1,6 +1,7 @@
 .navbar {
     height: 4rem;
-    width: 100%;
+    width: 135rem;
+    min-width: 100%;
     background-color: white;
     border-bottom: solid 1px #c5c8cd;
     position: absolute;

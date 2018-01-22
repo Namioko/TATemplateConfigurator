@@ -90,6 +90,7 @@
 .window__content {
     height: calc(100% - 3rem);
     overflow-y: auto;
+    max-width: 90rem;
 }
 
 .window__question-field-list {
