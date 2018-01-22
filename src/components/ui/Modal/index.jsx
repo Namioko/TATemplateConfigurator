@@ -16,7 +16,7 @@ export default class Modal extends Component {
       zIndex: '9999',
       background: '#fff',
       borderRadius: '.3rem',
-      padding: '.3rem'
+      padding: '1rem'
     }
 
     if (this.props.width && this.props.height) {
@@ -53,7 +53,7 @@ export default class Modal extends Component {
       <div className={this.props.containerClassName}>
         <div className={this.props.className} style={modalStyle}>
           <h1 style={{marginRight: "50px", marginTop: "5px"}}>{this.props.title}</h1>
-          <img src={CloseIcon} alt="Close" title="Close window" style={{position: 'absolute', top: '5px', right: '5px'}} onClick={(e) => this.close(e)} />
+          <img src={CloseIcon} alt="Close" title="Close window" style={{position: 'absolute', top: '1rem', right: '1rem'}} onClick={(e) => this.close(e)} />
           {this.props.children}
         </div>
         {!this.props.noBackdrop && 

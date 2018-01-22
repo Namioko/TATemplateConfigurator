@@ -87,7 +87,9 @@ class FileImporter extends Component {
                     {isActive ? (
                         <div style={{width: "100%", height: "100%"}}>
                             <img src={CloudUpload} alt="Upload" style={{width: "10rem", margin: "0 auto", display: "table-cell"}}/>
-                            <p style={{ width: "100%", height: "100%", display: "table-cell", color: "#ecebe9"}}>Try dropping your configuration file here, or click to select file to upload.</p>
+                            <p style={{ width: "100%", height: "100%", display: "table-cell", color: "#757575", fontSize: "1.8rem", textAlign: "center"}}>
+                                Try dropping your configuration file here, or click to select file to upload.
+                            </p>
                         </div>
                     ) : (
                         <p>Not supported</p>
