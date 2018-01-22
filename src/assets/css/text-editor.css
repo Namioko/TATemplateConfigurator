@@ -1,0 +1,47 @@
+:root {
+    --button: {
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        border: none;
+        border-radius: 2px;
+        text-align: center;
+        line-height: 100%;
+        height: 100%;
+    }
+}
+
+.editor-container {
+    width: 100%;
+    min-width: 135rem;
+    height: 100%;
+}
+
+.text-editor {
+    width: 100%;
+}
+
+.text-editor > div {
+    width: 100%;
+    height: 100%;
+    margin-top: 4rem;
+    border: none;
+    resize: none;
+    font-size: 1.5rem;
+}
+
+.text-editor__buttons {
+    position: fixed;
+    right: 2rem;
+    top: 5rem;
+    z-index: 9997;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-editor_img-button {
+    @apply --button;
+    color: white;
+    width: 2rem;
+    margin: 0.5rem;
+}
