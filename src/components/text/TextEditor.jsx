@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import {observer, inject} from 'mobx-react';
+import classNames from 'classnames';
 import {buildConfig} from '../../utils/config';
-import { parseTextConfig } from '../../utils/text-parser';
+import {parseTextConfig} from '../../utils/text-parser';
 import {DEFAULT_COLORS, DEFAULT_AREAS_PALETTE} from '../../constants/design';
-import CodeMirror from 'react-codemirror';
 import UndoIcon from '../../assets/img/icons/ic_undo.svg';
 import RedoIcon from '../../assets/img/icons/ic_redo.svg';
 
-import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/mdn-like.css';
+import 'codemirror/mode/javascript/javascript.js';
+
+import {Controlled as CodeMirror} from 'react-codemirror2';
 
 @inject('questionStore', 'designStore', 'otherStore', 'componentStore')
 @observer
@@ -45,8 +47,8 @@ class TextEditor extends Component {
         this.pushTextToHistory(this.state.text);
     }
 
-    handleTextChange = (newValue) => {
-        this.setState({text: newValue, isChanged: true});
+    handleTextChange = (editor, data, value) => {
+        this.setState({text: value, isChanged: true});
     };
 
     handleApplyChanges = (text) => {
@@ -61,18 +63,18 @@ class TextEditor extends Component {
         for (let key in DEFAULT_COLORS) {
             designStore.setProperty(key, parsedConfig.Design[key]);
         }
-        for(let key in DEFAULT_AREAS_PALETTE) {
+        for (let key in DEFAULT_AREAS_PALETTE) {
             designStore.setAreaPalette(key, parsedConfig.Design['areasPalette'][key]);
         }
         designStore.setProperty('chartPalette', parsedConfig.Design['chartPalette']);
 
         //Questions
         questionStore.clearQuestions();
-        for(let i = 0; i < parsedConfig.Questions.length; i++) {
+        for (let i = 0; i < parsedConfig.Questions.length; i++) {
             questionStore.addQuestionToEnd(parsedConfig.Questions[i]);
         }
 
-        if(parsedConfig.Questions.length > 0) {
+        if (parsedConfig.Questions.length > 0) {
             componentStore.changeCurrentQuestion(0);
         } else {
             componentStore.resetCurrentQuestion();
@@ -125,12 +127,15 @@ class TextEditor extends Component {
 
         const {text, isChanged} = this.state;
 
+        const currentHistoryIndex = Number(sessionStorage.getItem('currentHistoryIndex'));
+        const historyLength = Number(sessionStorage.getItem('historyLength'));
+
         return (
             <div className="editor-container">
                 <CodeMirror
                     className="text-editor"
                     value={text}
-                    onChange={this.handleTextChange}
+                    onBeforeChange={this.handleTextChange}
                     options={{
                         mode: 'javascript',
                         lineNumbers: true,
@@ -138,30 +143,41 @@ class TextEditor extends Component {
                         matchBrackets: true,
                         theme: 'mdn-like'
                     }}
+                    autoSave={true}
                 />
 
                 <div className="text-editor__buttons">
                     <div>
-                        <img
-                            src={UndoIcon}
-                            alt="Undo"
-                            className="green-button text-editor_img-button"
+                        <button
+                            className="green-button text-editor_button"
                             title="Undo"
-                            onClick={this.handleUndo}
-                        />
-                        <img
-                            src={RedoIcon}
-                            alt="Redo"
-                            className="green-button text-editor_img-button"
+                            disabled={currentHistoryIndex < 1}
+                            onClick={this.handleUndo}>
+                            <img
+                                className="text-editor_img-button"
+                                src={UndoIcon}
+                                alt="Undo"
+                            />
+                        </button>
+                        <button
+                            className="green-button text-editor_button"
                             title="Redo"
-                            onClick={this.handleRedo}
-                        />
+                            disabled={currentHistoryIndex >= historyLength - 1}
+                            onClick={this.handleRedo}>
+                            <img
+                                className="text-editor_img-button"
+                                src={RedoIcon}
+                                alt="Redo"
+                            />
+                        </button>
                     </div>
 
                     <button
                         className={"green-button"}
                         style={{visibility: isChanged ? "visible" : "hidden"}}
-                        onClick={() => {this.handleApplyChanges(this.state.text)}}>
+                        onClick={() => {
+                            this.handleApplyChanges(this.state.text)
+                        }}>
                         Apply changes
                     </button>
                 </div>

@@ -9,8 +9,8 @@
     border-color: #9096A2;
 }
 
-.gray-button:hover,
-.gray-button:active {
+.gray-button:enabled:hover,
+.gray-button:enabled:active {
     background-color: #9096A2;
     border-color: rgb(125, 128, 134);
 }
@@ -21,8 +21,8 @@
     border-color: #A3D465;
 }
 
-.green-button:hover,
-.green-button:active {
+.green-button:enabled:hover,
+.green-button:enabled:active {
     background-color: #4CAF50;
     border-color: #43A047;
 }
@@ -47,5 +47,17 @@
     font-size: 1.3rem;
     line-height: 1.5;
     border-radius: .25rem;
-    transition: background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.green-button:disabled,
+.gray-button:disabled {
+    box-shadow: none;
+    opacity: .65;
+}
+
+.green-button:disabled,
+.gray-button:disabled {
+    box-shadow: none;
+    opacity: .65;
 }

@@ -43,5 +43,9 @@
     @apply --button;
     color: white;
     width: 2rem;
+    vertical-align: middle;
+}
+
+.text-editor_button {
     margin: 0.5rem;
 }
