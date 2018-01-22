@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { isValidTextConfig } from '../utils/validation';
 import { inject } from 'mobx-react';
 import { parseTextConfig } from '../utils/text-parser';
+import {DEFAULT_COLORS, DEFAULT_AREAS_PALETTE} from '../constants/design';
 import Dropzone from 'react-dropzone';
 
 @inject('questionStore', 'designStore', 'otherStore', 'componentStore')
@@ -33,13 +34,37 @@ class FileImporter extends Component {
         const { questionStore, designStore, otherStore, componentStore } = this.props;
 
         if (!isValidTextConfig(content)) {
-            this.setState({errorMessage: "Invalid!!!", successMessage: null});
+            this.setState({errorMessage: "Invalid configuration!", successMessage: null});
             return;
         }
 
         const parsedConfig = parseTextConfig(content);
 
-        console.log(parsedConfig);
+        otherStore.setShowOnlySelectedCategoryTagInHitlist(parsedConfig.ShowOnlySelectedCategoryTagInHitlist);
+        otherStore.setSentimentRange(parsedConfig.SentimentRange);
+
+        //Design
+        designStore.setCustomerLogo(parsedConfig.CustomerLogo);
+        for (let key in DEFAULT_COLORS) {
+            designStore.setProperty(key, parsedConfig.Design[key]);
+        }
+        for(let key in DEFAULT_AREAS_PALETTE) {
+            designStore.setAreaPalette(key, parsedConfig.Design['areasPalette'][key]);
+        }
+        designStore.setProperty('chartPalette', parsedConfig.Design['chartPalette']);
+
+        //Questions
+        questionStore.clearQuestions();
+        for(let i = 0; i < parsedConfig.Questions.length; i++) {
+            questionStore.addQuestionToEnd(parsedConfig.Questions[i]);
+        }
+
+        if(parsedConfig.Questions.length > 0) {
+            componentStore.changeCurrentQuestion(0);
+        } else {
+            componentStore.resetCurrentQuestion();
+        }
+
         this.setState({successMessage: "Yeeeeah! It's true!", errorMessage: null});
     };
 
